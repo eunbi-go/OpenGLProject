@@ -24,6 +24,9 @@ public:
 public:
 	void Move(MOVE move);
 	void SetMoveDir(MOVE move) { _eCurMoveDir = move; }
+
+	void Jump();
+
 	glm::mat4 Get_Translation() { return trans; }
 	
 public:
@@ -49,6 +52,11 @@ public:
 
 	MOVE	_ePreMoveDir = MOVE::MOVE_END;
 	MOVE	_eCurMoveDir = MOVE::MOVE_END;
+
+	bool	_isJump = false;
+	GLfloat	_jumpTime = 0.f;
+	GLfloat	_jumpHeight = 0.f;
+	GLfloat	_jumpPower = 4.f;
 };
 
 #endif // !__CUBE_H__

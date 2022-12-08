@@ -16,6 +16,8 @@ void Player::Initialize()
 
 int Player::Update()
 {
+	if (_isJump) Jump();
+
 	return OBJ_NOEVENET;
 }
 

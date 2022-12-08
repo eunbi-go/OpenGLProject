@@ -200,6 +200,11 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		camera.cameraPos += glm::normalize(glm::cross(cameraFront, up)) * speed;
 		break;
 
+	case 'q':
+	case 'Q':
+		static_cast<Cube*>(game.Get_Player())->_isJump = true;
+		break;
+
 	default:
 		break;
 	}

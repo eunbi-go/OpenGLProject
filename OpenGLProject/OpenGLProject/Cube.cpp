@@ -140,3 +140,21 @@ void Cube::Move(MOVE move)
 		break;
 	}
 }
+
+void Cube::Jump()
+{
+	_jumpHeight = (_jumpTime * _jumpTime - _jumpPower * _jumpTime) / 3.f;
+	_jumpTime += 0.05f;
+	cout << _jumpHeight << endl;
+
+	trans[3][1] = 0.f;
+	float y = _jumpHeight * -1.f;
+	trans = glm::translate(trans, glm::vec3(0.0f, y, 0.0f));
+	if (_jumpTime > _jumpPower)
+	{
+		cout << "Á¡ÇÁ ³¡" << endl;
+		_jumpTime = 0;
+		_jumpHeight = 0;
+		_isJump = false;
+	}
+}
