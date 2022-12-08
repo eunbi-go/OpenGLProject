@@ -17,7 +17,7 @@ public:
 	void Release();
 
 public:
-	//GLuint _program;
+	class Object* Get_Player();
 };
 
 #endif

@@ -63,11 +63,11 @@ void Cube::Late_Update()
 
 void Cube::Render(GLuint _program)
 {
-	//glm::mat4 finalMat = scale * trans * rotation;
-	//unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");
-	//glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(finalMat));
-	//glBindVertexArray(vaoHandle);
-	//glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
+	glm::mat4 finalMat = scale * trans * rotation;
+	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(finalMat));
+	glBindVertexArray(vaoHandle);
+	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
 }
 
 void Cube::Release()
@@ -101,4 +101,42 @@ void Cube::UpdateBuffer()
 	glGenBuffers(1, &indexBufferObjec);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObjec);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
+}
+
+void Cube::Move(MOVE move)
+{
+	if (_ePreMoveDir != _eCurMoveDir)
+	{
+		moving = 0.f;
+		_ePreMoveDir = _eCurMoveDir;
+	}
+
+	switch (move)
+	{
+	case MOVE_FORWARD:
+		moving -= 0.05f;
+		trans = glm::translate(trans, glm::vec3(0.0f, 0.0f, moving));
+		break;
+
+	case MOVE_BACK:
+		moving += 0.05f;
+		trans = glm::translate(trans, glm::vec3(0.0f, 0.0f, moving));
+		break;
+
+	case MOVE_LEFT:
+		moving -= 0.05f;
+		trans = glm::translate(trans, glm::vec3(moving, 0.0f, 0.0f));
+		break;
+
+	case MOVE_RIGHT:
+		moving += 0.05f;
+		trans = glm::translate(trans, glm::vec3(moving, 0.0f, 0.0f));
+		break;
+
+	case MOVE_END:
+		break;
+
+	default:
+		break;
+	}
 }

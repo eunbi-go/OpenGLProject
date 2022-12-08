@@ -22,6 +22,11 @@ public:
 	void UpdateBuffer();
 
 public:
+	void Move(MOVE move);
+	void SetMoveDir(MOVE move) { _eCurMoveDir = move; }
+	glm::mat4 Get_Translation() { return trans; }
+	
+public:
 	void SetPos(glm::vec3 pos) { trans = glm::mat4(1.0f); trans = glm::translate(trans, glm::vec3(pos.x, pos.y, pos.z)); }
 	void SetScale(glm::vec3 s) { scale = glm::scale(scale, glm::vec3(s.x, s.y, s.z)); }
 	void SetRotateX(float radian) { rotateRadian = radian;  rotation = glm::rotate(rotation, glm::radians(rotateRadian), glm::vec3(1.0, 0.0, 0.0)); }
@@ -40,6 +45,10 @@ public:
 	glm::mat4 finalMat = glm::mat4(1.0f);
 
 	GLfloat rotateRadian;
+	GLfloat moving = 0.f;
+
+	MOVE	_ePreMoveDir = MOVE::MOVE_END;
+	MOVE	_eCurMoveDir = MOVE::MOVE_END;
 };
 
 #endif // !__CUBE_H__

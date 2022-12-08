@@ -103,10 +103,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\OpenGlTransformation2\OpenGlTransformation2\fragment.glsl">
+    <None Include="vertexs.glsl">
       <Filter>소스 파일\Shader</Filter>
     </None>
-    <None Include="..\..\OpenGlTransformation2\OpenGlTransformation2\vertex.glsl">
+    <None Include="fragments.glsl">
       <Filter>소스 파일\Shader</Filter>
     </None>
   </ItemGroup>

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "MainGame.h"
 #include "SceneManager.h"
+#include "ObjectManager.h"
+
 MainGame::MainGame()
 {
 }
@@ -32,4 +34,9 @@ void MainGame::Render(GLuint _program)
 
 void MainGame::Release()
 {
+}
+
+Object* MainGame::Get_Player()
+{
+	return ObjectManager::Get_Instance()->Get_Player();
 }
