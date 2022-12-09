@@ -110,27 +110,25 @@ void Cube::Move(MOVE move)
 	{
 		_ePreMoveDir = _eCurMoveDir;
 	}
+
 	double time = Timer::Get_Instance()->Get_DeltaTime();
+
 	switch (move)
 	{
 	case MOVE_FORWARD:
-		//_moving--;
-		trans = glm::translate(trans, glm::vec3(0.f, 0.0f, _movingZ * -time));
+		trans = glm::translate(trans, glm::vec3(0.f, 0.0f, _movingSpeed * -time));
 		break;
 
 	case MOVE_BACK:
-		//_moving++;
-		trans = glm::translate(trans, glm::vec3(0.f, 0.0f, _movingZ * time));
+		trans = glm::translate(trans, glm::vec3(0.f, 0.0f, _movingSpeed * time));
 		break;
 
 	case MOVE_LEFT:
-		//_movingX--;
-		trans = glm::translate(trans, glm::vec3(_movingX * -time, 0.0f, 0.f));
+		trans = glm::translate(trans, glm::vec3(_movingSpeed * -time, 0.0f, 0.f));
 		break;
 
 	case MOVE_RIGHT:
-		//_movingX++;
-		trans = glm::translate(trans, glm::vec3(_movingX * time, 0.0f, 0.f));
+		trans = glm::translate(trans, glm::vec3(_movingSpeed * time, 0.0f, 0.f));
 		break;
 
 	case MOVE_END:
@@ -144,8 +142,7 @@ void Cube::Move(MOVE move)
 void Cube::Jump()
 {
 	_jumpHeight = (_jumpTime * _jumpTime - _jumpPower * _jumpTime) / 3.f;
-	_jumpTime += 0.05f;
-	cout << _jumpHeight << endl;
+	_jumpTime += Timer::Get_Instance()->Get_DeltaTime();
 
 	trans[3][1] = 0.f;
 	float y = _jumpHeight * -1.f;
