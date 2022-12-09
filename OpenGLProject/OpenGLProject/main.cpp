@@ -20,8 +20,6 @@ struct Camera
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.f);
 	glm::mat4 view = glm::mat4(1.0f);
-
-	float speed = 0.08f;
 };
 
 MainGame game;
@@ -157,7 +155,9 @@ void IdleScene()
 
 GLvoid Keyboard(unsigned char key, int x, int y)
 {
+	float speed = 3.f;
 	glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
+	speed *= game.Get_DeltaTime();
 
 	switch (key)
 	{
@@ -165,28 +165,28 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case 'w':
 		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_FORWARD);
 		static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_FORWARD);
-		camera.cameraPos += camera.cameraFront * camera.speed;
+		camera.cameraPos += camera.cameraFront * speed;
 		break;
 
 	case 'S':
 	case 's':
 		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_BACK);
 		static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_BACK);
-		camera.cameraPos -= camera.cameraFront * camera.speed;
+		camera.cameraPos -= camera.cameraFront * speed;
 		break;
 
 	case 'A':
 	case 'a':
 		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_LEFT);
 		static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_LEFT);
-		camera.cameraPos -= glm::normalize(glm::cross(camera.cameraFront, up)) * camera.speed;
+		camera.cameraPos -= glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
 		break;
 
 	case 'D':
 	case 'd':
 		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_RIGHT);
 		static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_RIGHT);
-		camera.cameraPos += glm::normalize(glm::cross(camera.cameraFront, up)) * camera.speed;
+		camera.cameraPos += glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
 		break;
 
 	case 'q':

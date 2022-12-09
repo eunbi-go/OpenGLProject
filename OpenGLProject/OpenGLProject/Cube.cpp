@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Cube.h"
+#include "Timer.h"
 
 GLshort cube_indices[] = {
 	// Front.
@@ -107,30 +108,29 @@ void Cube::Move(MOVE move)
 {
 	if (_ePreMoveDir != _eCurMoveDir)
 	{
-		_moving = 0.f;
 		_ePreMoveDir = _eCurMoveDir;
 	}
-
+	double time = Timer::Get_Instance()->Get_DeltaTime();
 	switch (move)
 	{
 	case MOVE_FORWARD:
-		_moving -= 0.05f;
-		trans = glm::translate(trans, glm::vec3(0.0f, 0.0f, _moving));
+		//_moving--;
+		trans = glm::translate(trans, glm::vec3(0.f, 0.0f, _movingZ * -time));
 		break;
 
 	case MOVE_BACK:
-		_moving += 0.05f;
-		trans = glm::translate(trans, glm::vec3(0.0f, 0.0f, _moving));
+		//_moving++;
+		trans = glm::translate(trans, glm::vec3(0.f, 0.0f, _movingZ * time));
 		break;
 
 	case MOVE_LEFT:
-		_moving -= 0.05f;
-		trans = glm::translate(trans, glm::vec3(_moving, 0.0f, 0.0f));
+		//_movingX--;
+		trans = glm::translate(trans, glm::vec3(_movingX * -time, 0.0f, 0.f));
 		break;
 
 	case MOVE_RIGHT:
-		_moving += 0.05f;
-		trans = glm::translate(trans, glm::vec3(_moving, 0.0f, 0.0f));
+		//_movingX++;
+		trans = glm::translate(trans, glm::vec3(_movingX * time, 0.0f, 0.f));
 		break;
 
 	case MOVE_END:

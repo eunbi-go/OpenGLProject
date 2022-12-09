@@ -49,6 +49,8 @@ public:
 
 	GLfloat rotateRadian;
 	GLfloat _moving = 0.f;
+	GLfloat _movingZ = 3.f;
+	GLfloat _movingX = 3.f;
 
 	MOVE	_ePreMoveDir = MOVE::MOVE_END;
 	MOVE	_eCurMoveDir = MOVE::MOVE_END;

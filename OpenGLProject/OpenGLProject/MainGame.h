@@ -16,8 +16,10 @@ public:
 	void Render(GLuint _program);
 	void Release();
 
+
 public:
 	class Object* Get_Player();
+	double Get_DeltaTime();
 };
 
 #endif
