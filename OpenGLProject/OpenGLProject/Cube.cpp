@@ -107,30 +107,30 @@ void Cube::Move(MOVE move)
 {
 	if (_ePreMoveDir != _eCurMoveDir)
 	{
-		moving = 0.f;
+		_moving = 0.f;
 		_ePreMoveDir = _eCurMoveDir;
 	}
 
 	switch (move)
 	{
 	case MOVE_FORWARD:
-		moving -= 0.05f;
-		trans = glm::translate(trans, glm::vec3(0.0f, 0.0f, moving));
+		_moving -= 0.05f;
+		trans = glm::translate(trans, glm::vec3(0.0f, 0.0f, _moving));
 		break;
 
 	case MOVE_BACK:
-		moving += 0.05f;
-		trans = glm::translate(trans, glm::vec3(0.0f, 0.0f, moving));
+		_moving += 0.05f;
+		trans = glm::translate(trans, glm::vec3(0.0f, 0.0f, _moving));
 		break;
 
 	case MOVE_LEFT:
-		moving -= 0.05f;
-		trans = glm::translate(trans, glm::vec3(moving, 0.0f, 0.0f));
+		_moving -= 0.05f;
+		trans = glm::translate(trans, glm::vec3(_moving, 0.0f, 0.0f));
 		break;
 
 	case MOVE_RIGHT:
-		moving += 0.05f;
-		trans = glm::translate(trans, glm::vec3(moving, 0.0f, 0.0f));
+		_moving += 0.05f;
+		trans = glm::translate(trans, glm::vec3(_moving, 0.0f, 0.0f));
 		break;
 
 	case MOVE_END:
@@ -150,11 +150,12 @@ void Cube::Jump()
 	trans[3][1] = 0.f;
 	float y = _jumpHeight * -1.f;
 	trans = glm::translate(trans, glm::vec3(0.0f, y, 0.0f));
+
 	if (_jumpTime > _jumpPower)
 	{
-		cout << "점프 끝" << endl;
-		_jumpTime = 0;
-		_jumpHeight = 0;
+		//cout << "점프 끝" << endl;
+		_jumpTime = 0.f;
+		_jumpHeight = 0.f;
 		_isJump = false;
 	}
 }
