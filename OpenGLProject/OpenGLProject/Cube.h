@@ -23,7 +23,7 @@ public:
 	void RenderFinalMatrix(GLuint _program);
 
 public:
-	void Move(MOVE move);
+	void Move();
 	void SetMoveDir(MOVE move) { _eCurMoveDir = move; }
 
 	void Jump();

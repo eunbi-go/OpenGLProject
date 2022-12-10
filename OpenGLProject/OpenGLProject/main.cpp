@@ -138,7 +138,7 @@ DWORD dwTime = GetTickCount();
 
 void IdleScene()
 {
-	if (dwTime + 10 < GetTickCount())
+	if (dwTime + 40 < GetTickCount())
 	{
 		game.Update();
 		game.Late_Update();
@@ -161,28 +161,28 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case 'W': 
 	case 'w':
 		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_FORWARD);
-		static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_FORWARD);
+		static_cast<Cube*>(game.Get_Player())->Move();
 		camera.cameraPos += camera.cameraFront * speed;
 		break;
 
 	case 'S':
 	case 's':
 		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_BACK);
-		static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_BACK);
+		static_cast<Cube*>(game.Get_Player())->Move();
 		camera.cameraPos -= camera.cameraFront * speed;
 		break;
 
 	case 'A':
 	case 'a':
 		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_LEFT);
-		static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_LEFT);
+		static_cast<Cube*>(game.Get_Player())->Move();
 		camera.cameraPos -= glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
 		break;
 
 	case 'D':
 	case 'd':
 		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_RIGHT);
-		static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_RIGHT);
+		static_cast<Cube*>(game.Get_Player())->Move();
 		camera.cameraPos += glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
 		break;
 

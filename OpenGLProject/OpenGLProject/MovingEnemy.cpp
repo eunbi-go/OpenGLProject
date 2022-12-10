@@ -39,10 +39,10 @@ int MovingEnemy::Update()
 
 	if (_eDir == LEFT) _eCurMoveDir = MOVE::MOVE_LEFT;
 	else _eCurMoveDir = MOVE::MOVE_RIGHT;
-	Move(_eCurMoveDir);
+	Move();
 
 	// child
-	_childRot += Timer::Get_Instance()->Get_DeltaTime() * 30.f;
+	_childRot += Timer::Get_Instance()->Get_DeltaTime() * 100.f;
 	if (_childRot > 360.f)
 		_childRot = 1.f;
 

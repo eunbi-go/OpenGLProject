@@ -49,6 +49,9 @@
     <Filter Include="소스 파일\01. Object\04. Enemy">
       <UniqueIdentifier>{b7f75121-9151-4809-a4b3-d190606443a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Manager\03. Timer">
+      <UniqueIdentifier>{6261916b-f5a4-42ef-8ff0-86891e1d2def}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -78,14 +81,14 @@
     <ClCompile Include="Player.cpp">
       <Filter>소스 파일\01. Object\02. Player</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>소스 파일\01. Object\03. Item</Filter>
     </ClCompile>
     <ClCompile Include="MovingEnemy.cpp">
       <Filter>소스 파일\01. Object\04. Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>소스 파일\Manager\03. Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,14 +119,14 @@
     <ClInclude Include="Player.h">
       <Filter>소스 파일\01. Object\02. Player</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>소스 파일\01. Object\03. Item</Filter>
     </ClInclude>
     <ClInclude Include="MovingEnemy.h">
       <Filter>소스 파일\01. Object\04. Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>소스 파일\Manager\03. Timer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

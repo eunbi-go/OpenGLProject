@@ -112,7 +112,7 @@ void Cube::RenderFinalMatrix(GLuint _program)
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
 }
 
-void Cube::Move(MOVE move)
+void Cube::Move()
 {
 	double time = Timer::Get_Instance()->Get_DeltaTime();
 
