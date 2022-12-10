@@ -27,8 +27,11 @@
 #include <random>
 #include <time.h>
 #include <algorithm>
+
 using namespace std;
-enum OBJID {PLAYER, ENEMY, ITEM, OBJID_END};
+
+enum OBJID {PLAYER, ENEMY, ITEM, BLOCK, OBJID_END};
+enum MOVE {MOVE_FORWARD, MOVE_BACK, MOVE_RIGHT, MOVE_LEFT, MOVE_END};
 
 #define SAFE_DELETE(p) if (p) { delete p; p = nullptr; }
 

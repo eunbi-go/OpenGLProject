@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Cube.h"
+#include "Timer.h"
 
 GLshort cube_indices[] = {
 	// Front.
@@ -63,11 +64,11 @@ void Cube::Late_Update()
 
 void Cube::Render(GLuint _program)
 {
-	//glm::mat4 finalMat = scale * trans * rotation;
-	//unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");
-	//glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(finalMat));
-	//glBindVertexArray(vaoHandle);
-	//glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
+	glm::mat4 finalMat = scale * trans * rotation;
+	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(finalMat));
+	glBindVertexArray(vaoHandle);
+	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
 }
 
 void Cube::Release()
@@ -101,4 +102,57 @@ void Cube::UpdateBuffer()
 	glGenBuffers(1, &indexBufferObjec);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObjec);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
+}
+
+void Cube::Move(MOVE move)
+{
+	if (_ePreMoveDir != _eCurMoveDir)
+	{
+		_ePreMoveDir = _eCurMoveDir;
+	}
+
+	double time = Timer::Get_Instance()->Get_DeltaTime();
+
+	switch (move)
+	{
+	case MOVE_FORWARD:
+		trans = glm::translate(trans, glm::vec3(0.f, 0.0f, _movingSpeed * -time));
+		break;
+
+	case MOVE_BACK:
+		trans = glm::translate(trans, glm::vec3(0.f, 0.0f, _movingSpeed * time));
+		break;
+
+	case MOVE_LEFT:
+		trans = glm::translate(trans, glm::vec3(_movingSpeed * -time, 0.0f, 0.f));
+		break;
+
+	case MOVE_RIGHT:
+		trans = glm::translate(trans, glm::vec3(_movingSpeed * time, 0.0f, 0.f));
+		break;
+
+	case MOVE_END:
+		break;
+
+	default:
+		break;
+	}
+}
+
+void Cube::Jump()
+{
+	_jumpHeight = (_jumpTime * _jumpTime - _jumpPower * _jumpTime) / 3.f;
+	_jumpTime += Timer::Get_Instance()->Get_DeltaTime();
+
+	trans[3][1] = 0.f;
+	float y = _jumpHeight * -1.f;
+	trans = glm::translate(trans, glm::vec3(0.0f, y, 0.0f));
+
+	if (_jumpTime > _jumpPower)
+	{
+		//cout << "Á¡ÇÁ ³¡" << endl;
+		_jumpTime = 0.f;
+		_jumpHeight = 0.f;
+		_isJump = false;
+	}
 }

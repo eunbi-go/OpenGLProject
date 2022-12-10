@@ -1,23 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-//#include <iostream>
-//#include <vector>
-//#include <random>
-//
-//#include <gl/glew.h>
-//#include <gl/freeglut.h>
-//#include <gl/freeglut_ext.h>
-//#include <glm/glm/glm.hpp>
-//#include <glm/glm/ext.hpp>
-//#include <glm/glm/gtc/matrix_transform.hpp>
-//
-//#include <stdlib.h>
-//#include <stdio.h>
+
 #include "stdafx.h"
 
 #include "Cube.h"
 #include "MainGame.h"
-using namespace std;
+#include "Player.h"
 
 random_device rd;
 mt19937 gen(rd());
@@ -25,8 +13,17 @@ uniform_real_distribution<> randomC(0.0, 1.0);
 uniform_real_distribution<> randomSpeed(0.001, 0.01);
 
 
-//Cube cube;
+struct Camera
+{
+	glm::vec3 cameraPos = glm::vec3(0.0f, 1.0f, 2.0f);
+	glm::vec3 cameraDir = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.f);
+	glm::mat4 view = glm::mat4(1.0f);
+};
+
 MainGame game;
+Camera camera;
 
 void IdleScene();
 void Init();
@@ -56,7 +53,7 @@ GLuint vertexshader, fragmentshader;
 
 void make_vertexShader()
 {
-	vertexsource = filetobuf("vertex.glsl");
+	vertexsource = filetobuf("vertexs.glsl");
 	vertexshader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexshader, 1, (const GLchar**)&vertexsource, 0);
 	glCompileShader(vertexshader);
@@ -74,7 +71,7 @@ void make_vertexShader()
 
 void make_fragmentShader()
 {
-	fragmentsource = filetobuf("fragment.glsl");
+	fragmentsource = filetobuf("fragments.glsl");
 	fragmentshader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentshader, 1, (const GLchar**)&fragmentsource, 0);
 	glCompileShader(fragmentshader);
@@ -92,7 +89,6 @@ void make_fragmentShader()
 
 void InitBuffer()
 {
-	//cube.UpdateBuffer();
 }
 
 GLuint s_program;
@@ -119,24 +115,19 @@ GLvoid drawScene()
 	glUseProgram(s_program);
 
 	// camera
-	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-	glm::vec3 cameraDir = glm::vec3(0.0f, 0.0f, 0.0f);
-	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-	glm::mat4 view = glm::mat4(1.0f);
-
-	view = glm::lookAt(cameraPos, cameraDir, cameraUp);
+	camera.view = glm::mat4(1.0f);
+	camera.view = glm::lookAt(camera.cameraPos, camera.cameraPos + camera.cameraFront, camera.cameraUp);
 	unsigned int viewLoc = glGetUniformLocation(s_program, "viewTransform");
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &camera.view[0][0]);
 
 	// project
 	glm::mat4 projection = glm::mat4(1.0f);
-	projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 200.0f);
 	projection = glm::translate(projection, glm::vec3(0.0, 0.0, -2.0));
 	unsigned int projectLoc = glGetUniformLocation(s_program, "projectionTransform");
 	glUniformMatrix4fv(projectLoc, 1, GL_FALSE, &projection[0][0]);
 
 	game.Render(s_program);
-	//cube.Render(s_program);
 
 	glutSwapBuffers(); //--- 화면에 출력하기
 }
@@ -154,21 +145,55 @@ void IdleScene()
 	{
 		game.Update();
 		game.Late_Update();
+		dwTime = GetTickCount();
 
-		//cube.Update();
-
-		InitBuffer();
 		glutPostRedisplay();
 
-		dwTime = GetTickCount();
 	}
 
 }
 
 GLvoid Keyboard(unsigned char key, int x, int y)
 {
+	float speed = 3.f;
+	glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
+	speed *= game.Get_DeltaTime();
+
 	switch (key)
 	{
+	case 'W': 
+	case 'w':
+		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_FORWARD);
+		static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_FORWARD);
+		camera.cameraPos += camera.cameraFront * speed;
+		break;
+
+	case 'S':
+	case 's':
+		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_BACK);
+		static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_BACK);
+		camera.cameraPos -= camera.cameraFront * speed;
+		break;
+
+	case 'A':
+	case 'a':
+		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_LEFT);
+		static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_LEFT);
+		camera.cameraPos -= glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
+		break;
+
+	case 'D':
+	case 'd':
+		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_RIGHT);
+		static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_RIGHT);
+		camera.cameraPos += glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
+		break;
+
+	case 'q':
+	case 'Q':
+		static_cast<Cube*>(game.Get_Player())->_isJump = true;
+		break;
+
 	default:
 		break;
 	}

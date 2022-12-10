@@ -17,6 +17,7 @@ public:
 	virtual void Late_update() override;
 	virtual void Render(GLuint _program) override;
 	virtual void Release() override;
+
 };
 
 #endif // !__STAGE_H__

@@ -20,6 +20,9 @@ public:
 	void Add_Object(Object* _pObj, OBJID _eID) { _listObj[_eID].emplace_back(_pObj); }
 
 public:
+	Object* Get_Player() { return _listObj[OBJID::PLAYER].front(); }
+
+public:
 	static ObjectManager* Get_Instance()
 	{
 		if (!_pInstance)
