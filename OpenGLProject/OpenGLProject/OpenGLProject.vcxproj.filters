@@ -46,6 +46,9 @@
     <Filter Include="소스 파일\01. Object\03. Item">
       <UniqueIdentifier>{eabb2012-c7ad-406b-b2ff-d4e618155ff1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01. Object\04. Enemy">
+      <UniqueIdentifier>{b7f75121-9151-4809-a4b3-d190606443a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,6 +84,9 @@
     <ClCompile Include="Item.cpp">
       <Filter>소스 파일\01. Object\03. Item</Filter>
     </ClCompile>
+    <ClCompile Include="MovingEnemy.cpp">
+      <Filter>소스 파일\01. Object\04. Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -115,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>소스 파일\01. Object\03. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingEnemy.h">
+      <Filter>소스 파일\01. Object\04. Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

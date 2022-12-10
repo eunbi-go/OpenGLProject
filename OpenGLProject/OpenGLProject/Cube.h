@@ -20,6 +20,7 @@ public:
 
 public:
 	void UpdateBuffer();
+	void RenderFinalMatrix(GLuint _program);
 
 public:
 	void Move(MOVE move);
@@ -35,7 +36,7 @@ public:
 	void SetRotateX(float radian) { rotateRadian = radian;  rotation = glm::rotate(rotation, glm::radians(rotateRadian), glm::vec3(1.0, 0.0, 0.0)); }
 	void SetRotateY(float radian) { rotateRadian = radian;  rotation = glm::rotate(rotation, glm::radians(rotateRadian), glm::vec3(0.0, 1.0, 0.0)); }
 	void SetRotateZ(float radian) { rotateRadian = radian;  rotation = glm::rotate(rotation, glm::radians(rotateRadian), glm::vec3(0.0, 0.0, 1.0)); }
-
+	void SetFinalMat(glm::mat4 finalM) { finalMat = finalM; }
 
 public:
 	GLuint vaoHandle;

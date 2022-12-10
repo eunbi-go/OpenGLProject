@@ -28,6 +28,10 @@ private:
 	GLfloat		_alphaTime = 0.f;
 	GLfloat		_speedupTime = 0.f;
 	GLfloat		_lightTime = 0.f;
+
+	// test
+	class Object* _child;
+	GLfloat	_childRot = 0.f;
 };
 
 #endif // !__PLAYER_H__

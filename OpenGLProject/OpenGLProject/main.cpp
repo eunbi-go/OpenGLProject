@@ -7,10 +7,7 @@
 #include "MainGame.h"
 #include "Player.h"
 
-random_device rd;
-mt19937 gen(rd());
-uniform_real_distribution<> randomC(0.0, 1.0);
-uniform_real_distribution<> randomSpeed(0.001, 0.01);
+
 
 
 struct Camera
@@ -155,7 +152,7 @@ void IdleScene()
 
 GLvoid Keyboard(unsigned char key, int x, int y)
 {
-	float speed = 3.f;
+	float speed = 20.f;
 	glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
 	speed *= game.Get_DeltaTime();
 

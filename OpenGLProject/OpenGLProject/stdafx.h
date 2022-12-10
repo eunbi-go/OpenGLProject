@@ -31,6 +31,12 @@
 
 using namespace std;
 
+//random_device rd;
+//mt19937 gen(rd());
+//uniform_int_distribution<int> dir(0, 1);
+//uniform_real_distribution<> randomC(0.0, 1.0);
+//uniform_real_distribution<> randomSpeed(0.001, 0.01);
+
 enum OBJID {PLAYER, ENEMY, ITEM, BLOCK, OBJID_END};
 enum MOVE {MOVE_FORWARD, MOVE_BACK, MOVE_RIGHT, MOVE_LEFT, MOVE_END};
 enum ITEMTYPE { ALPHA, SPEEDUP, LIGHT, ITEM_END };

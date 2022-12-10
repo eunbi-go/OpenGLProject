@@ -104,16 +104,19 @@ void Cube::UpdateBuffer()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
 }
 
+void Cube::RenderFinalMatrix(GLuint _program)
+{
+	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(finalMat));
+	glBindVertexArray(vaoHandle);
+	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
+}
+
 void Cube::Move(MOVE move)
 {
-	if (_ePreMoveDir != _eCurMoveDir)
-	{
-		_ePreMoveDir = _eCurMoveDir;
-	}
-
 	double time = Timer::Get_Instance()->Get_DeltaTime();
 
-	switch (move)
+	switch (_eCurMoveDir)
 	{
 	case MOVE_FORWARD:
 		trans = glm::translate(trans, glm::vec3(0.f, 0.0f, _movingSpeed * -time));

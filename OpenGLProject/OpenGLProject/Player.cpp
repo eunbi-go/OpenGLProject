@@ -12,6 +12,7 @@ Player::~Player()
 
 void Player::Initialize()
 {
+	_movingSpeed = 20.f;
 	UpdateBuffer();
 }
 
