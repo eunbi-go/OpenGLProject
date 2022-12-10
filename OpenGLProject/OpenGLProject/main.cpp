@@ -194,6 +194,18 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		static_cast<Cube*>(game.Get_Player())->_isJump = true;
 		break;
 
+	// 아이템 적용 테스트
+	case '1':	// 투명화
+
+		break;
+
+	case '2':	// 스피드업
+		static_cast<Player*>(game.Get_Player())->SetItemOn(ITEMTYPE::SPEEDUP);
+		break;
+	case '3':
+
+		break;
+
 	default:
 		break;
 	}

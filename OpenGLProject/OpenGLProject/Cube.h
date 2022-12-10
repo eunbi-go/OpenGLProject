@@ -48,7 +48,7 @@ public:
 	glm::mat4 finalMat = glm::mat4(1.0f);
 
 	GLfloat rotateRadian;
-	GLfloat _movingSpeed = 3.f;
+	GLfloat _movingSpeed = 5.f;
 
 	MOVE	_ePreMoveDir = MOVE::MOVE_END;
 	MOVE	_eCurMoveDir = MOVE::MOVE_END;

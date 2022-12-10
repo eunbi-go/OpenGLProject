@@ -11,14 +11,20 @@ public:
 	virtual ~Item();
 
 public:
-	enum TYPE { ALPHA, SPEEDUP, LIGHT };
-
-public:
 	virtual void Initialize() override;
 	virtual int Update() override;
 	virtual void Late_Update() override;
 	virtual void Render(GLuint _program) override;
 	virtual void Release() override;
+	
+public:
+	const ITEMTYPE GetItemType() { return _itemType; }
+
+public:
+	void SetItemType(ITEMTYPE itemType) { _itemType = itemType; }
+
+private:
+	ITEMTYPE	_itemType = ITEM_END;
 };
 
 #endif

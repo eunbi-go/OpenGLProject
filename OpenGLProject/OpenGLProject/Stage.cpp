@@ -28,15 +28,15 @@ void Stage::Initialize()
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::PLAYER);
 	}
 
-	{
-		// Test Block
-		Object* obj = nullptr;
-		obj = new Cube;
-		obj->Initialize();
-		static_cast<Cube*>(obj)->SetPos(glm::vec3(0.5, 0.0, 0.0));
-		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
-		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::BLOCK);
-	}
+	//{
+	//	// Test Block
+	//	Object* obj = nullptr;
+	//	obj = new Cube;
+	//	obj->Initialize();
+	//	static_cast<Cube*>(obj)->SetPos(glm::vec3(0.5, 0.0, 0.0));
+	//	static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
+	//	ObjectManager::Get_Instance()->Add_Object(obj, OBJID::BLOCK);
+	//}
 }
 
 void Stage::Update()

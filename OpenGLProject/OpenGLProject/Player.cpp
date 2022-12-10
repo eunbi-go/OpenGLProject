@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "Timer.h"
 
 Player::Player()
 {
@@ -17,6 +18,8 @@ void Player::Initialize()
 int Player::Update()
 {
 	if (_isJump) Jump();
+
+	ApplyItemEffect();
 
 	return OBJ_NOEVENET;
 }
@@ -36,4 +39,26 @@ void Player::Render(GLuint _program)
 
 void Player::Release()
 {
+}
+
+void Player::ApplyItemEffect()
+{
+	// ALPHA
+
+
+	// SPEEDUP
+	if (_playerItem[ITEMTYPE::SPEEDUP]) {
+		_speedupTime += Timer::Get_Instance()->Get_DeltaTime();
+	
+		_movingSpeed = 10.f;
+	
+		if (_speedupTime >= 5.f) {
+			_movingSpeed = 5.f;
+			_speedupTime = 0.f;
+			_playerItem[ITEMTYPE::SPEEDUP] = false;
+		}
+	}
+	
+	// LIGHT
+
 }
