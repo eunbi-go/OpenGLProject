@@ -28,7 +28,7 @@
 #include <time.h>
 #include <algorithm>
 using namespace std;
-enum OBJID {PLAYER, ENEMY, OBJID_END};
+enum OBJID {PLAYER, ENEMY, ITEM, OBJID_END};
 
 #define SAFE_DELETE(p) if (p) { delete p; p = nullptr; }
 
