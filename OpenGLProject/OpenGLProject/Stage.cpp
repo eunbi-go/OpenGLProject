@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Item.h"
 #include "MovingEnemy.h"
+#include "AttackEnemy.h"
 
 #include "ObjectManager.h"
 
@@ -32,7 +33,7 @@ void Stage::Initialize()
 	{
 		// Enemy
 		Object* obj = nullptr;
-		obj = new MovingEnemy;
+		obj = new AttackEnemy;
 		obj->Initialize();
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(-0.3, 0.0, 0.0));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));

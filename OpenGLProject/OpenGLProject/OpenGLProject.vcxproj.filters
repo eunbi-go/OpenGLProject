@@ -90,6 +90,9 @@
     <ClCompile Include="Timer.cpp">
       <Filter>소스 파일\Manager\03. Timer</Filter>
     </ClCompile>
+    <ClCompile Include="AttackEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>소스 파일\Manager\03. Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackEnemy.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
