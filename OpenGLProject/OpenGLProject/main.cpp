@@ -12,16 +12,19 @@
 
 struct Camera
 {
+	//glm::vec3 cameraPos = glm::vec3(0.0f, 2.0f, 2.0f);
 	glm::vec3 cameraPos = glm::vec3(0.0f, 1.0f, 2.0f);
 	glm::vec3 cameraDir = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.f);
+	glm::vec3 cameraOn = glm::vec3(0.0f, -1.0f, 0.f);
 	glm::mat4 view = glm::mat4(1.0f);
 };
 
 MainGame game;
 Camera camera;
-
+bool isUp = false;
+bool isCamAni = false;
 void IdleScene();
 void Init();
 GLvoid Keyboard(unsigned char key, int x, int y);
@@ -113,7 +116,18 @@ GLvoid drawScene()
 
 	// camera
 	camera.view = glm::mat4(1.0f);
-	camera.view = glm::lookAt(camera.cameraPos, camera.cameraPos + camera.cameraFront, camera.cameraUp);
+	
+	
+	glm::vec3 camDir = glm::vec3(0.f);
+	if (isUp)
+	{
+		//camera.cameraPos.y = 2.f;
+		camDir = camera.cameraPos + camera.cameraFront + camera.cameraOn;
+	}
+	else camDir = camera.cameraPos + camera.cameraFront;
+
+
+	camera.view = glm::lookAt(camera.cameraPos, camDir, camera.cameraUp);
 	unsigned int viewLoc = glGetUniformLocation(s_program, "viewTransform");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &camera.view[0][0]);
 
@@ -135,13 +149,27 @@ GLvoid Reshape(int w, int h) //--- 콜백 함수: 다시 그리기 콜백 함수
 }
 
 DWORD dwTime = GetTickCount();
-
+float camSpeed = 0.5f;
 void IdleScene()
 {
 	if (dwTime + 40 < GetTickCount())
 	{
 		game.Update();
 		game.Late_Update();
+
+		if (isCamAni)
+		{
+			if (isUp && camera.cameraPos.y <= 2.f)
+			{
+				camera.cameraPos.y += game.Get_DeltaTime() * camSpeed;
+			}
+			else if (!isUp && camera.cameraPos.y >= 1.f)
+			{
+				camera.cameraPos.y -= game.Get_DeltaTime() * camSpeed;
+			}
+			else isCamAni = false;
+		}
+
 		dwTime = GetTickCount();
 
 		glutPostRedisplay();
@@ -189,6 +217,12 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case 'q':
 	case 'Q':
 		static_cast<Cube*>(game.Get_Player())->_isJump = true;
+		break;
+
+	case 'e':
+	case 'E':
+		isUp = !isUp;
+		isCamAni = true;
 		break;
 
 	// 아이템 적용 테스트
