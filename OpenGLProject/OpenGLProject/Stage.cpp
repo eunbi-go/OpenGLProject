@@ -35,7 +35,7 @@ void Stage::Initialize()
 		Object* obj = nullptr;
 		obj = new AttackEnemy;
 		obj->Initialize();
-		static_cast<Cube*>(obj)->SetPos(glm::vec3(-0.3, 0.0, 0.0));
+		static_cast<Cube*>(obj)->SetPos(glm::vec3(-1.3, 0.0, -2.0));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ENEMY);
 	}

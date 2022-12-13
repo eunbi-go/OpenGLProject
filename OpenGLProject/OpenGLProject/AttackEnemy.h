@@ -26,6 +26,9 @@ private:
 private:
 	class Object* _leftLeg;
 	class Object* _rightLeg;
+	class Object* _ring;
+
+	float	_ringRot = 0.f;
 };
 
 #endif // !__ATTACKENEMY_H__
