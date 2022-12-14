@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "AttackEnemy.h"
+#include "Bullet.h"
 
 #include "ObjectManager.h"
 #include "Timer.h"
@@ -48,9 +49,9 @@ int AttackEnemy::Update()
 		_ringRot = 1.f;
 
 	_attackTime += Timer::Get_Instance()->Get_DeltaTime();
-	if (_attackTime > 1.f)
+	if (_attackTime > 3.f)
 	{
-		_attackTime = 1.f;
+		_attackTime = 0.f;
 		Attack();
 	}
 
@@ -114,6 +115,7 @@ void AttackEnemy::RenderChild(GLuint _program)
 		t2 = glm::translate(t2, glm::vec3(0.4f, 0.0f, 0.f));
 		r = glm::rotate(r, glm::radians(_ringRot), glm::vec3(0.f, 1.f, 0.f));
 		childMat = t1 * r * t2 * static_cast<Cube*>(_ring)->scale;
+		_bulletPos = t1 * t2;
 		static_cast<Cube*>(_ring)->SetFinalMat(childMat);
 		static_cast<Cube*>(_ring)->RenderFinalMatrix(_program);
 	}
@@ -121,4 +123,11 @@ void AttackEnemy::RenderChild(GLuint _program)
 
 void AttackEnemy::Attack()
 {
+	Object* obj = nullptr;
+	obj = new Bullet;
+	obj->Initialize();
+	static_cast<Cube*>(obj)->SetPos(glm::vec3(_bulletPos[3][0], _bulletPos[3][1], _bulletPos[3][2]));
+	static_cast<Cube*>(obj)->SetScale(glm::vec3(0.4f, 0.4f, 0.4f));
+	static_cast<Cube*>(obj)->SetMoveDir(MOVE::MOVE_BACK);
+	ObjectManager::Get_Instance()->Add_Object(obj, OBJID::BULLET);
 }

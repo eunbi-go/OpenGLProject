@@ -31,6 +31,8 @@ private:
 
 	float	_ringRot = 0.f;
 	double	_attackTime = 0.0;
+
+	glm::mat4	_bulletPos = glm::mat4(1.f);
 };
 
 #endif // !__ATTACKENEMY_H__
