@@ -33,9 +33,26 @@ void AttackEnemy::Initialize()
 
 int AttackEnemy::Update()
 {
+	glm::mat4 playerMat = static_cast<Cube*>(ObjectManager::Get_Instance()->Get_Player())->Get_Translation();
+	glm::vec3 playerPos = glm::vec3(playerMat[3][0], playerMat[3][1], playerMat[3][2]);
+	glm::vec3 pos = glm::vec3(trans[3][0], trans[3][1], trans[3][2]);
+	glm::vec3 dir = playerPos - pos;
+	dir.y = 0.f;
+	glm::vec3 normalDir = glm::normalize(dir);
+	glm::quat q;
+	q = glm::quatLookAt(normalDir, glm::vec3(0.f, 1.f, 0.f));
+	rotation = glm::mat4_cast(q);
+
 	_ringRot += Timer::Get_Instance()->Get_DeltaTime() * 100.f;
 	if (_ringRot > 360.f)
 		_ringRot = 1.f;
+
+	_attackTime += Timer::Get_Instance()->Get_DeltaTime();
+	if (_attackTime > 1.f)
+	{
+		_attackTime = 1.f;
+		Attack();
+	}
 
 	return OBJ_NOEVENET;
 }
@@ -100,4 +117,8 @@ void AttackEnemy::RenderChild(GLuint _program)
 		static_cast<Cube*>(_ring)->SetFinalMat(childMat);
 		static_cast<Cube*>(_ring)->RenderFinalMatrix(_program);
 	}
+}
+
+void AttackEnemy::Attack()
+{
 }

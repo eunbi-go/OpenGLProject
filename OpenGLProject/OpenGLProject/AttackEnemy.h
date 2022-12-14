@@ -22,6 +22,7 @@ public:
 
 private:
 	void RenderChild(GLuint _program);
+	void Attack();
 
 private:
 	class Object* _leftLeg;
@@ -29,6 +30,7 @@ private:
 	class Object* _ring;
 
 	float	_ringRot = 0.f;
+	double	_attackTime = 0.0;
 };
 
 #endif // !__ATTACKENEMY_H__
