@@ -38,7 +38,7 @@ using namespace std;
 //uniform_real_distribution<> randomSpeed(0.001, 0.01);
 
 enum OBJID {PLAYER, ENEMY, ITEM, BLOCK, BULLET, OBJID_END};
-enum MOVE {MOVE_FORWARD, MOVE_BACK, MOVE_RIGHT, MOVE_LEFT, MOVE_END};
+enum MOVE {MOVE_FORWARD, MOVE_BACK, MOVE_RIGHT, MOVE_LEFT, MOVE_TO_PLAYER, MOVE_END};
 enum ITEMTYPE { ALPHA, SPEEDUP, LIGHT, ITEM_END };
 
 #define SAFE_DELETE(p) if (p) { delete p; p = nullptr; }

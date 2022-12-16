@@ -128,6 +128,6 @@ void AttackEnemy::Attack()
 	obj->Initialize();
 	static_cast<Cube*>(obj)->SetPos(glm::vec3(_bulletPos[3][0], _bulletPos[3][1], _bulletPos[3][2]));
 	static_cast<Cube*>(obj)->SetScale(glm::vec3(0.4f, 0.4f, 0.4f));
-	static_cast<Cube*>(obj)->SetMoveDir(MOVE::MOVE_BACK);
+	static_cast<Cube*>(obj)->SetMoveDir(MOVE::MOVE_TO_PLAYER);
 	ObjectManager::Get_Instance()->Add_Object(obj, OBJID::BULLET);
 }

@@ -2,6 +2,8 @@
 #include "Cube.h"
 #include "Timer.h"
 
+#include "ObjectManager.h"
+
 GLshort cube_indices[] = {
 	// Front.
 	3, 2, 1, 0,
@@ -115,6 +117,10 @@ void Cube::RenderFinalMatrix(GLuint _program)
 void Cube::Move()
 {
 	double time = Timer::Get_Instance()->Get_DeltaTime();
+	glm::mat4	playerTrans = static_cast<Cube*>(ObjectManager::Get_Instance()->Get_Player())->Get_Translation();
+	glm::vec3	playerPos = glm::vec3(playerTrans[3][0], playerTrans[3][1], playerTrans[3][2]);
+	glm::vec3	pos = glm::vec3(trans[3][0], trans[3][1], trans[3][2]);
+	glm::vec3	dir = glm::normalize(playerPos - pos);
 
 	switch (_eCurMoveDir)
 	{
@@ -132,6 +138,10 @@ void Cube::Move()
 
 	case MOVE_RIGHT:
 		trans = glm::translate(trans, glm::vec3(_movingSpeed * time, 0.0f, 0.f));
+		break;
+
+	case MOVE_TO_PLAYER:
+		trans = glm::translate(trans, glm::vec3(_movingSpeed * dir.x * time, 0.0f, _movingSpeed * dir.z * time));
 		break;
 
 	case MOVE_END:
