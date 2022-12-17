@@ -16,6 +16,15 @@ public:
 	virtual void Late_Update() = 0;
 	virtual void Render(GLuint _program) = 0;
 	virtual void Release() = 0;
+
+public:
+	CollisionBox GetCollisionBox() { return _collisionBox; }
+
+public:
+	//void SetCollisionBox(float maxX, float minX, float maxZ, float mixZ);
+
+protected:
+	CollisionBox	_collisionBox;
 };
 
 #endif // !__OBJECT_H__

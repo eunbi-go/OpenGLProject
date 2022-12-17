@@ -29,11 +29,14 @@
 #include <time.h>
 #include <algorithm>
 
+#include <DirectXCollision.h>
+
 using namespace std;
 
-enum OBJID {PLAYER, ENEMY, ITEM, BLOCK, OBJID_END};
+enum OBJID {PLAYER, ENEMY, ITEM, BLOCK, GROUND, OBJID_END};
 enum MOVE {MOVE_FORWARD, MOVE_BACK, MOVE_RIGHT, MOVE_LEFT, MOVE_END};
 enum ITEMTYPE { ALPHA, SPEEDUP, LIGHT, ITEM_END };
+enum COLOR { RED, GREEN, BLUE, PURPLE, COLOR_END };
 
 #define SAFE_DELETE(p) if (p) { delete p; p = nullptr; }
 
@@ -49,3 +52,13 @@ void Safe_Delete(T& _Dst)
 		_Dst = nullptr;
 	}
 }
+
+struct CollisionBox
+{
+	float	maxX;
+	float	minX;
+	float	maxZ;
+	float	minZ;
+	float	lengthX;
+	float	lengthZ;
+};

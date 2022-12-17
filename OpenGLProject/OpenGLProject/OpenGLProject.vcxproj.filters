@@ -46,6 +46,12 @@
     <Filter Include="소스 파일\01. Object\03. Item">
       <UniqueIdentifier>{eabb2012-c7ad-406b-b2ff-d4e618155ff1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Manager\03. Collision">
+      <UniqueIdentifier>{4e7ebc83-1584-4884-8526-753f20205725}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Object\04. Ground">
+      <UniqueIdentifier>{b47f4ff0-58f8-42a8-9e75-4e15b5f1d546}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,6 +87,9 @@
     <ClCompile Include="Item.cpp">
       <Filter>소스 파일\01. Object\03. Item</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>소스 파일\Manager\03. Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -115,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>소스 파일\01. Object\03. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>소스 파일\Manager\03. Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

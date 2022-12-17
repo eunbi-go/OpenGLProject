@@ -5,6 +5,7 @@
 
 #include "Scene.h"
 
+class Object;
 class Stage : public Scene
 {
 public:
@@ -17,6 +18,9 @@ public:
 	virtual void Late_update() override;
 	virtual void Render(GLuint _program) override;
 	virtual void Release() override;
+
+private:
+	Object* _player = nullptr;
 
 };
 

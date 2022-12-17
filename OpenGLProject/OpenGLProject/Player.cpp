@@ -44,7 +44,10 @@ void Player::Release()
 void Player::ApplyItemEffect()
 {
 	// ALPHA
+	if (_playerItem[ITEMTYPE::ALPHA]) {
+		_alphaTime += Timer::Get_Instance()->Get_DeltaTime();
 
+	}
 
 	// SPEEDUP
 	if (_playerItem[ITEMTYPE::SPEEDUP]) {

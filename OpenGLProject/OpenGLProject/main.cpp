@@ -196,7 +196,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 	// 아이템 적용 테스트
 	case '1':	// 투명화
-
+		static_cast<Player*>(game.Get_Player())->SetItemOn(ITEMTYPE::ALPHA);
 		break;
 
 	case '2':	// 스피드업
