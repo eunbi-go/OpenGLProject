@@ -140,12 +140,21 @@
     <ClInclude Include="Bullet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertexs.glsl">
       <Filter>소스 파일\Shader</Filter>
     </None>
     <None Include="fragments.glsl">
+      <Filter>소스 파일\Shader</Filter>
+    </None>
+    <None Include="vertexTexture.glsl">
+      <Filter>소스 파일</Filter>
+    </None>
+    <None Include="fragmentsTexture.glsl">
       <Filter>소스 파일\Shader</Filter>
     </None>
   </ItemGroup>
