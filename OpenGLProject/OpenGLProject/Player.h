@@ -18,6 +18,8 @@ public:
 
 private:
 	void ApplyItemEffect();
+	
+	void RenderChild(GLuint _program);
 
 public:
 	void SetItemOn(ITEMTYPE i) { _playerItem[i] = true; }	// test¿ë
@@ -29,9 +31,19 @@ private:
 	GLfloat		_speedupTime = 0.f;
 	GLfloat		_lightTime = 0.f;
 
-	// test
-	class Object* _child;
-	GLfloat	_childRot = 0.f;
+	class Object* _head;
+	class Object* _leftLeg;
+	class Object* _rightLeg;
+	class Object* _leftArm;
+	class Object* _rightArm;
+
+	float	_rightLegRot = -35.f;
+	float	_leftLegRot = 35.f;
+	bool	_isLegMius = false;
+
+	float	_rightArmRot = -35.f;
+	float	_leftArmRot = 35.f;
+	bool	_isArmMius = false;
 };
 
 #endif // !__PLAYER_H__
