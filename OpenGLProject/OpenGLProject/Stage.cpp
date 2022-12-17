@@ -30,15 +30,15 @@ void Stage::Initialize()
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::PLAYER);
 	}
 
-	{
-		// Enemy
-		Object* obj = nullptr;
-		obj = new AttackEnemy;
-		obj->Initialize();
-		static_cast<Cube*>(obj)->SetPos(glm::vec3(-1.3, 0.0, -2.0));
-		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
-		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ENEMY);
-	}
+	//{
+	//	// Enemy
+	//	Object* obj = nullptr;
+	//	obj = new AttackEnemy;
+	//	obj->Initialize();
+	//	static_cast<Cube*>(obj)->SetPos(glm::vec3(-1.3, 0.0, -2.0));
+	//	static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
+	//	ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ENEMY);
+	//}
 }
 
 void Stage::Update()

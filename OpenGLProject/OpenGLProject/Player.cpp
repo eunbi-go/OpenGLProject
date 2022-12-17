@@ -100,7 +100,7 @@ void Player::UpdateChild()
 	if (_eCurMoveDir != MOVE_END && !_isMoveStop)
 	{
 		_movingSec += Timer::Get_Instance()->Get_DeltaTime();
-		if (_movingSec > 2.f)
+		if (_movingSec > 1.f)
 		{
 			_movingSec = 0.f;
 			_isMoveStop = true;
