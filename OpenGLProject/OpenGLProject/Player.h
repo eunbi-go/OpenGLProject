@@ -19,6 +19,7 @@ public:
 private:
 	void ApplyItemEffect();
 	
+	void UpdateChild();
 	void RenderChild(GLuint _program);
 
 public:
@@ -44,6 +45,10 @@ private:
 	float	_rightArmRot = -35.f;
 	float	_leftArmRot = 35.f;
 	bool	_isArmMius = false;
+
+	float	_movingSec = 0.f;
+public:
+	bool	_isMoveStop = true;
 };
 
 #endif // !__PLAYER_H__

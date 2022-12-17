@@ -52,7 +52,7 @@ int AttackEnemy::Update()
 	if (_attackTime > 3.f)
 	{
 		_attackTime = 0.f;
-		//Attack();
+		Attack();
 	}
 
 	return OBJ_NOEVENET;

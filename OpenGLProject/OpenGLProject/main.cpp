@@ -190,6 +190,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case 'w':
 		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_FORWARD);
 		static_cast<Cube*>(game.Get_Player())->Move();
+		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
 		camera.cameraPos += camera.cameraFront * speed;
 		break;
 
@@ -197,6 +198,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case 's':
 		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_BACK);
 		static_cast<Cube*>(game.Get_Player())->Move();
+		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
 		camera.cameraPos -= camera.cameraFront * speed;
 		break;
 
@@ -204,6 +206,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case 'a':
 		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_LEFT);
 		static_cast<Cube*>(game.Get_Player())->Move();
+		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
 		camera.cameraPos -= glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
 		break;
 
@@ -211,6 +214,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case 'd':
 		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_RIGHT);
 		static_cast<Cube*>(game.Get_Player())->Move();
+		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
 		camera.cameraPos += glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
 		break;
 
@@ -234,7 +238,6 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		static_cast<Player*>(game.Get_Player())->SetItemOn(ITEMTYPE::SPEEDUP);
 		break;
 	case '3':
-
 		break;
 
 	default:
