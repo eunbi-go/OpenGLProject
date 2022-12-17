@@ -127,12 +127,13 @@ void make_fragmentShader()
 
 float vertexData[] = {
 	//--- 위치				//--- 노말			//--- 텍스처 좌표
-	-0.5f, -0.5f, 0.5f,		0.0, 0.0, 1.0,		0.0, 0.0,
-	0.5f, -0.5f, 0.5f,		0.0, 0.0, 1.0,		1.0, 0.0,
-	0.5f, 0.5f, 0.5f,		0.0, 0.0, 1.0,		1.0, 1.0,
-	0.5f, 0.5f, 0.5f,		0.0, 0.0, 1.0,		1.0, 1.0,
-	-0.5f, 0.5f, 0.5f,		0.0, 0.0, 1.0,		0.0, 1.0,
-	-0.5f, -0.5f, 0.5f,		0.0, 0.0, 1.0,		0.0, 0.0 
+	-20.f, -0.5f, 20.f,		0.0, 0.0, 1.0,		0.0, 0.0,
+	20.f, -0.5f, 20.f,		0.0, 0.0, 1.0,		1.0, 0.0,
+	20.f, -0.5f, -20.f,		0.0, 0.0, 1.0,		1.0, 1.0,
+
+	20.f, -0.5f, -20.f,		0.0, 0.0, 1.0,		1.0, 1.0,
+	-20.f, -0.5f, -20.f,		0.0, 0.0, 1.0,		0.0, 1.0,
+	-20.f, -0.5f, 20.f,		0.0, 0.0, 1.0,		0.0, 0.0
 };
 
 unsigned int VBO, VAO;
@@ -204,6 +205,36 @@ GLvoid drawScene()
 {
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+	{
+		glUseProgram(s_TexProgram);
+
+		glm::mat4 view = glm::mat4(1.0f);
+		glm::vec3 camDir = glm::vec3(0.f);
+		if (isUp)
+		{
+			camDir = camera.cameraPos + camera.cameraFront + camera.cameraOn;
+		}
+		else camDir = camera.cameraPos + camera.cameraFront;
+
+
+		view = glm::lookAt(camera.cameraPos, camDir, camera.cameraUp);
+		unsigned int viewLoc = glGetUniformLocation(s_TexProgram, "viewTransform");
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+
+		// project
+		glm::mat4 projection = glm::mat4(1.0f);
+		projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 200.0f);
+		projection = glm::translate(projection, glm::vec3(0.0, 0.0, -2.0));
+		unsigned int projectLoc = glGetUniformLocation(s_TexProgram, "projectionTransform");
+		glUniformMatrix4fv(projectLoc, 1, GL_FALSE, &projection[0][0]);
+
+
+		glBindVertexArray(VAO);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+	}
+	
 	glUseProgram(s_program);
 
 	// camera
@@ -233,16 +264,9 @@ GLvoid drawScene()
 
 
 
-	glEnable(GL_BLEND);
 	game.Render(s_program);
-	glDisable(GL_BLEND);
 
-	glEnable(GL_TEXTURE_2D);
-	glUseProgram(s_TexProgram);
-	glBindVertexArray(VAO);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-
+	
 	
 
 	glutSwapBuffers(); //--- 화면에 출력하기
