@@ -53,7 +53,7 @@ void MovingEnemy::Late_Update()
 {
 }
 
-void MovingEnemy::Render(GLuint _program)
+void MovingEnemy::Render(GLuint _program, GLuint _texProgram)
 {
 	glm::mat4 finalMat = trans * rotation * scale;
 	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");

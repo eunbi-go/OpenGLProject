@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SceneManager.h"
 #include "Stage.h"
+#include "Logo.h"
 
 SceneManager* SceneManager::_pInstance = nullptr;
 
@@ -19,11 +20,17 @@ void SceneManager::Scene_Change(SCENEID _eScene)
 	_eCurScene = _eScene;
 	if (_ePreScene != _eCurScene)
 	{
+		if (_pScene!= nullptr)
+			_pScene->Release();
 		SAFE_DELETE(_pScene);
 
 		switch (_eCurScene)
 		{
-		case SceneManager::STAGE:
+		case LOGO:
+			_pScene = new Logo;
+			break;
+
+		case STAGE:
 			_pScene = new Stage;
 			break;
 		}
@@ -42,9 +49,9 @@ void SceneManager::Late_Update()
 	_pScene->Late_update();
 }
 
-void SceneManager::Render(GLuint _program)
+void SceneManager::Render(GLuint _program, GLuint _texProgram)
 {
-	_pScene->Render(_program);
+	_pScene->Render(_program, _texProgram);
 }
 
 void SceneManager::Release()

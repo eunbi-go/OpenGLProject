@@ -1,6 +1,7 @@
 #pragma once
 
 
+
 #include <gl/glew.h>
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
@@ -32,9 +33,11 @@
 using namespace std;
 
 
-enum OBJID {PLAYER, ENEMY, ITEM, BLOCK, BULLET, OBJID_END};
+enum OBJID {PLAYER, ENEMY, ITEM, BLOCK, BULLET, TEXTURED_RECT, OBJID_END};
 enum MOVE {MOVE_FORWARD, MOVE_BACK, MOVE_RIGHT, MOVE_LEFT, MOVE_TO_PLAYER, MOVE_END};
 enum ITEMTYPE { ALPHA, SPEEDUP, LIGHT, ITEM_END };
+enum TEX_TYPE { GROUND, BUTTON, TEX_TYPE_END };
+enum SCENEID { LOGO, STAGE, SCENE_END };
 
 #define SAFE_DELETE(p) if (p) { delete p; p = nullptr; }
 

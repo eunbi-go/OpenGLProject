@@ -13,7 +13,7 @@ public:
 public:
 	void Update();
 	void Late_Update();
-	void Render(GLuint _program);
+	void Render(GLuint _program, GLuint _texProgram);
 	void Release();
 
 public:
@@ -22,6 +22,9 @@ public:
 public:
 	Object* Get_Player() { return _listObj[OBJID::PLAYER].front(); }
 	list<Object*>& Get_List(OBJID id) { return _listObj[id]; }
+
+public:
+	void SetTexProgram(GLuint program) { _texProgram = program; }
 
 public:
 	static ObjectManager* Get_Instance()
@@ -39,6 +42,7 @@ public:
 private:
 	list<Object*>				_listObj[OBJID::OBJID_END];
 	static ObjectManager* _pInstance;
+	GLuint _texProgram;
 };
 
 #endif // !__OBJECTMANAGER_H__

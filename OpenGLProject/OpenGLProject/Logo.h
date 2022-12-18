@@ -1,15 +1,14 @@
 #pragma once
 
-#ifndef __STAGE_H__
-#define __STAGE_H__
+#ifndef __LOGO_H__
+#define __LOGO_H__
 
 #include "Scene.h"
-
-class Stage : public Scene
+class Logo : public Scene
 {
 public:
-	Stage();
-	virtual ~Stage();
+	Logo();
+	virtual ~Logo();
 
 public:
 	virtual void Initialize() override;
@@ -17,7 +16,6 @@ public:
 	virtual void Late_update() override;
 	virtual void Render(GLuint _program, GLuint _texProgram) override;
 	virtual void Release() override;
-
 };
 
-#endif // !__STAGE_H__
+#endif // !__LOGO_H__

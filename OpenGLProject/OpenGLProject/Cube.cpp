@@ -66,7 +66,7 @@ void Cube::Late_Update()
 
 }
 
-void Cube::Render(GLuint _program)
+void Cube::Render(GLuint _program, GLuint _texProgram)
 {
 	glm::mat4 finalMat = scale * trans * rotation;
 	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");

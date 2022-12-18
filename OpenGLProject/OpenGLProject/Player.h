@@ -13,7 +13,7 @@ public:
 	virtual void Initialize() override;
 	virtual int Update() override;
 	virtual void Late_Update() override;
-	virtual void Render(GLuint _program) override;
+	virtual void Render(GLuint _program, GLuint _texProgram) override;
 	virtual void Release() override;
 
 private:

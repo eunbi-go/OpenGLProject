@@ -13,9 +13,12 @@ public:
 	void Initialize();
 	void Update();
 	void Late_Update();
-	void Render(GLuint _program);
+	void Render(GLuint _program, GLuint _texProgram);
 	void Release();
 
+public:
+	SCENEID GetCurrentSceneType();
+	void ChangeToStage();
 
 public:
 	class Object* Get_Player();
