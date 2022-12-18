@@ -263,10 +263,12 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	{
 	case 'W': 
 	case 'w':
-		//if (static_cast<Player*>(game.Get_Player())->GetIsBack()) {
-		//	static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-		//	static_cast<Player*>(game.Get_Player())->SetIsBack(false);
-		//}
+		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
+		
+		if (static_cast<Player*>(game.Get_Player())->GetIsBack()) {
+			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
+			static_cast<Player*>(game.Get_Player())->SetIsBack(false);
+		}
 
 		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
 			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_FORWARD);
@@ -277,6 +279,8 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 	case 'S':
 	case 's':
+		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
+
 		if (static_cast<Player*>(game.Get_Player())->GetIsForward()) {
 			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
 			static_cast<Player*>(game.Get_Player())->SetIsForward(false);
@@ -291,6 +295,8 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 	case 'A':
 	case 'a':
+		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
+
 		if (static_cast<Player*>(game.Get_Player())->GetIsRight()) {
 			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
 			static_cast<Player*>(game.Get_Player())->SetIsRight(false);
@@ -305,6 +311,8 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 	case 'D':
 	case 'd':
+		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
+
 		if (static_cast<Player*>(game.Get_Player())->GetIsLeft()) {
 			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
 			static_cast<Player*>(game.Get_Player())->SetIsLeft(false);
