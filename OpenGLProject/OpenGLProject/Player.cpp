@@ -109,7 +109,7 @@ void Player::ApplyItemEffect()
 
 		if (_alphaTime >= 5.f)
 		{
-			SetColor((0.0f, 1.0f, 0.5f);
+			SetColor(0.0f, 1.0f, 0.5f);
 			UpdateBuffer();
 
 			static_cast<Cube*>(_leftLeg)->SetColor(1.0f, 0.f, 1.0f);
