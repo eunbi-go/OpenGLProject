@@ -67,7 +67,11 @@ void CollisionManager::Collision_PlayerToItem(Object* player, list<Object*> src)
 
 		if (static_cast<Player*>(player)->GetIsCollision() && IsCollision(&c1, &c2)) {
 			if (static_cast<Item*>(Src)->GetItemType() == ALPHA) static_cast<Player*>(player)->SetItemOn(ALPHA);
-			else if (static_cast<Item*>(Src)->GetItemType() == SPEEDUP) static_cast<Player*>(player)->SetItemOn(SPEEDUP);
+			else if (static_cast<Item*>(Src)->GetItemType() == SPEEDUP)
+			{
+				static_cast<Player*>(player)->SetItemOn(SPEEDUP);
+				static_cast<Player*>(player)->SetIsSpeedUp(true);
+			}
 
 			static_cast<Cube*>(Src)->SetDead();
 		}
@@ -91,7 +95,8 @@ void CollisionManager::Collision_PlayerToBullet(Object* player, list<Object*> sr
 
 		if (static_cast<Player*>(player)->GetIsCollision() && IsCollision(&c1, &c2)) {
 			static_cast<Cube*>(Src)->SetDead();
-			//static_cast<Cube*>(player)->SetPos(glm::vec3(0.0, 0.0, 0));
+			static_cast<Cube*>(player)->SetPos(glm::vec3(0.0, 0.0, 0));
+			static_cast<Player*>(player)->SetIsRespawn(true);
 		}
 	}
 }

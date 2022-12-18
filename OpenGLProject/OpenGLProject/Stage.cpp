@@ -24,7 +24,7 @@ Stage::~Stage()
 
 void Stage::Initialize()
 {
-	SoundManager::Get_Instance()->PlayBGM(L"bgm.mp3");
+	//SoundManager::Get_Instance()->PlayBGM(L"bgm.mp3");
 
 	{
 		// Player
@@ -63,11 +63,11 @@ void Stage::Late_update()
 	CollisionManager::Get_Instance()->Collision_PlayerToBlock(
 		ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::BLOCK));
 
-	CollisionManager::Get_Instance()->Collision_PlayerToBullet(
-		ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::BULLET));
+	//CollisionManager::Get_Instance()->Collision_PlayerToBullet(
+	//	ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::BULLET));
 
-	CollisionManager::Get_Instance()->Collision_PlayerToEnemy(
-		ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::ENEMY));
+	//CollisionManager::Get_Instance()->Collision_PlayerToEnemy(
+	//	ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::ENEMY));
 
 	CollisionManager::Get_Instance()->Collision_PlayerToItem(
 		ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::ITEM));
@@ -172,7 +172,7 @@ void Stage::CreateItem()
 
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(-1.5f, y, -6.0f));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
-		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
+		static_cast<Cube*>(obj)->SetBoundingSize(0.4f);
 		static_cast<Item*>(obj)->SetItemType(ALPHA);
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ITEM);
 	}
@@ -184,7 +184,7 @@ void Stage::CreateItem()
 
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(1.5f, y, -6.0f));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
-		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
+		static_cast<Cube*>(obj)->SetBoundingSize(0.4f);
 		static_cast<Item*>(obj)->SetItemType(SPEEDUP);
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ITEM);
 	}
@@ -196,7 +196,7 @@ void Stage::CreateItem()
 
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(-1.5f, y, -35.0f));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
-		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
+		static_cast<Cube*>(obj)->SetBoundingSize(0.4f);
 		static_cast<Item*>(obj)->SetItemType(ALPHA);
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ITEM);
 	}
@@ -208,7 +208,7 @@ void Stage::CreateItem()
 
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(1.5f, y, -35.0f));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
-		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
+		static_cast<Cube*>(obj)->SetBoundingSize(0.4f);
 		static_cast<Item*>(obj)->SetItemType(SPEEDUP);
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ITEM);
 	}
