@@ -1,38 +1,31 @@
 #include "stdafx.h"
-#include "Bullet.h"
+#include "Block.h"
 
-#include "Timer.h"
-
-Bullet::Bullet()
+Block::Block()
 {
 }
 
-Bullet::~Bullet()
+Block::~Block()
 {
 }
 
-void Bullet::Initialize()
+void Block::Initialize()
 {
 }
 
-int Bullet::Update()
+int Block::Update()
 {
-	if (_isDead)
-		return OBJ_DEAD;
+	if (_isDead) return OBJ_DEAD;
 
-	_lifeTime += Timer::Get_Instance()->Get_DeltaTime();
-	if (_lifeTime >= 3.f)
-		return OBJ_DEAD;
 
-	Move();
 	return OBJ_NOEVENET;
 }
 
-void Bullet::Late_Update()
+void Block::Late_Update()
 {
 }
 
-void Bullet::Render(GLuint _program)
+void Block::Render(GLuint _program)
 {
 	glm::mat4 finalMat = trans * rotation * scale;
 	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");
@@ -41,6 +34,6 @@ void Bullet::Render(GLuint _program)
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
 }
 
-void Bullet::Release()
+void Block::Release()
 {
 }

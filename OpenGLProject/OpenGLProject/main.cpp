@@ -188,10 +188,10 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	{
 	case 'W': 
 	case 'w':
-		//if (static_cast<Player*>(game.Get_Player())->GetIsBack()) {
-		//	static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-		//	static_cast<Player*>(game.Get_Player())->SetIsBack(false);
-		//}
+		if (static_cast<Player*>(game.Get_Player())->GetIsBack()) {
+			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
+			static_cast<Player*>(game.Get_Player())->SetIsBack(false);
+		}
 
 		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
 			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_FORWARD);
@@ -275,6 +275,8 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 void main(int argc, char** argv)
 {
+
+
 	// 윈도우 생성하기
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);

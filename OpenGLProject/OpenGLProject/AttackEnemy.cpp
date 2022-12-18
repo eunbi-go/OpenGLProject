@@ -4,6 +4,7 @@
 
 #include "ObjectManager.h"
 #include "Timer.h"
+#include "Player.h"
 
 random_device rd1;
 mt19937 gen1(rd1());
@@ -127,11 +128,14 @@ void AttackEnemy::RenderChild(GLuint _program)
 
 void AttackEnemy::Attack()
 {
+	if (static_cast<Player*>(ObjectManager::Get_Instance()->Get_Player())->GetZ() < trans[3][2]) return;
+
 	Object* obj = nullptr;
 	obj = new Bullet;
 	obj->Initialize();
 	static_cast<Cube*>(obj)->SetPos(glm::vec3(_bulletPos[3][0], _bulletPos[3][1], _bulletPos[3][2]));
 	static_cast<Cube*>(obj)->SetScale(glm::vec3(0.4f, 0.4f, 0.4f));
+	static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
 	int randomValue = attackType(gen1);
 	if (randomValue == 1)
 		static_cast<Cube*>(obj)->SetMoveDir(MOVE::MOVE_TO_PLAYER);

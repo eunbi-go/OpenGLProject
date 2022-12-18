@@ -29,10 +29,20 @@
 #include <time.h>
 #include <algorithm>
 
+// 사운드파일 추가
+#include <io.h>
+#include "fmod.h"
+#pragma comment (lib, "fmodex_vc.lib")
+
+
+// 동영상
+#include <Vfw.h>
+#pragma comment (lib, "Vfw32.lib")
+
 using namespace std;
 
 
-enum OBJID {PLAYER, ENEMY, ITEM, BLOCK, BULLET, OBJID_END};
+enum OBJID {PLAYER, ENEMY, ITEM, BLOCK, BULLET, GROUND, OBJID_END};
 enum MOVE {MOVE_FORWARD, MOVE_BACK, MOVE_RIGHT, MOVE_LEFT, MOVE_TO_PLAYER, MOVE_END};
 enum ITEMTYPE { ALPHA, SPEEDUP, LIGHT, ITEM_END };
 
