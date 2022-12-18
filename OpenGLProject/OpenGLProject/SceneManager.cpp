@@ -42,9 +42,9 @@ void SceneManager::Late_Update()
 	_pScene->Late_update();
 }
 
-void SceneManager::Render(GLuint _program)
+void SceneManager::Render(GLuint _program, GLuint _texProgram)
 {
-	_pScene->Render(_program);
+	_pScene->Render(_program, _texProgram);
 }
 
 void SceneManager::Release()

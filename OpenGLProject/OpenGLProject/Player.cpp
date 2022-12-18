@@ -58,7 +58,7 @@ void Player::Late_Update()
 {
 }
 
-void Player::Render(GLuint _program)
+void Player::Render(GLuint _program, GLuint _texProgram)
 {
 	glm::mat4 finalMat = trans * rotation* scale;
 	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");

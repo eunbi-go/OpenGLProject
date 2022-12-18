@@ -43,17 +43,29 @@ void ObjectManager::Late_Update()
 	}
 }
 
-void ObjectManager::Render(GLuint _program)
+void ObjectManager::Render(GLuint _program, GLuint _texProgram)
 {
 	for (int i = 0; i < OBJID::OBJID_END; ++i)
 	{
-		for (auto& pObj : _listObj[i])
+		if (i != OBJID::TEXTURED_RECT)
 		{
-			if (!pObj)
-				continue;
-			pObj->Render(_program);
+			glUseProgram(_program);
+			for (auto& pObj : _listObj[i])
+			{
+				if (!pObj)
+					continue;
+				pObj->Render(_program, _texProgram);
+			}
 		}
-
+		else
+		{
+			for (auto& pObj : _listObj[i])
+			{
+				if (!pObj)
+					continue;
+				pObj->Render(_program, _texProgram);
+			}
+		}
 	}
 }
 

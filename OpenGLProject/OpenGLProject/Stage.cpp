@@ -6,6 +6,7 @@
 #include "Item.h"
 #include "MovingEnemy.h"
 #include "AttackEnemy.h"
+#include "TexturedRect.h"
 
 #include "ObjectManager.h"
 
@@ -39,6 +40,15 @@ void Stage::Initialize()
 	//	static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
 	//	ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ENEMY);
 	//}
+
+	{
+		// ground
+		Object* obj = nullptr;
+		obj = new TexturedRect;
+		static_cast<TexturedRect*>(obj)->SetTexType(TEX_TYPE::GROUND);
+		obj->Initialize();
+		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::TEXTURED_RECT);
+	}
 }
 
 void Stage::Update()
@@ -51,9 +61,9 @@ void Stage::Late_update()
 	ObjectManager::Get_Instance()->Late_Update();
 }
 
-void Stage::Render(GLuint _program)
+void Stage::Render(GLuint _program, GLuint _texProgram)
 {
-	ObjectManager::Get_Instance()->Render(_program);
+	ObjectManager::Get_Instance()->Render(_program, _texProgram);
 }
 
 void Stage::Release()

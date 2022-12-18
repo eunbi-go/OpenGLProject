@@ -30,9 +30,9 @@ void MainGame::Late_Update()
 	Timer::Get_Instance()->Update_CTimeManager();
 }
 
-void MainGame::Render(GLuint _program)
+void MainGame::Render(GLuint _program, GLuint _texProgram)
 {
-	SceneManager::Get_Instance()->Render(_program);
+	SceneManager::Get_Instance()->Render(_program, _texProgram);
 }
 
 void MainGame::Release()

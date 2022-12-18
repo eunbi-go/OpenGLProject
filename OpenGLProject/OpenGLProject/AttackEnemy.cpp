@@ -66,7 +66,7 @@ void AttackEnemy::Late_Update()
 {
 }
 
-void AttackEnemy::Render(GLuint _program)
+void AttackEnemy::Render(GLuint _program, GLuint _texProgram)
 {
 	glm::mat4 finalMat = trans * rotation * scale;
 	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");
