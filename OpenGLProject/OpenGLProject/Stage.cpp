@@ -7,6 +7,7 @@
 #include "MovingEnemy.h"
 #include "AttackEnemy.h"
 
+#include "CollisionManager.h"
 #include "ObjectManager.h"
 
 Stage::Stage()
@@ -49,6 +50,16 @@ void Stage::Update()
 void Stage::Late_update()
 {
 	ObjectManager::Get_Instance()->Late_Update();
+
+	CollisionManager::Get_Instance()->Collision_PlayerToBlock(
+		ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::BLOCK));
+
+	CollisionManager::Get_Instance()->Collision_PlayerToBullet(
+		ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::ENEMY));
+
+	CollisionManager::Get_Instance()->Collision_PlayerToItem(
+		ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::ITEM));
+
 }
 
 void Stage::Render(GLuint _program)
