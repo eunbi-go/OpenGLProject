@@ -15,7 +15,7 @@ MainGame::~MainGame()
 
 void MainGame::Initialize()
 {
-	SceneManager::Get_Instance()->Scene_Change(SceneManager::SCENEID::STAGE);
+	SceneManager::Get_Instance()->Scene_Change(SCENEID::LOGO);
 	Timer::Get_Instance()->Ready_CTimeManager();
 }
 
@@ -38,6 +38,16 @@ void MainGame::Render(GLuint _program, GLuint _texProgram)
 void MainGame::Release()
 {
 	Timer::Destroy_Instance();
+}
+
+SCENEID MainGame::GetCurrentSceneType()
+{
+	return SceneManager::Get_Instance()->GetCurrentSceneType();
+}
+
+void MainGame::ChangeToStage()
+{
+	SceneManager::Get_Instance()->Scene_Change(SCENEID::STAGE);
 }
 
 Object* MainGame::Get_Player()

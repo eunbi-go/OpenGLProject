@@ -15,14 +15,15 @@ float vertexData[] = {
 };
 float vertexButtonData[] = {
 	//--- 위치				//--- 노말			//--- 텍스처 좌표
-	-0.5f, -0.3f, 0.5f,		0.0, 0.0, 1.0,		0.0, 0.0,
-	0.5f, -0.3f, 0.5f,		0.0, 0.0, 1.0,		1.0, 0.0,
-	0.5f, 0.3f, 0.5f,		0.0, 0.0, 1.0,		1.0, 1.0,
+	-0.5f, 0.3f, 0.5f,		0.0, 0.0, 1.0,		0.0, 0.0,
+	0.5f, 0.3f, 0.5f,		0.0, 0.0, 1.0,		1.0, 0.0,
+	0.5f, -0.3f, 0.5f,		0.0, 0.0, 1.0,		1.0, 1.0,
 
-	0.5f, 0.3f, 0.5f,		0.0, 0.0, 1.0,		1.0, 1.0,
-	-0.5f, 0.3f, 0.5f,		0.0, 0.0, 1.0,		0.0, 1.0,
-	-0.5f, -0.3f, 0.5f,		0.0, 0.0, 1.0,		0.0, 0.0
+	0.5f, -0.3f, 0.5f,		0.0, 0.0, 1.0,		1.0, 1.0,
+	-0.5f, -0.3f, 0.5f,		0.0, 0.0, 1.0,		0.0, 1.0,
+	-0.5f, 0.3f, 0.5f,		0.0, 0.0, 1.0,		0.0, 0.0
 };
+
 
 TexturedRect::TexturedRect()
 {
@@ -34,7 +35,7 @@ TexturedRect::~TexturedRect()
 
 void TexturedRect::Initialize()
 {
-	if (_type == TEX_TYPE::LOGO)
+	if (_type == TEX_TYPE::BUTTON)
 		UpdateButtonBuffer();
 	else
 		UpdateBuffer();
@@ -125,8 +126,7 @@ void TexturedRect::UpdateButtonBuffer()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	// 텍스처 로드 및 생성
 	int width, height, nrChannels;
-	unsigned char* data = nullptr;
-		data = stbi_load("start.png", &width, &height, &nrChannels, 0);
+	unsigned char* data = stbi_load("images.jpg", &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);

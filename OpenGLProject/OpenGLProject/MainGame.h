@@ -16,6 +16,9 @@ public:
 	void Render(GLuint _program, GLuint _texProgram);
 	void Release();
 
+public:
+	SCENEID GetCurrentSceneType();
+	void ChangeToStage();
 
 public:
 	class Object* Get_Player();

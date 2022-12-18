@@ -12,9 +12,7 @@ public:
 	~SceneManager();
 	
 public:
-	enum SCENEID {
-		STAGE, SCENE_END
-	};
+
 
 public:
 	void Scene_Change(SCENEID _eScene);
@@ -22,6 +20,9 @@ public:
 	void Late_Update();
 	void Render(GLuint _program, GLuint _texProgram);
 	void Release();
+
+public:
+	SCENEID GetCurrentSceneType() { return _eCurScene; }
 
 public:
 	static SceneManager* Get_Instance()
