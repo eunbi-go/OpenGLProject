@@ -110,7 +110,7 @@ void InitShader()
 //--- 그리기 콜백 함수
 GLvoid drawScene()
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(s_program);
 
@@ -188,64 +188,39 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	{
 	case 'W': 
 	case 'w':
-		if (static_cast<Player*>(game.Get_Player())->GetIsBack()) {
-			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-			static_cast<Player*>(game.Get_Player())->SetIsBack(false);
-		}
-
-		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
-			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_FORWARD);
-			static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_FORWARD);
-			camera.cameraPos += camera.cameraFront * speed;
-		}
+		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_FORWARD);
+		static_cast<Cube*>(game.Get_Player())->Move();
+		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
+		camera.cameraPos += camera.cameraFront * speed;
 		break;
 
 	case 'S':
 	case 's':
-		if (static_cast<Player*>(game.Get_Player())->GetIsForward()) {
-			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-			static_cast<Player*>(game.Get_Player())->SetIsForward(false);
-		}
-
-		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
-			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_BACK);
-			static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_BACK);
-			camera.cameraPos -= camera.cameraFront * speed;
-		}
+		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_BACK);
+		static_cast<Cube*>(game.Get_Player())->Move();
+		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
+		camera.cameraPos -= camera.cameraFront * speed;
 		break;
 
 	case 'A':
 	case 'a':
-		if (static_cast<Player*>(game.Get_Player())->GetIsRight()) {
-			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-			static_cast<Player*>(game.Get_Player())->SetIsRight(false);
-		}
-
-		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
-			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_LEFT);
-			static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_LEFT);
-			camera.cameraPos -= glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
-		}
+		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_LEFT);
+		static_cast<Cube*>(game.Get_Player())->Move();
+		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
+		camera.cameraPos -= glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
 		break;
 
 	case 'D':
 	case 'd':
-		if (static_cast<Player*>(game.Get_Player())->GetIsLeft()) {
-			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-			static_cast<Player*>(game.Get_Player())->SetIsLeft(false);
-		}
-
-		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
-			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_RIGHT);
-			static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_RIGHT);
-			camera.cameraPos += glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
-		}
+		static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_RIGHT);
+		static_cast<Cube*>(game.Get_Player())->Move();
+		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
+		camera.cameraPos += glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
 		break;
 
 	case 'q':
 	case 'Q':
-		if (static_cast<Player*>(game.Get_Player())->GetIsMove())
-			static_cast<Cube*>(game.Get_Player())->_isJump = true;
+		static_cast<Cube*>(game.Get_Player())->_isJump = true;
 		break;
 
 	case 'e':
@@ -256,7 +231,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 	// 아이템 적용 테스트
 	case '1':	// 투명화
-		static_cast<Player*>(game.Get_Player())->SetItemOn(ITEMTYPE::ALPHA);
+
 		break;
 
 	case '2':	// 스피드업

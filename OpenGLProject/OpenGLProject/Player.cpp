@@ -76,18 +76,7 @@ void Player::Release()
 void Player::ApplyItemEffect()
 {
 	// ALPHA
-	if (_playerItem[ITEMTYPE::ALPHA]) {
-		_alphaTime += Timer::Get_Instance()->Get_DeltaTime();
 
-		_isCollision = false;
-		_isMove = true;
-
-		if (_alphaTime >= 5.f) {
-			_isCollision = true;
-			_alphaTime = 0.f;
-			_playerItem[ITEMTYPE::ALPHA] = false;
-		}
-	}
 
 	// SPEEDUP
 	if (_playerItem[ITEMTYPE::SPEEDUP]) {
@@ -101,6 +90,9 @@ void Player::ApplyItemEffect()
 			_playerItem[ITEMTYPE::SPEEDUP] = false;
 		}
 	}
+	
+	// LIGHT
+
 }
 
 void Player::UpdateChild()
