@@ -140,8 +140,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="AttackEnemy.cpp" />
     <ClCompile Include="Bullet.cpp" />
+=======
+    <ClCompile Include="CollisionManager.cpp" />
+>>>>>>> Item
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="MovingEnemy.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -156,8 +160,12 @@
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="AttackEnemy.h" />
     <ClInclude Include="Bullet.h" />
+=======
+    <ClInclude Include="CollisionManager.h" />
+>>>>>>> Item
     <ClInclude Include="Cube.h" />
     <ClInclude Include="MovingEnemy.h" />
     <ClInclude Include="Item.h" />

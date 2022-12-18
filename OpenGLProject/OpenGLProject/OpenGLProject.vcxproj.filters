@@ -46,11 +46,16 @@
     <Filter Include="소스 파일\01. Object\03. Item">
       <UniqueIdentifier>{eabb2012-c7ad-406b-b2ff-d4e618155ff1}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="소스 파일\01. Object\04. Enemy">
       <UniqueIdentifier>{b7f75121-9151-4809-a4b3-d190606443a7}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\Manager\03. Timer">
       <UniqueIdentifier>{6261916b-f5a4-42ef-8ff0-86891e1d2def}</UniqueIdentifier>
+=======
+    <Filter Include="소스 파일\Manager\03. Collision">
+      <UniqueIdentifier>{4e7ebc83-1584-4884-8526-753f20205725}</UniqueIdentifier>
+>>>>>>> Item
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +101,9 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>소스 파일\Manager\03. Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -139,6 +147,9 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>소스 파일\Manager\03. Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

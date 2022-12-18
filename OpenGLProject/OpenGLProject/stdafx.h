@@ -29,6 +29,8 @@
 #include <time.h>
 #include <algorithm>
 
+#include <DirectXCollision.h>
+
 using namespace std;
 
 
@@ -50,3 +52,13 @@ void Safe_Delete(T& _Dst)
 		_Dst = nullptr;
 	}
 }
+
+struct CollisionBox
+{
+	float	maxX;
+	float	minX;
+	float	maxZ;
+	float	minZ;
+	float	lengthX;
+	float	lengthZ;
+};

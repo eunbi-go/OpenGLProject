@@ -24,7 +24,7 @@ GLfloat cube_vertices[] = {
 	0.2f,	-0.2f,	0.2f,		// 1.
 	0.2f,	0.2f,	0.2f,		// 2.
 	-0.2f,	0.2f,	0.2f,		// 3.
-	-0.2f,	-0.2f,	-0.2f,	// 4.
+	-0.2f,	-0.2f,	-0.2f,		// 4.
 	0.2f,	-0.2f,	-0.2f,		// 5.
 	0.2f,	0.2f,	-0.2f,		// 6.
 	-0.2f,	0.2f,	-0.2f,		// 7.
@@ -35,11 +35,12 @@ GLfloat colors[] = {
 	0.0f, 1.0f, 0.0f,
 	0.0f, 0.0f, 1.0f,
 	1.0f, 1.0f, 0.0f,
-	1.0f, 0.0f, 1.0f,
+	1.0f, 0.0f, 1.0f, 
 	0.0f, 1.0f, 1.0f,
 	0.5f, 0.0f, 0.0f,
 	0.0f, 0.5f, 0.0f
 };
+
 
 Cube::Cube()
 {
@@ -56,6 +57,8 @@ void Cube::Initialize()
 
 int Cube::Update()
 {
+	if (_isDead) return OBJ_DEAD;
+
 	return OBJ_NOEVENET;
 }
 

@@ -21,6 +21,7 @@ public:
 
 public:
 	Object* Get_Player() { return _listObj[OBJID::PLAYER].front(); }
+	list<Object*>& Get_List(OBJID id) { return _listObj[id]; }
 
 public:
 	static ObjectManager* Get_Instance()
