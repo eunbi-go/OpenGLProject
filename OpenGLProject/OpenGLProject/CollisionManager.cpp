@@ -119,6 +119,7 @@ void CollisionManager::Collision_PlayerToEnemy(Object* player, list<Object*> src
 		if (static_cast<Player*>(player)->GetIsCollision() && IsCollision(&c1, &c2)) {
 			//static_cast<Cube*>(Src)->SetDead();
 			static_cast<Cube*>(player)->SetPos(glm::vec3(0.0, 0.0, 0));
+			static_cast<Player*>(player)->SetIsRespawn(true);
 		}
 	}
 }

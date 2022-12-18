@@ -36,8 +36,8 @@ void Stage::Initialize()
 		obj = new Player;
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(0.0, 0.0, 0));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
-		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
-		static_cast<Cube*>(obj)->SetColor(1.0f, 1.0f, 0.f);
+		static_cast<Cube*>(obj)->SetBoundingSize(0.35f);
+		static_cast<Cube*>(obj)->SetColor(0.0f, 1.0f, 0.5f);
 		obj->Initialize();
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::PLAYER);
 	}
@@ -68,11 +68,11 @@ void Stage::Late_update()
 	CollisionManager::Get_Instance()->Collision_PlayerToBlock(
 		ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::BLOCK));
 
-	//CollisionManager::Get_Instance()->Collision_PlayerToBullet(
-	//	ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::BULLET));
+	CollisionManager::Get_Instance()->Collision_PlayerToBullet(
+		ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::BULLET));
 
-	//CollisionManager::Get_Instance()->Collision_PlayerToEnemy(
-	//	ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::ENEMY));
+	CollisionManager::Get_Instance()->Collision_PlayerToEnemy(
+		ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::ENEMY));
 
 	CollisionManager::Get_Instance()->Collision_PlayerToItem(
 		ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::ITEM));
@@ -178,7 +178,7 @@ void Stage::CreateItem()
 	{
 		Object* obj = nullptr;
 		obj = new Item;
-		static_cast<Cube*>(obj)->SetColor(0.7f, 0.7f, 1.f);
+		static_cast<Cube*>(obj)->SetColor(0.1f, 0.7f, 1.f);
 		obj->Initialize();
 
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(-1.5f, y, -6.0f));

@@ -137,7 +137,7 @@ void AttackEnemy::Attack()
 	obj = new Bullet;
 	static_cast<Cube*>(obj)->SetPos(glm::vec3(_bulletPos[3][0], _bulletPos[3][1], _bulletPos[3][2]));
 	static_cast<Cube*>(obj)->SetScale(glm::vec3(0.4f, 0.4f, 0.4f));
-	static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
+	static_cast<Cube*>(obj)->SetBoundingSize(0.35f);
 	static_cast<Cube*>(obj)->SetColor(1.f, 0.8f, 0.8f);
 	obj->Initialize();
 
