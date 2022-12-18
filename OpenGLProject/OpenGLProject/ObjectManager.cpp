@@ -78,3 +78,9 @@ void ObjectManager::Release()
 		_listObj[i].clear();
 	}
 }
+
+Object* ObjectManager::Get_Player()
+{
+	if (_listObj[OBJID::PLAYER].empty()) return nullptr;
+	else return _listObj[OBJID::PLAYER].front();
+}

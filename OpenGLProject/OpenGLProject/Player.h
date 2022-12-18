@@ -29,20 +29,26 @@ public:
 	bool GetIsRight() { return _isRightCollision; }
 	bool GetIsForward() { return _isForwardCollision; }
 	bool GetIsBack() { return _isBackCollision; }
+	bool GetIsRespawn() { return _isRespawn; }
+	bool GetIsSpeedUp() { return _isSpeedUp; }
 
 public:
-	void SetItemOn(ITEMTYPE i) { _playerItem[i] = true; }	// test¿ë
+	void SetItemOn(ITEMTYPE i) { _playerItem[i] = true; }
 	void SetIsMove(bool value) { _isMove = value; }
 	void SetIsLeft(bool value) { _isLeftCollision = value; }
 	void SetIsRight(bool value) { _isRightCollision = value; }
 	void SetIsForward(bool value) { _isForwardCollision = value; }
 	void SetIsBack(bool value) { _isBackCollision = value; }
+	void SetIsRespawn(bool value) { _isRespawn = value; }
+	void SetIsSpeedUp(bool value) { _isSpeedUp = value; }
 
 private:
 	array<bool, ITEMTYPE::ITEM_END> _playerItem = { false, };
 
 	bool		_isCollision = true;
 	bool		_isMove = true;
+	bool		_isRespawn = false;
+	bool		_isSpeedUp = false;
 
 	GLfloat		_alphaTime = 0.f;
 	GLfloat		_speedupTime = 0.f;

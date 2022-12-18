@@ -209,12 +209,22 @@ GLvoid drawScene()
 		glUniformMatrix4fv(projectLoc, 1, GL_FALSE, &projection[0][0]);
 	}
 
+	// 플레이어 원점 돌아갔을때 카메라 위치 초기화
+	if (game.Get_Player() != nullptr && static_cast<Player*>(game.Get_Player())->GetIsRespawn()) {
+		camera.cameraPos = glm::vec3(0.0f, 1.0f, 2.0f);
+		camera.cameraDir = glm::vec3(0.0f, 0.0f, 0.0f);
+		camera.cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+		camera.cameraFront = glm::vec3(0.0f, 0.0f, -1.f);
+		camera.cameraOn = glm::vec3(0.0f, -1.0f, 0.f);
+		camera.view = glm::mat4(1.0f);
+
+		isUp = false;
+		isCamAni = false;
+
+		static_cast<Player*>(game.Get_Player())->SetIsRespawn(false);
+	}
 
 	game.Render(s_program, s_TexProgram);
-
-	
-	
-
 	glutSwapBuffers(); //--- 화면에 출력하기
 }
 
@@ -257,7 +267,12 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 {
 	float speed = 20.f;
 	glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
+
+	if (static_cast<Player*>(game.Get_Player())->GetIsSpeedUp()) speed = 30.f;
+	else speed = 20.f;
+
 	speed *= game.Get_DeltaTime();
+
 
 	switch (key)
 	{
