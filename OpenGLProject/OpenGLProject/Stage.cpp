@@ -103,12 +103,12 @@ void Stage::CreateBlock()
 	BlockPos.push_back(glm::vec3(0.f, y, -60.f));
 
 	// create block
-	for (int i = 0; i < BlockPos.size(); ++i) {
+	for (int i = 0; i < (int)BlockPos.size(); ++i) {
 		Object* obj = nullptr;
 		obj = new Block;
 		static_cast<Cube*>(obj)->SetPos(BlockPos[i]);
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(5.f, 20.f, 5.f));
-		static_cast<Cube*>(obj)->SetColor(randomC(genColor), randomC(genColor), randomC(genColor));
+		static_cast<Cube*>(obj)->SetColor((float)randomC(genColor), (float)randomC(genColor), (float)randomC(genColor));
 		obj->Initialize();
 		static_cast<Cube*>(obj)->SetBoundingSize(1.5f);
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::BLOCK);
@@ -140,7 +140,7 @@ void Stage::CreateEnemy()
 
 
 	// Create Moving Enemy
-	for (int i = 0; i < MovingEnemyPos.size(); ++i) {
+	for (int i = 0; i < (int)MovingEnemyPos.size(); ++i) {
 		Object* obj = nullptr;
 		obj = new MovingEnemy;
 		
@@ -154,7 +154,7 @@ void Stage::CreateEnemy()
 	}
 
 	// Create Attack Enemy
-	for (int i = 0; i < AttackEnemyPos.size(); ++i) {
+	for (int i = 0; i < (int)AttackEnemyPos.size(); ++i) {
 		Object* obj = nullptr;
 		obj = new AttackEnemy;
 

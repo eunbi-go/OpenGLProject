@@ -77,7 +77,7 @@ void MovingEnemy::RenderChild(GLuint _program)
 	glm::mat4 t1 = glm::mat4(1.f);
 	glm::mat4 t2 = glm::mat4(1.f);
 
-	r1 = glm::rotate(r1, glm::radians(_childRot), glm::vec3(0.f, 1.f, 0.f));
+	r1 = glm::rotate(r1, glm::radians((float)_childRot), glm::vec3(0.f, 1.f, 0.f));
 	t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
 	t2 = glm::translate(t2, glm::vec3(0.f, 0.5f, 0.f));
 

@@ -121,7 +121,7 @@ void AttackEnemy::RenderChild(GLuint _program)
 
 		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(0.4f, 0.0f, 0.f));
-		r = glm::rotate(r, glm::radians(_ringRot), glm::vec3(0.f, 1.f, 0.f));
+		r = glm::rotate(r, glm::radians((float)_ringRot), glm::vec3(0.f, 1.f, 0.f));
 		childMat = t1 * r * t2 * static_cast<Cube*>(_ring)->scale;
 		_bulletPos = t1 * t2;
 		static_cast<Cube*>(_ring)->SetFinalMat(childMat);

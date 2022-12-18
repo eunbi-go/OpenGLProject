@@ -50,9 +50,9 @@ private:
 	bool		_isRespawn = false;
 	bool		_isSpeedUp = false;
 
-	GLfloat		_alphaTime = 0.f;
-	GLfloat		_speedupTime = 0.f;
-	GLfloat		_lightTime = 0.f;
+	double		_alphaTime = 0.f;
+	double		_speedupTime = 0.f;
+	double		_lightTime = 0.f;
 
 	bool		_isLeftCollision = false;
 	bool		_isRightCollision = false;
@@ -65,15 +65,15 @@ private:
 	class Object* _leftArm;
 	class Object* _rightArm;
 
-	float	_rightLegRot = -35.f;
-	float	_leftLegRot = 35.f;
+	double	_rightLegRot = -35.f;
+	double	_leftLegRot = 35.f;
 	bool	_isLegMius = false;
 
-	float	_rightArmRot = -35.f;
-	float	_leftArmRot = 35.f;
+	double	_rightArmRot = -35.f;
+	double	_leftArmRot = 35.f;
 	bool	_isArmMius = false;
 
-	float	_movingSec = 0.f;
+	double	_movingSec = 0.f;
 public:
 	bool	_isMoveStop = true;
 };

@@ -157,8 +157,8 @@ void Cube::Move()
 
 void Cube::Jump()
 {
-	_jumpHeight = (_jumpTime * _jumpTime - _jumpPower * _jumpTime) / 3.f;
-	_jumpTime += Timer::Get_Instance()->Get_DeltaTime();
+	_jumpHeight = (float)((_jumpTime * _jumpTime - _jumpPower * _jumpTime) / 5.f);
+	_jumpTime += (float)Timer::Get_Instance()->Get_DeltaTime();
 
 	trans[3][1] = 0.f;
 	float y = _jumpHeight * -1.f;

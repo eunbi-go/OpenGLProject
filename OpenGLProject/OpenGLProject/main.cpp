@@ -157,7 +157,7 @@ GLvoid drawScene()
 {
 	glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
+
 	{
 		glUseProgram(s_TexProgram);
 
@@ -246,11 +246,11 @@ void IdleScene()
 		{
 			if (isUp && camera.cameraPos.y <= 2.f)
 			{
-				camera.cameraPos.y += game.Get_DeltaTime() * camSpeed;
+				camera.cameraPos.y += (GLfloat)(game.Get_DeltaTime() * camSpeed);
 			}
 			else if (!isUp && camera.cameraPos.y >= 1.f)
 			{
-				camera.cameraPos.y -= game.Get_DeltaTime() * camSpeed;
+				camera.cameraPos.y -= (GLfloat)(game.Get_DeltaTime() * camSpeed);
 			}
 			else isCamAni = false;
 		}
@@ -270,8 +270,8 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 	if (static_cast<Player*>(game.Get_Player())->GetIsSpeedUp()) speed = 30.f;
 	else speed = 20.f;
+	speed *= (float)game.Get_DeltaTime();
 
-	speed *= game.Get_DeltaTime();
 
 
 	switch (key)

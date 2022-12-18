@@ -2,6 +2,10 @@
 #include "Player.h"
 #include "Timer.h"
 
+random_device rdAColor;
+mt19937 genAColor(rdAColor());
+uniform_real_distribution<> randomAC(0.0, 1.0);
+
 Player::Player()
 {
 }
@@ -81,14 +85,48 @@ void Player::Release()
 void Player::ApplyItemEffect()
 {
 	// ALPHA
-	if (_playerItem[ITEMTYPE::ALPHA]) {
+	if (_playerItem[ITEMTYPE::ALPHA])
+	{
 		_alphaTime += Timer::Get_Instance()->Get_DeltaTime();
+		
+		SetColor((float)randomAC(genAColor), (float)randomAC(genAColor), (float)randomAC(genAColor));
+		UpdateBuffer();
+		
+		static_cast<Cube*>(_leftLeg)->SetColor((float)randomAC(genAColor), (float)randomAC(genAColor), (float)randomAC(genAColor));
+		static_cast<Cube*>(_leftLeg)->UpdateBuffer();
 
-		_isCollision = false;
-		_isMove = true;
+		static_cast<Cube*>(_rightLeg)->SetColor((float)randomAC(genAColor), (float)randomAC(genAColor), (float)randomAC(genAColor));
+		static_cast<Cube*>(_rightLeg)->UpdateBuffer();
 
-		if (_alphaTime >= 5.f) {
-			_isCollision = true;
+		static_cast<Cube*>(_leftArm)->SetColor((float)randomAC(genAColor), (float)randomAC(genAColor), (float)randomAC(genAColor));
+		static_cast<Cube*>(_leftArm)->UpdateBuffer();
+
+		static_cast<Cube*>(_rightArm)->SetColor((float)randomAC(genAColor), (float)randomAC(genAColor), (float)randomAC(genAColor));
+		static_cast<Cube*>(_rightArm)->UpdateBuffer();
+
+		static_cast<Cube*>(_head)->SetColor((float)randomAC(genAColor), (float)randomAC(genAColor), (float)randomAC(genAColor));
+		static_cast<Cube*>(_head)->UpdateBuffer();
+
+		if (_alphaTime >= 5.f)
+		{
+			SetColor((0.0f, 1.0f, 0.5f);
+			UpdateBuffer();
+
+			static_cast<Cube*>(_leftLeg)->SetColor(1.0f, 0.f, 1.0f);
+			_leftLeg->Initialize();
+
+			static_cast<Cube*>(_rightLeg)->SetColor(1.0f, 0.f, 1.0f);
+			_rightLeg->Initialize();
+
+			static_cast<Cube*>(_leftArm)->SetColor(0.f, 0.f, 1.f);
+			_leftArm->Initialize();
+
+			static_cast<Cube*>(_rightArm)->SetColor(0.f, 0.f, 1.f);
+			_rightArm->Initialize();
+
+			static_cast<Cube*>(_head)->SetColor(0.5f, 0.0f, 0.7f);
+			_head->Initialize();
+
 			_alphaTime = 0.f;
 			_playerItem[ITEMTYPE::ALPHA] = false;
 		}
@@ -195,7 +233,7 @@ void Player::RenderChild(GLuint _program)
 		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(-0.2f, 0.0f, 0.f));
 		if (_isJump || !_isMoveStop)
-			r = glm::rotate(r, glm::radians(_leftArmRot), glm::vec3(1.f, 0.f, 0.f));
+			r = glm::rotate(r, glm::radians((float)_leftArmRot), glm::vec3(1.f, 0.f, 0.f));
 
 		childMat = t1 * r * t2 * static_cast<Cube*>(_leftArm)->scale;
 		static_cast<Cube*>(_leftArm)->SetFinalMat(childMat);
@@ -211,7 +249,7 @@ void Player::RenderChild(GLuint _program)
 		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(0.2f, 0.0f, 0.f));
 		if (_isJump || !_isMoveStop)
-			r = glm::rotate(r, glm::radians(_rightArmRot), glm::vec3(1.f, 0.f, 0.f));
+			r = glm::rotate(r, glm::radians((float)_rightArmRot), glm::vec3(1.f, 0.f, 0.f));
 
 		childMat = t1 * r * t2 * static_cast<Cube*>(_rightArm)->scale;
 		static_cast<Cube*>(_rightArm)->SetFinalMat(childMat);
@@ -228,7 +266,7 @@ void Player::RenderChild(GLuint _program)
 		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(-0.1f, -0.2f, 0.f));
 		if (_isJump || !_isMoveStop)
-			r = glm::rotate(r, glm::radians(_leftLegRot), glm::vec3(1.f, 0.f, 0.f));
+			r = glm::rotate(r, glm::radians((float)_leftLegRot), glm::vec3(1.f, 0.f, 0.f));
 
 		childMat = t1 * r * t2 * static_cast<Cube*>(_leftLeg)->scale;
 		static_cast<Cube*>(_leftLeg)->SetFinalMat(childMat);
@@ -244,7 +282,7 @@ void Player::RenderChild(GLuint _program)
 		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(0.1f, -0.2f, 0.f));
 		if (_isJump || !_isMoveStop)
-			r = glm::rotate(r, glm::radians(_rightLegRot), glm::vec3(1.f, 0.f, 0.f));
+			r = glm::rotate(r, glm::radians((float)_rightLegRot), glm::vec3(1.f, 0.f, 0.f));
 
 		childMat = t1 * r * t2 * static_cast<Cube*>(_rightLeg)->scale;
 		static_cast<Cube*>(_rightLeg)->SetFinalMat(childMat);

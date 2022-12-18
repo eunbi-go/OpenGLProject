@@ -29,7 +29,7 @@ private:
 	class Object* _rightLeg;
 	class Object* _ring;
 
-	float	_ringRot = 0.f;
+	double	_ringRot = 0.f;
 	double	_attackTime = 0.0;
 
 	glm::mat4	_bulletPos = glm::mat4(1.f);
