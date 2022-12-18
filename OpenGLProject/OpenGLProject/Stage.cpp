@@ -35,27 +35,6 @@ void Stage::Initialize()
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::BLOCK);
 	}
-
-	//{
-	//	// Test Block
-	//	Object* obj = nullptr;
-	//	obj = new Item;
-	//	obj->Initialize();
-	//	static_cast<Cube*>(obj)->SetPos(glm::vec3(0.5, 0.0, 0.0));
-	//	static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
-	//	static_cast<Item*>(obj)->SetItemType(SPEEDUP);
-	//	ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ITEM);
-	//}
-
-	{
-		// Ground
-		Object* obj = nullptr;
-		obj = new Cube;
-		obj->Initialize();
-		static_cast<Cube*>(obj)->SetPos(glm::vec3(0.0, -2.5, 0.0));
-		static_cast<Cube*>(obj)->SetScale(glm::vec3(20.f, 0.1f, 1000.f));
-		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::GROUND);
-	}
 }
 
 void Stage::Update()

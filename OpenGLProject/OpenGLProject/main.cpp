@@ -177,10 +177,10 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 	case 'S':
 	case 's':
-		//if (static_cast<Player*>(game.Get_Player())->GetIsForward()) {
-		//	static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-		//	static_cast<Player*>(game.Get_Player())->SetIsForward(false);
-		//}
+		if (static_cast<Player*>(game.Get_Player())->GetIsForward()) {
+			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
+			static_cast<Player*>(game.Get_Player())->SetIsForward(false);
+		}
 
 		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
 			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_BACK);
@@ -205,10 +205,10 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 	case 'D':
 	case 'd':
-		//if (static_cast<Player*>(game.Get_Player())->GetIsLeft()) {
-		//	static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-		//	static_cast<Player*>(game.Get_Player())->SetIsLeft(false);
-		//}
+		if (static_cast<Player*>(game.Get_Player())->GetIsLeft()) {
+			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
+			static_cast<Player*>(game.Get_Player())->SetIsLeft(false);
+		}
 
 		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
 			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_RIGHT);

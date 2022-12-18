@@ -40,7 +40,6 @@ private:
 
 	bool		_isCollision = true;
 	bool		_isMove = true;
-	GLfloat		_stopTime = 0.f;
 
 	GLfloat		_alphaTime = 0.f;
 	GLfloat		_speedupTime = 0.f;
