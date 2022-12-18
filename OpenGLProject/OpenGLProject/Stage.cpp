@@ -28,6 +28,7 @@ void Stage::Initialize()
 		obj->Initialize();
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(0.0, 0.0, 0));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
+		static_cast<Cube*>(obj)->SetBoundingSize(0.2f);
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::PLAYER);
 	}
 
@@ -40,6 +41,39 @@ void Stage::Initialize()
 	//	static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
 	//	ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ENEMY);
 	//}
+
+	{
+		// Block
+		Object* obj = nullptr;
+		obj = new Cube;
+		obj->Initialize();
+		static_cast<Cube*>(obj)->SetPos(glm::vec3(0.5, 0.0, 0.0));
+		static_cast<Cube*>(obj)->SetScale(glm::vec3(2.f, 2.f, 2.f));
+		static_cast<Cube*>(obj)->SetBoundingSize(0.25f);
+		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::BLOCK);
+	}
+
+	{
+		// Block
+		Object* obj = nullptr;
+		obj = new Cube;
+		obj->Initialize();
+		static_cast<Cube*>(obj)->SetPos(glm::vec3(0.5, 0.0, 0.5));
+		static_cast<Cube*>(obj)->SetScale(glm::vec3(2.f, 2.f, 2.f));
+		static_cast<Cube*>(obj)->SetBoundingSize(0.25f);
+		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::BLOCK);
+	}
+
+	{
+		// Block
+		Object* obj = nullptr;
+		obj = new Cube;
+		obj->Initialize();
+		static_cast<Cube*>(obj)->SetPos(glm::vec3(0.5, 0.0, 1.0));
+		static_cast<Cube*>(obj)->SetScale(glm::vec3(2.f, 2.f, 2.f));
+		static_cast<Cube*>(obj)->SetBoundingSize(0.25f);
+		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::BLOCK);
+	}
 }
 
 void Stage::Update()

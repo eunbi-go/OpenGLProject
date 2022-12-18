@@ -52,6 +52,9 @@
     <Filter Include="소스 파일\Manager\03. Timer">
       <UniqueIdentifier>{6261916b-f5a4-42ef-8ff0-86891e1d2def}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Manager\04. Collision">
+      <UniqueIdentifier>{010e9fdb-2494-4de4-8bd9-9ba68bd329ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -96,6 +99,9 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>소스 파일\Manager\04. Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -139,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>소스 파일\Manager\04. Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -56,6 +56,8 @@ void Cube::Initialize()
 
 int Cube::Update()
 {
+	if (_isDead) return OBJ_DEAD;
+
 	return OBJ_NOEVENET;
 }
 

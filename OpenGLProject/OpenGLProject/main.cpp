@@ -188,14 +188,14 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	{
 	case 'W': 
 	case 'w':
-		if (static_cast<Player*>(game.Get_Player())->GetIsBack()) {
-			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-			static_cast<Player*>(game.Get_Player())->SetIsBack(false);
-		}
+		//if (static_cast<Player*>(game.Get_Player())->GetIsBack()) {
+		//	static_cast<Player*>(game.Get_Player())->SetIsMove(true);
+		//	static_cast<Player*>(game.Get_Player())->SetIsBack(false);
+		//}
 
 		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
 			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_FORWARD);
-			static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_FORWARD);
+			static_cast<Cube*>(game.Get_Player())->Move();
 			camera.cameraPos += camera.cameraFront * speed;
 		}
 		break;
@@ -209,7 +209,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
 			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_BACK);
-			static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_BACK);
+			static_cast<Cube*>(game.Get_Player())->Move();
 			camera.cameraPos -= camera.cameraFront * speed;
 		}
 		break;
@@ -223,7 +223,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
 			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_LEFT);
-			static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_LEFT);
+			static_cast<Cube*>(game.Get_Player())->Move();
 			camera.cameraPos -= glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
 		}
 		break;
@@ -237,7 +237,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
 			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_RIGHT);
-			static_cast<Cube*>(game.Get_Player())->Move(MOVE::MOVE_RIGHT);
+			static_cast<Cube*>(game.Get_Player())->Move();
 			camera.cameraPos += glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
 		}
 		break;
