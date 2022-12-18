@@ -375,6 +375,8 @@ void MouseInput(int button, int state, int x, int y)
 
 void main(int argc, char** argv)
 {
+
+
 	// 윈도우 생성하기
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);

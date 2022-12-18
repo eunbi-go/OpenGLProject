@@ -55,6 +55,12 @@
     <Filter Include="소스 파일\Manager\04. Collision">
       <UniqueIdentifier>{010e9fdb-2494-4de4-8bd9-9ba68bd329ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01. Object\05. Block">
+      <UniqueIdentifier>{b0619816-7d22-4edc-b9c4-3c702b1fbdcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\05. Sound">
+      <UniqueIdentifier>{5f4076cc-49ae-4cf0-8fc5-33a52a702ff8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -109,6 +115,12 @@
     <ClCompile Include="Logo.cpp">
       <Filter>소스 파일</Filter>
 >>>>>>> EB_Texture
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>소스 파일\01. Object\05. Block</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>소스 파일\Manager\05. Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +179,12 @@
     <ClInclude Include="Logo.h">
       <Filter>헤더 파일</Filter>
 >>>>>>> EB_Texture
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>소스 파일\01. Object\05. Block</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>소스 파일\Manager\05. Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

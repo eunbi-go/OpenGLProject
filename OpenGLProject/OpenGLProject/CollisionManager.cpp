@@ -91,6 +91,28 @@ void CollisionManager::Collision_PlayerToBullet(Object* player, list<Object*> sr
 
 		if (static_cast<Player*>(player)->GetIsCollision() && IsCollision(&c1, &c2)) {
 			static_cast<Cube*>(Src)->SetDead();
+			//static_cast<Cube*>(player)->SetPos(glm::vec3(0.0, 0.0, 0));
+		}
+	}
+}
+
+void CollisionManager::Collision_PlayerToEnemy(Object* player, list<Object*> src)
+{
+	for (auto& Src : src)
+	{
+		CollisionBox c1, c2;
+		c1.maxX = static_cast<Cube*>(player)->GetX() + static_cast<Cube*>(player)->GetBoundingSize();
+		c1.minX = static_cast<Cube*>(player)->GetX() - static_cast<Cube*>(player)->GetBoundingSize();
+		c1.maxZ = static_cast<Cube*>(player)->GetZ() + static_cast<Cube*>(player)->GetBoundingSize();
+		c1.minZ = static_cast<Cube*>(player)->GetZ() - static_cast<Cube*>(player)->GetBoundingSize();
+
+		c2.maxX = static_cast<Cube*>(Src)->GetX() + static_cast<Cube*>(Src)->GetBoundingSize();
+		c2.minX = static_cast<Cube*>(Src)->GetX() - static_cast<Cube*>(Src)->GetBoundingSize();
+		c2.maxZ = static_cast<Cube*>(Src)->GetZ() + static_cast<Cube*>(Src)->GetBoundingSize();
+		c2.minZ = static_cast<Cube*>(Src)->GetZ() - static_cast<Cube*>(Src)->GetBoundingSize();
+
+		if (static_cast<Player*>(player)->GetIsCollision() && IsCollision(&c1, &c2)) {
+			//static_cast<Cube*>(Src)->SetDead();
 			static_cast<Cube*>(player)->SetPos(glm::vec3(0.0, 0.0, 0));
 		}
 	}

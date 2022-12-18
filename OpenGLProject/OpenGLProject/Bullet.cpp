@@ -17,6 +17,9 @@ void Bullet::Initialize()
 
 int Bullet::Update()
 {
+	if (_isDead)
+		return OBJ_DEAD;
+
 	_lifeTime += Timer::Get_Instance()->Get_DeltaTime();
 	if (_lifeTime >= 3.f)
 		return OBJ_DEAD;
