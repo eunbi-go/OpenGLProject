@@ -24,7 +24,6 @@ float vertexButtonData[] = {
 	-0.5f, 0.3f, 0.5f,		0.0, 0.0, 1.0,		0.0, 0.0
 };
 
-
 TexturedRect::TexturedRect()
 {
 }
@@ -78,7 +77,6 @@ void TexturedRect::UpdateBuffer()
 
 
 	// initTexture
-	BITMAPINFO* bmp;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -117,7 +115,6 @@ void TexturedRect::UpdateButtonBuffer()
 
 
 	// initTexture
-	BITMAPINFO* bmp;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

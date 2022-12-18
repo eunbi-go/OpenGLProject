@@ -25,7 +25,7 @@ private:
 
 private:
 	class Object* _child;
-	GLfloat	_childRot = 0.f;
+	double	_childRot = 0.f;
 	DIR	_eDir = DIR_END;
 	double	_dirTime = 0.0;
 };
