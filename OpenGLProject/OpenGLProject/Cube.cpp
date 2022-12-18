@@ -22,70 +22,23 @@ GLfloat cube_vertices[] = {
 	0.2f,	-0.2f,	0.2f,		// 1.
 	0.2f,	0.2f,	0.2f,		// 2.
 	-0.2f,	0.2f,	0.2f,		// 3.
-	-0.2f,	-0.2f,	-0.2f,	// 4.
+	-0.2f,	-0.2f,	-0.2f,		// 4.
 	0.2f,	-0.2f,	-0.2f,		// 5.
 	0.2f,	0.2f,	-0.2f,		// 6.
 	-0.2f,	0.2f,	-0.2f,		// 7.
 };
-
-#pragma region Color
 
 GLfloat colors[] = {
 	1.0f, 0.0f, 0.0f,
 	0.0f, 1.0f, 0.0f,
 	0.0f, 0.0f, 1.0f,
 	1.0f, 1.0f, 0.0f,
-	1.0f, 0.0f, 1.0f,
+	1.0f, 0.0f, 1.0f, 
 	0.0f, 1.0f, 1.0f,
 	0.5f, 0.0f, 0.0f,
 	0.0f, 0.5f, 0.0f
 };
 
-GLfloat red[] = {
-	0.9f, 0.0f, 0.0f,
-	0.9f, 0.0f, 0.0f,
-	0.9f, 0.0f, 0.0f,
-	0.9f, 0.0f, 0.0f,
-	0.9f, 0.0f, 0.0f,
-	0.9f, 0.0f, 0.0f,
-	0.9f, 0.0f, 0.0f,
-	0.9f, 0.0f, 0.0f
-};
-
-GLfloat green[] = {
-	0.0f, 0.9f, 0.0f,
-	0.0f, 0.9f, 0.0f,
-	0.0f, 0.9f, 0.0f,
-	0.0f, 0.9f, 0.0f,
-	0.0f, 0.9f, 0.0f,
-	0.0f, 0.9f, 0.0f,
-	0.0f, 0.9f, 0.0f,
-	0.0f, 0.9f, 0.0f
-};
-
-GLfloat blue[] = {
-	0.0f, 0.0f, 0.9f,
-	0.0f, 0.0f, 0.9f,
-	0.0f, 0.0f, 0.9f,
-	0.0f, 0.0f, 0.9f,
-	0.0f, 0.0f, 0.9f,
-	0.0f, 0.0f, 0.9f,
-	0.0f, 0.0f, 0.9f,
-	0.0f, 0.0f, 0.9f
-};
-
-GLfloat purple[] = {
-	0.8f, 0.0f, 0.8f,
-	0.8f, 0.0f, 0.8f,
-	0.8f, 0.0f, 0.8f,
-	0.8f, 0.0f, 0.8f,
-	0.8f, 0.0f, 0.8f,
-	0.8f, 0.0f, 0.8f,
-	0.8f, 0.0f, 0.8f,
-	0.8f, 0.0f, 0.8f
-};
-
-#pragma endregion
 
 Cube::Cube()
 {
@@ -102,6 +55,8 @@ void Cube::Initialize()
 
 int Cube::Update()
 {
+	if (_isDead) return OBJ_DEAD;
+
 	return OBJ_NOEVENET;
 }
 
@@ -150,15 +105,6 @@ void Cube::UpdateBuffer()
 	glGenBuffers(1, &indexBufferObjec);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObjec);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
-}
-
-void Cube::UpdateCollisionBox()
-{
-	_collisionBox.maxX = trans[3][0] + 2.f;
-	_collisionBox.minX = trans[3][0] - 2.f;
-
-	_collisionBox.maxZ = trans[3][2] + 2.f;
-	_collisionBox.maxZ = trans[3][2] - 2.f;
 }
 
 void Cube::Move(MOVE move)

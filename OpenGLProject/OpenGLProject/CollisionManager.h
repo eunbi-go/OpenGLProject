@@ -12,7 +12,9 @@ private:
 	~CollisionManager();
 
 public:
-	void CollisionCheck(Object* player, list<Object*> src);
+	void Collision_PlayerToBlock(Object* player, list<Object*> src);
+	void Collision_PlayerToItem(Object* player, list<Object*> src);
+	void Collision_PlayerToBullet(Object* player, list<Object*> src);
 
 private:
 	bool IsCollision(CollisionBox* obj1, CollisionBox* obj2);

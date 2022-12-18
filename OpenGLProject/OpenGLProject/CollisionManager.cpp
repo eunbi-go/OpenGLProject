@@ -3,6 +3,8 @@
 #include "Object.h"
 #include "ObjectManager.h"
 #include "Cube.h"
+#include "Player.h"
+#include "Item.h"
 
 CollisionManager* CollisionManager::_pInstance = nullptr;
 
@@ -14,7 +16,7 @@ CollisionManager::~CollisionManager()
 {
 }
 
-void CollisionManager::CollisionCheck(Object* player, list<Object*> src)
+void CollisionManager::Collision_PlayerToBlock(Object* player, list<Object*> src)
 {
 	for (auto& Src : src)
 	{
@@ -29,8 +31,67 @@ void CollisionManager::CollisionCheck(Object* player, list<Object*> src)
 		c2.maxZ = static_cast<Cube*>(Src)->GetZ() + static_cast<Cube*>(Src)->GetBoundingSize();
 		c2.minZ = static_cast<Cube*>(Src)->GetZ() - static_cast<Cube*>(Src)->GetBoundingSize();
 
-		if (IsCollision(&c1, &c2)) {
-			int a = 0;
+		if (static_cast<Player*>(player)->GetIsCollision() && IsCollision(&c1, &c2)) {
+			static_cast<Player*>(player)->SetIsMove(false);
+
+			if (static_cast<Cube*>(player)->GetMoveDir() == MOVE::MOVE_RIGHT) {
+				static_cast<Player*>(player)->SetIsRight(true);
+			}
+			else if (static_cast<Cube*>(player)->GetMoveDir() == MOVE::MOVE_LEFT) {
+				static_cast<Player*>(player)->SetIsLeft(true);
+			}
+			else if (static_cast<Cube*>(player)->GetMoveDir() == MOVE::MOVE_FORWARD) {
+				static_cast<Player*>(player)->SetIsForward(true);
+			}
+			else if (static_cast<Cube*>(player)->GetMoveDir() == MOVE::MOVE_BACK) {
+				static_cast<Player*>(player)->SetIsBack(true);
+			}
+		}
+	}
+}
+
+void CollisionManager::Collision_PlayerToItem(Object* player, list<Object*> src)
+{
+	for (auto& Src : src)
+	{
+		CollisionBox c1, c2;
+		c1.maxX = static_cast<Cube*>(player)->GetX() + static_cast<Cube*>(player)->GetBoundingSize();
+		c1.minX = static_cast<Cube*>(player)->GetX() - static_cast<Cube*>(player)->GetBoundingSize();
+		c1.maxZ = static_cast<Cube*>(player)->GetZ() + static_cast<Cube*>(player)->GetBoundingSize();
+		c1.minZ = static_cast<Cube*>(player)->GetZ() - static_cast<Cube*>(player)->GetBoundingSize();
+
+		c2.maxX = static_cast<Cube*>(Src)->GetX() + static_cast<Cube*>(Src)->GetBoundingSize();
+		c2.minX = static_cast<Cube*>(Src)->GetX() - static_cast<Cube*>(Src)->GetBoundingSize();
+		c2.maxZ = static_cast<Cube*>(Src)->GetZ() + static_cast<Cube*>(Src)->GetBoundingSize();
+		c2.minZ = static_cast<Cube*>(Src)->GetZ() - static_cast<Cube*>(Src)->GetBoundingSize();
+
+		if (static_cast<Player*>(player)->GetIsCollision() && IsCollision(&c1, &c2)) {
+			if (static_cast<Item*>(Src)->GetItemType() == ALPHA) static_cast<Player*>(player)->SetItemOn(ALPHA);
+			else if (static_cast<Item*>(Src)->GetItemType() == SPEEDUP) static_cast<Player*>(player)->SetItemOn(SPEEDUP);
+
+			static_cast<Cube*>(Src)->SetDead();
+		}
+	}
+}
+
+void CollisionManager::Collision_PlayerToBullet(Object* player, list<Object*> src)
+{
+	for (auto& Src : src)
+	{
+		CollisionBox c1, c2;
+		c1.maxX = static_cast<Cube*>(player)->GetX() + static_cast<Cube*>(player)->GetBoundingSize();
+		c1.minX = static_cast<Cube*>(player)->GetX() - static_cast<Cube*>(player)->GetBoundingSize();
+		c1.maxZ = static_cast<Cube*>(player)->GetZ() + static_cast<Cube*>(player)->GetBoundingSize();
+		c1.minZ = static_cast<Cube*>(player)->GetZ() - static_cast<Cube*>(player)->GetBoundingSize();
+
+		c2.maxX = static_cast<Cube*>(Src)->GetX() + static_cast<Cube*>(Src)->GetBoundingSize();
+		c2.minX = static_cast<Cube*>(Src)->GetX() - static_cast<Cube*>(Src)->GetBoundingSize();
+		c2.maxZ = static_cast<Cube*>(Src)->GetZ() + static_cast<Cube*>(Src)->GetBoundingSize();
+		c2.minZ = static_cast<Cube*>(Src)->GetZ() - static_cast<Cube*>(Src)->GetBoundingSize();
+
+		if (static_cast<Player*>(player)->GetIsCollision() && IsCollision(&c1, &c2)) {
+			static_cast<Cube*>(Src)->SetDead();
+			static_cast<Cube*>(player)->SetPos(glm::vec3(0.0, 0.0, 0));
 		}
 	}
 }

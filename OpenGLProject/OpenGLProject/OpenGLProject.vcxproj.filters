@@ -49,9 +49,6 @@
     <Filter Include="소스 파일\Manager\03. Collision">
       <UniqueIdentifier>{4e7ebc83-1584-4884-8526-753f20205725}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Object\04. Ground">
-      <UniqueIdentifier>{b47f4ff0-58f8-42a8-9e75-4e15b5f1d546}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

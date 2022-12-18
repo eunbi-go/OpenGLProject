@@ -21,10 +21,11 @@ public:
 	CollisionBox GetCollisionBox() { return _collisionBox; }
 
 public:
-	//void SetCollisionBox(float maxX, float minX, float maxZ, float mixZ);
+	void SetDead() { _isDead = true; }
 
 protected:
 	CollisionBox	_collisionBox;
+	bool	_isDead = false;
 };
 
 #endif // !__OBJECT_H__
