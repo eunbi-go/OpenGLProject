@@ -25,7 +25,7 @@ void Block::Late_Update()
 {
 }
 
-void Block::Render(GLuint _program)
+void Block::Render(GLuint _program, GLuint _texProgram)
 {
 	glm::mat4 finalMat = trans * rotation * scale;
 	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");

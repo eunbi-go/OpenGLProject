@@ -24,7 +24,7 @@ Stage::~Stage()
 
 void Stage::Initialize()
 {
-	//SoundManager::Get_Instance()->PlayBGM(L"bgm.mp3");
+	SoundManager::Get_Instance()->PlayBGM(L"bgm.mp3");
 
 	{
 		// Player
