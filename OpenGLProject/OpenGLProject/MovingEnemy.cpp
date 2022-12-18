@@ -21,8 +21,9 @@ void MovingEnemy::Initialize()
 	_movingSpeed = 2.f;
 
 	_child = new Cube;
-	_child->Initialize();
 	static_cast<Cube*>(_child)->SetScale(glm::vec3(0.3f, 0.3f, 0.3f));
+	static_cast<Cube*>(_child)->SetColor(0.8f, 1.f, 1.f);	// ¸öÅëº¸´Ù ´õ ¿¬ÇÑ ÇÏ´Ã»ö
+	_child->Initialize();
 
 	UpdateBuffer();
 }

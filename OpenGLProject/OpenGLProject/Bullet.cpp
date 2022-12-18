@@ -13,6 +13,7 @@ Bullet::~Bullet()
 
 void Bullet::Initialize()
 {
+	UpdateBuffer();
 }
 
 int Bullet::Update()

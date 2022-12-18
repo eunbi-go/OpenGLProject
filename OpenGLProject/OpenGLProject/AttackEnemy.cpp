@@ -23,16 +23,19 @@ void AttackEnemy::Initialize()
 	_movingSpeed = 2.f;
 
 	_leftLeg = new Cube;
-	_leftLeg->Initialize();
 	static_cast<Cube*>(_leftLeg)->SetScale(glm::vec3(0.3f, 0.8f, 0.3f));
+	static_cast<Cube*>(_leftLeg)->SetColor(1.f, 0.7f, 0.9f);
+	_leftLeg->Initialize();
 
 	_rightLeg = new Cube;
-	_rightLeg->Initialize();
 	static_cast<Cube*>(_rightLeg)->SetScale(glm::vec3(0.3f, 0.8f, 0.3f));
+	static_cast<Cube*>(_rightLeg)->SetColor(1.f, 0.7f, 0.9f);
+	_rightLeg->Initialize();
 
 	_ring = new Cube;
-	_ring->Initialize();
 	static_cast<Cube*>(_ring)->SetScale(glm::vec3(0.3f, 0.3f, 0.3f));
+	static_cast<Cube*>(_ring)->SetColor(1.f, 0.f, 0.4f);
+	_ring->Initialize();
 
 	UpdateBuffer();
 }
@@ -132,10 +135,12 @@ void AttackEnemy::Attack()
 
 	Object* obj = nullptr;
 	obj = new Bullet;
-	obj->Initialize();
 	static_cast<Cube*>(obj)->SetPos(glm::vec3(_bulletPos[3][0], _bulletPos[3][1], _bulletPos[3][2]));
 	static_cast<Cube*>(obj)->SetScale(glm::vec3(0.4f, 0.4f, 0.4f));
 	static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
+	static_cast<Cube*>(obj)->SetColor(1.f, 0.8f, 0.8f);
+	obj->Initialize();
+
 	int randomValue = attackType(gen1);
 	if (randomValue == 1)
 		static_cast<Cube*>(obj)->SetMoveDir(MOVE::MOVE_TO_PLAYER);

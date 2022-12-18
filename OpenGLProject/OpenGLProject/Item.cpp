@@ -11,6 +11,7 @@ Item::~Item()
 
 void Item::Initialize()
 {
+	UpdateBuffer();
 }
 
 int Item::Update()

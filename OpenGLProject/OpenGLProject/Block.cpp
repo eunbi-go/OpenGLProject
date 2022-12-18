@@ -11,6 +11,7 @@ Block::~Block()
 
 void Block::Initialize()
 {
+	UpdateBuffer();
 }
 
 int Block::Update()

@@ -4,6 +4,7 @@
 
 #include "ObjectManager.h"
 
+
 GLshort cube_indices[] = {
 	// Front.
 	3, 2, 1, 0,
@@ -30,16 +31,16 @@ GLfloat cube_vertices[] = {
 	-0.2f,	0.2f,	-0.2f,		// 7.
 };
 
-GLfloat colors[] = {
-	1.0f, 0.0f, 0.0f,
-	0.0f, 1.0f, 0.0f,
-	0.0f, 0.0f, 1.0f,
-	1.0f, 1.0f, 0.0f,
-	1.0f, 0.0f, 1.0f,
-	0.0f, 1.0f, 1.0f,
-	0.5f, 0.0f, 0.0f,
-	0.0f, 0.5f, 0.0f
-};
+//GLfloat colors[] = {
+//	1.0f, 0.0f, 0.0f,
+//	0.0f, 1.0f, 0.0f,
+//	0.0f, 0.0f, 1.0f,
+//	1.0f, 1.0f, 0.0f,
+//	1.0f, 0.0f, 1.0f,
+//	0.0f, 1.0f, 1.0f,
+//	0.5f, 0.0f, 0.0f,
+//	0.0f, 0.5f, 0.0f
+//};
 
 Cube::Cube()
 {
@@ -169,5 +170,15 @@ void Cube::Jump()
 		_jumpTime = 0.f;
 		_jumpHeight = 0.f;
 		_isJump = false;
+	}
+}
+
+void Cube::SetColor(float x, float y, float z)
+{
+	for (int i = 0; i < 24; i += 3)
+	{
+		colors[i] = x;
+		colors[i + 1] = y;
+		colors[i + 2] = z;
 	}
 }

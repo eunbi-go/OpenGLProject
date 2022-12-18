@@ -13,6 +13,10 @@
 #include "ObjectManager.h"
 #include "SoundManager.h"
 
+random_device rdColor;
+mt19937 genColor(rdColor());
+uniform_real_distribution<> randomC(0.0, 1.0);
+
 Stage::Stage()
 {
 }
@@ -30,10 +34,11 @@ void Stage::Initialize()
 		// Player
 		Object* obj = nullptr;
 		obj = new Player;
-		obj->Initialize();
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(0.0, 0.0, 0));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
 		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
+		static_cast<Cube*>(obj)->SetColor(1.0f, 1.0f, 0.f);
+		obj->Initialize();
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::PLAYER);
 	}
 
@@ -101,9 +106,10 @@ void Stage::CreateBlock()
 	for (int i = 0; i < BlockPos.size(); ++i) {
 		Object* obj = nullptr;
 		obj = new Block;
-		obj->Initialize();
 		static_cast<Cube*>(obj)->SetPos(BlockPos[i]);
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(5.f, 20.f, 5.f));
+		static_cast<Cube*>(obj)->SetColor(randomC(genColor), randomC(genColor), randomC(genColor));
+		obj->Initialize();
 		static_cast<Cube*>(obj)->SetBoundingSize(1.5f);
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::BLOCK);
 	}
@@ -137,11 +143,13 @@ void Stage::CreateEnemy()
 	for (int i = 0; i < MovingEnemyPos.size(); ++i) {
 		Object* obj = nullptr;
 		obj = new MovingEnemy;
-		obj->Initialize();
 		
 		static_cast<Cube*>(obj)->SetPos(MovingEnemyPos[i]);
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
+		static_cast<Cube*>(obj)->SetColor(0.0f, 1.f, 1.f);	// ÇÏ´Ã»ö
 		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
+		obj->Initialize();
+
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ENEMY);
 	}
 
@@ -149,11 +157,13 @@ void Stage::CreateEnemy()
 	for (int i = 0; i < AttackEnemyPos.size(); ++i) {
 		Object* obj = nullptr;
 		obj = new AttackEnemy;
-		obj->Initialize();
 
 		static_cast<Cube*>(obj)->SetPos(AttackEnemyPos[i]);
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
+		static_cast<Cube*>(obj)->SetColor(1.f, 0.4f, 0.7f);	// ºÐÈ«
 		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
+		obj->Initialize();
+
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ENEMY);
 	}
 }
@@ -168,23 +178,28 @@ void Stage::CreateItem()
 	{
 		Object* obj = nullptr;
 		obj = new Item;
+		static_cast<Cube*>(obj)->SetColor(0.7f, 0.7f, 1.f);
 		obj->Initialize();
 
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(-1.5f, y, -6.0f));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
 		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
+
 		static_cast<Item*>(obj)->SetItemType(ALPHA);
+
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ITEM);
 	}
 
 	{
 		Object* obj = nullptr;
 		obj = new Item;
+		static_cast<Cube*>(obj)->SetColor(0.7f, 0.7f, 1.f);
 		obj->Initialize();
 
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(1.5f, y, -6.0f));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
 		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
+
 		static_cast<Item*>(obj)->SetItemType(SPEEDUP);
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ITEM);
 	}
@@ -192,11 +207,15 @@ void Stage::CreateItem()
 	{
 		Object* obj = nullptr;
 		obj = new Item;
+		static_cast<Cube*>(obj)->SetColor(0.7f, 0.7f, 1.f);
+
 		obj->Initialize();
 
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(-1.5f, y, -35.0f));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
+		static_cast<Cube*>(obj)->SetColor(0.7f, 0.7f, 1.f);
 		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
+
 		static_cast<Item*>(obj)->SetItemType(ALPHA);
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ITEM);
 	}
@@ -204,10 +223,13 @@ void Stage::CreateItem()
 	{
 		Object* obj = nullptr;
 		obj = new Item;
+		static_cast<Cube*>(obj)->SetColor(0.7f, 0.7f, 1.f);
+
 		obj->Initialize();
 
 		static_cast<Cube*>(obj)->SetPos(glm::vec3(1.5f, y, -35.0f));
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
+
 		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
 		static_cast<Item*>(obj)->SetItemType(SPEEDUP);
 		ObjectManager::Get_Instance()->Add_Object(obj, OBJID::ITEM);

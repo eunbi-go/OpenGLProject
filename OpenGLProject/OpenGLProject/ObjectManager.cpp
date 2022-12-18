@@ -59,6 +59,7 @@ void ObjectManager::Render(GLuint _program, GLuint _texProgram)
 		}
 		else
 		{
+			glUseProgram(_texProgram);
 			for (auto& pObj : _listObj[i])
 			{
 				if (!pObj)

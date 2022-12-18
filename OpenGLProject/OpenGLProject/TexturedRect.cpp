@@ -5,13 +5,13 @@
 
 float vertexData[] = {
 	//--- 위치				//--- 노말			//--- 텍스처 좌표
-	-30.f, -0.5f, 30.f,		0.0, 0.0, 1.0,		0.0, 0.0,
-	30.f, -0.5f, 30.f,		0.0, 0.0, 1.0,		1.0, 0.0,
-	30.f, -0.5f, -30.f,		0.0, 0.0, 1.0,		1.0, 1.0,
+	-5.f, -0.5f, 10.f,		0.0, 0.0, 1.0,		0.0, 0.0,
+	5.f, -0.5f, 10.f,		0.0, 0.0, 1.0,		1.0, 0.0,
+	5.f, -0.5f, -70.f,		0.0, 0.0, 1.0,		1.0, 1.0,
 
-	30.f, -0.5f, -30.f,		0.0, 0.0, 1.0,		1.0, 1.0,
-	-30.f, -0.5f, -30.f,		0.0, 0.0, 1.0,		0.0, 1.0,
-	-30.f, -0.5f, 30.f,		0.0, 0.0, 1.0,		0.0, 0.0
+	5.f, -0.5f, -70.f,		0.0, 0.0, 1.0,		1.0, 1.0,
+	-5.f, -0.5f, -70.f,		0.0, 0.0, 1.0,		0.0, 1.0,
+	-5.f, -0.5f, 10.f,		0.0, 0.0, 1.0,		0.0, 0.0
 };
 float vertexButtonData[] = {
 	//--- 위치				//--- 노말			//--- 텍스처 좌표
@@ -88,7 +88,7 @@ void TexturedRect::UpdateBuffer()
 	// 텍스처 로드 및 생성
 	int width, height, nrChannels;
 	unsigned char* data = nullptr;
-		data = stbi_load("grass.jpg", &width, &height, &nrChannels, 0);
+		data = stbi_load("bottom.jpg", &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);

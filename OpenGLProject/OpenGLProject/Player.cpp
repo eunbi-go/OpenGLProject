@@ -17,24 +17,29 @@ void Player::Initialize()
 	UpdateBuffer();
 
 	_leftLeg = new Cube;
-	_leftLeg->Initialize();
 	static_cast<Cube*>(_leftLeg)->SetScale(glm::vec3(0.3f, 0.8f, 0.3f));
+	static_cast<Cube*>(_leftLeg)->SetColor(1.0f, 0.f, 1.0f);
+	_leftLeg->Initialize();
 
 	_rightLeg = new Cube;
-	_rightLeg->Initialize();
 	static_cast<Cube*>(_rightLeg)->SetScale(glm::vec3(0.3f, 0.8f, 0.3f));
+	static_cast<Cube*>(_rightLeg)->SetColor(1.0f, 0.f, 1.0f);
+	_rightLeg->Initialize();
 
 	_leftArm = new Cube;
-	_leftArm->Initialize();
 	static_cast<Cube*>(_leftArm)->SetScale(glm::vec3(0.2f, 0.6f, 0.2f));
+	static_cast<Cube*>(_leftArm)->SetColor(0.f, 0.f, 1.f);
+	_leftArm->Initialize();
 
 	_rightArm = new Cube;
-	_rightArm->Initialize();
 	static_cast<Cube*>(_rightArm)->SetScale(glm::vec3(0.2f, 0.6f, 0.2f));
+	static_cast<Cube*>(_rightArm)->SetColor(0.f, 0.f, 1.f);
+	_rightArm->Initialize();
 
 	_head = new Cube;
-	_head->Initialize();
 	static_cast<Cube*>(_head)->SetScale(glm::vec3(0.7f, 0.7f, 0.7f));
+	static_cast<Cube*>(_head)->SetColor(0.5f, 0.0f, 0.7f);
+	_head->Initialize();
 }
 
 int Player::Update()

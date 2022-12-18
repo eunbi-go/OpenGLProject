@@ -43,11 +43,14 @@ public:
 	void SetRotateZ(float radian) { rotateRadian = radian;  rotation = glm::rotate(rotation, glm::radians(rotateRadian), glm::vec3(0.0, 0.0, 1.0)); }
 	void SetFinalMat(glm::mat4 finalM) { finalMat = finalM; }
 	void SetBoundingSize(float size) { _boundingSize = size; }
+	void SetColor(float x, float y, float z);
 
 public:
 	GLuint vaoHandle;
 	GLuint vboHandles[2];
 	GLuint indexBufferObject;
+
+	GLfloat	colors[24];
 
 	glm::mat4 trans = glm::mat4(1.0f);
 	glm::mat4 rotation = glm::mat4(1.0f);
