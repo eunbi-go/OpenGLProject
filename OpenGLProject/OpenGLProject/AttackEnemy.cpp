@@ -16,11 +16,14 @@ AttackEnemy::AttackEnemy()
 
 AttackEnemy::~AttackEnemy()
 {
+	Release();
 }
 
 void AttackEnemy::Initialize()
 {
 	_movingSpeed = 2.f;
+
+	Cube::Initialize();
 
 	_leftLeg = new Cube;
 	static_cast<Cube*>(_leftLeg)->SetScale(glm::vec3(0.3f, 0.8f, 0.3f));
@@ -36,8 +39,6 @@ void AttackEnemy::Initialize()
 	static_cast<Cube*>(_ring)->SetScale(glm::vec3(0.3f, 0.3f, 0.3f));
 	static_cast<Cube*>(_ring)->SetColor(1.f, 0.f, 0.4f);
 	_ring->Initialize();
-
-	UpdateBuffer();
 }
 
 int AttackEnemy::Update()
@@ -83,6 +84,9 @@ void AttackEnemy::Render(GLuint _program, GLuint _texProgram)
 
 void AttackEnemy::Release()
 {
+	if (_leftLeg) delete _leftLeg;
+	if (_rightLeg) delete _rightLeg;
+	if (_ring) delete _ring;
 }
 
 void AttackEnemy::RenderChild(GLuint _program)

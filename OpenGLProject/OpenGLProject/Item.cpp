@@ -11,15 +11,12 @@ Item::~Item()
 
 void Item::Initialize()
 {
-	UpdateBuffer();
+	Cube::Initialize();
 }
 
 int Item::Update()
 {
-	if (_isDead) return OBJ_DEAD;
-
-
-	return OBJ_NOEVENET;
+	return Cube::Update();
 }
 
 void Item::Late_Update()

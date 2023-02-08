@@ -13,6 +13,7 @@ MovingEnemy::MovingEnemy()
 
 MovingEnemy::~MovingEnemy()
 {
+	Release();
 }
 
 void MovingEnemy::Initialize()
@@ -68,6 +69,7 @@ void MovingEnemy::Render(GLuint _program, GLuint _texProgram)
 
 void MovingEnemy::Release()
 {
+	if (_child) delete _child;
 }
 
 void MovingEnemy::RenderChild(GLuint _program)

@@ -26,8 +26,8 @@ public:
 	void SetTexType(TEX_TYPE type) { _type = type; }
 
 public:
-	unsigned int VBO, VAO;
-	unsigned int texture;
+	unsigned int VBO = 0, VAO = 0;
+	unsigned int texture = 0;
 	TEX_TYPE	_type = TEX_TYPE_END;
 };
 

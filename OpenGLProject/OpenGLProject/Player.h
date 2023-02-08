@@ -60,11 +60,11 @@ private:
 	bool		_isForwardCollision = false;
 	bool		_isBackCollision = false;
 
-	class Object* _head;
-	class Object* _leftLeg;
-	class Object* _rightLeg;
-	class Object* _leftArm;
-	class Object* _rightArm;
+	class Object* _head = nullptr;
+	class Object* _leftLeg = nullptr;
+	class Object* _rightLeg = nullptr;
+	class Object* _leftArm = nullptr;
+	class Object* _rightArm = nullptr;
 
 	double	_rightLegRot = -35.f;
 	double	_leftLegRot = 35.f;

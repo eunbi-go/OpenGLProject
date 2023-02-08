@@ -24,7 +24,7 @@ private:
 	void RenderChild(GLuint _program);
 
 private:
-	class Object* _child;
+	class Object* _child = nullptr;
 	double	_childRot = 0.f;
 	DIR	_eDir = DIR_END;
 	double	_dirTime = 0.0;

@@ -25,9 +25,9 @@ private:
 	void Attack();
 
 private:
-	class Object* _leftLeg;
-	class Object* _rightLeg;
-	class Object* _ring;
+	class Object* _leftLeg = nullptr;
+	class Object* _rightLeg = nullptr;
+	class Object* _ring = nullptr;
 
 	double	_ringRot = 0.f;
 	double	_attackTime = 0.0;

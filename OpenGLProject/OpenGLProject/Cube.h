@@ -48,18 +48,18 @@ public:
 	void SetColor(float x, float y, float z);
 
 public:
-	GLuint _vaoHandle;
-	GLuint _vboHandles[2];
-	GLuint _indexBufferObject;
+	GLuint _vaoHandle = 0;
+	GLuint _vboHandles[2] = {};
+	GLuint _indexBufferObject = 0;
 
-	GLfloat	_colors[24];
+	GLfloat	_colors[24] = {};
 
 	glm::mat4 _trans = glm::mat4(1.0f);
 	glm::mat4 _rotation = glm::mat4(1.0f);
 	glm::mat4 _scale = glm::mat4(1.0f);
 	glm::mat4 _finalMat = glm::mat4(1.0f);
 
-	GLfloat _rotateRadian;
+	GLfloat _rotateRadian = 0.f;
 	GLfloat _movingSpeed = 5.f;
 
 	MOVE	_ePreMoveDir = MOVE::MOVE_END;

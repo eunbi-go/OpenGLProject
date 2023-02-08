@@ -24,7 +24,7 @@ public:
 	void SetDead() { _isDead = true; }
 
 protected:
-	CollisionBox	_collisionBox;
+	CollisionBox	_collisionBox = {};
 	bool	_isDead = false;
 };
 

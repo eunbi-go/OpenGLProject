@@ -11,15 +11,12 @@ Block::~Block()
 
 void Block::Initialize()
 {
-	UpdateBuffer();
+	Cube::Initialize();
 }
 
 int Block::Update()
 {
-	if (_isDead) return OBJ_DEAD;
-
-
-	return OBJ_NOEVENET;
+	return Cube::Update();
 }
 
 void Block::Late_Update()

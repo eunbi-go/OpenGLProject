@@ -40,9 +40,9 @@ public:
 private:
 	static SceneManager* _pInstance;
 
-	Scene*				_pScene;
-	SCENEID				_ePreScene;
-	SCENEID				_eCurScene;
+	Scene*				_pScene = nullptr;
+	SCENEID				_ePreScene = SCENEID::SCENE_END;
+	SCENEID				_eCurScene = SCENEID::SCENE_END;
 };
 
 

@@ -12,6 +12,7 @@ Player::Player()
 
 Player::~Player()
 {
+	Release();
 }
 
 void Player::Initialize()
@@ -19,7 +20,7 @@ void Player::Initialize()
 	SetScale(glm::vec3(0.9f, 0.8f, 0.9f));
 	_movingSpeed = 20.f;
 
-	UpdateBuffer();
+	Cube::Initialize();
 
 	_leftLeg = new Cube;
 	static_cast<Cube*>(_leftLeg)->SetScale(glm::vec3(0.3f, 0.8f, 0.3f));
@@ -50,6 +51,7 @@ void Player::Initialize()
 int Player::Update()
 {
 	if (_isJump) Jump();
+
 	else if (_isMoveStop)
 	{
 		_rightLegRot = -35.f;
@@ -61,7 +63,7 @@ int Player::Update()
 
 	UpdateChild();
 
-	return OBJ_NOEVENET;
+	return Cube::Update();
 }
 
 void Player::Late_Update()
@@ -81,6 +83,11 @@ void Player::Render(GLuint _program, GLuint _texProgram)
 
 void Player::Release()
 {
+	if (_head) delete _head;
+	if (_leftLeg) delete _leftLeg;
+	if (_rightLeg) delete _rightLeg;
+	if (_leftArm) delete _leftArm;
+	if (_rightArm) delete _rightArm;
 }
 
 void Player::ApplyItemEffect()
