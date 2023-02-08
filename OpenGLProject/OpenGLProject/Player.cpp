@@ -18,6 +18,7 @@ void Player::Initialize()
 {
 	SetScale(glm::vec3(0.9f, 0.8f, 0.9f));
 	_movingSpeed = 20.f;
+
 	UpdateBuffer();
 
 	_leftLeg = new Cube;
@@ -69,10 +70,10 @@ void Player::Late_Update()
 
 void Player::Render(GLuint _program, GLuint _texProgram)
 {
-	glm::mat4 finalMat = trans * rotation* scale;
+	glm::mat4 finalMat = _trans * _rotation* _scale;
 	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(finalMat));
-	glBindVertexArray(vaoHandle);
+	glBindVertexArray(_vaoHandle);
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
 
 	RenderChild(_program);
@@ -215,10 +216,10 @@ void Player::RenderChild(GLuint _program)
 		glm::mat4 t1 = glm::mat4(1.f);
 		glm::mat4 t2 = glm::mat4(1.f);
 
-		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
+		t1 = glm::translate(t1, glm::vec3(_trans[3][0], _trans[3][1], _trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(0.f, 0.3f, 0.f));
 
-		childMat = t1 * t2 * static_cast<Cube*>(_head)->scale;
+		childMat = t1 * t2 * static_cast<Cube*>(_head)->_scale;
 		static_cast<Cube*>(_head)->SetFinalMat(childMat);
 		static_cast<Cube*>(_head)->RenderFinalMatrix(_program);
 	}
@@ -230,12 +231,12 @@ void Player::RenderChild(GLuint _program)
 		glm::mat4 t2 = glm::mat4(1.f);
 		glm::mat4 r = glm::mat4(1.f);
 
-		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
+		t1 = glm::translate(t1, glm::vec3(_trans[3][0], _trans[3][1], _trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(-0.2f, 0.0f, 0.f));
 		if (_isJump || !_isMoveStop)
 			r = glm::rotate(r, glm::radians((float)_leftArmRot), glm::vec3(1.f, 0.f, 0.f));
 
-		childMat = t1 * r * t2 * static_cast<Cube*>(_leftArm)->scale;
+		childMat = t1 * r * t2 * static_cast<Cube*>(_leftArm)->_scale;
 		static_cast<Cube*>(_leftArm)->SetFinalMat(childMat);
 		static_cast<Cube*>(_leftArm)->RenderFinalMatrix(_program);
 	}
@@ -246,12 +247,12 @@ void Player::RenderChild(GLuint _program)
 		glm::mat4 t2 = glm::mat4(1.f);
 		glm::mat4 r = glm::mat4(1.f);
 
-		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
+		t1 = glm::translate(t1, glm::vec3(_trans[3][0], _trans[3][1], _trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(0.2f, 0.0f, 0.f));
 		if (_isJump || !_isMoveStop)
 			r = glm::rotate(r, glm::radians((float)_rightArmRot), glm::vec3(1.f, 0.f, 0.f));
 
-		childMat = t1 * r * t2 * static_cast<Cube*>(_rightArm)->scale;
+		childMat = t1 * r * t2 * static_cast<Cube*>(_rightArm)->_scale;
 		static_cast<Cube*>(_rightArm)->SetFinalMat(childMat);
 		static_cast<Cube*>(_rightArm)->RenderFinalMatrix(_program);
 	}
@@ -263,12 +264,12 @@ void Player::RenderChild(GLuint _program)
 		glm::mat4 t2 = glm::mat4(1.f);
 		glm::mat4 r = glm::mat4(1.f);
 
-		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
+		t1 = glm::translate(t1, glm::vec3(_trans[3][0], _trans[3][1], _trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(-0.1f, -0.2f, 0.f));
 		if (_isJump || !_isMoveStop)
 			r = glm::rotate(r, glm::radians((float)_leftLegRot), glm::vec3(1.f, 0.f, 0.f));
 
-		childMat = t1 * r * t2 * static_cast<Cube*>(_leftLeg)->scale;
+		childMat = t1 * r * t2 * static_cast<Cube*>(_leftLeg)->_scale;
 		static_cast<Cube*>(_leftLeg)->SetFinalMat(childMat);
 		static_cast<Cube*>(_leftLeg)->RenderFinalMatrix(_program);
 	}
@@ -279,12 +280,12 @@ void Player::RenderChild(GLuint _program)
 		glm::mat4 t2 = glm::mat4(1.f);
 		glm::mat4 r = glm::mat4(1.f);
 
-		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
+		t1 = glm::translate(t1, glm::vec3(_trans[3][0], _trans[3][1], _trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(0.1f, -0.2f, 0.f));
 		if (_isJump || !_isMoveStop)
 			r = glm::rotate(r, glm::radians((float)_rightLegRot), glm::vec3(1.f, 0.f, 0.f));
 
-		childMat = t1 * r * t2 * static_cast<Cube*>(_rightLeg)->scale;
+		childMat = t1 * r * t2 * static_cast<Cube*>(_rightLeg)->_scale;
 		static_cast<Cube*>(_rightLeg)->SetFinalMat(childMat);
 		static_cast<Cube*>(_rightLeg)->RenderFinalMatrix(_program);
 	}

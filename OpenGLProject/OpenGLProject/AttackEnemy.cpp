@@ -44,13 +44,13 @@ int AttackEnemy::Update()
 {
 	glm::mat4 playerMat = static_cast<Cube*>(ObjectManager::Get_Instance()->Get_Player())->Get_Translation();
 	glm::vec3 playerPos = glm::vec3(playerMat[3][0], playerMat[3][1], playerMat[3][2]);
-	glm::vec3 pos = glm::vec3(trans[3][0], trans[3][1], trans[3][2]);
+	glm::vec3 pos = glm::vec3(_trans[3][0], _trans[3][1], _trans[3][2]);
 	glm::vec3 dir = playerPos - pos;
 	dir.y = 0.f;
 	glm::vec3 normalDir = glm::normalize(dir);
 	glm::quat q;
 	q = glm::quatLookAt(normalDir, glm::vec3(0.f, 1.f, 0.f));
-	rotation = glm::mat4_cast(q);
+	_rotation = glm::mat4_cast(q);
 
 	_ringRot += Timer::Get_Instance()->Get_DeltaTime() * 100.f;
 	if (_ringRot > 360.f)
@@ -72,10 +72,10 @@ void AttackEnemy::Late_Update()
 
 void AttackEnemy::Render(GLuint _program, GLuint _texProgram)
 {
-	glm::mat4 finalMat = trans * rotation * scale;
+	glm::mat4 finalMat = _trans * _rotation * _scale;
 	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(finalMat));
-	glBindVertexArray(vaoHandle);
+	glBindVertexArray(_vaoHandle);
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
 
 	RenderChild(_program);
@@ -92,10 +92,10 @@ void AttackEnemy::RenderChild(GLuint _program)
 		glm::mat4 t1 = glm::mat4(1.f);
 		glm::mat4 t2 = glm::mat4(1.f);
 
-		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
+		t1 = glm::translate(t1, glm::vec3(_trans[3][0], _trans[3][1], _trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(-0.1f, -0.2f, 0.f));
 
-		childMat = t1 * t2 * static_cast<Cube*>(_leftLeg)->scale;
+		childMat = t1 * t2 * static_cast<Cube*>(_leftLeg)->_scale;
 		static_cast<Cube*>(_leftLeg)->SetFinalMat(childMat);
 		static_cast<Cube*>(_leftLeg)->RenderFinalMatrix(_program);
 	}
@@ -105,10 +105,10 @@ void AttackEnemy::RenderChild(GLuint _program)
 		glm::mat4 t1 = glm::mat4(1.f);
 		glm::mat4 t2 = glm::mat4(1.f);
 
-		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
+		t1 = glm::translate(t1, glm::vec3(_trans[3][0], _trans[3][1], _trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(0.1f, -0.2f, 0.f));
 
-		childMat = t1 * t2 * static_cast<Cube*>(_rightLeg)->scale;
+		childMat = t1 * t2 * static_cast<Cube*>(_rightLeg)->_scale;
 		static_cast<Cube*>(_rightLeg)->SetFinalMat(childMat);
 		static_cast<Cube*>(_rightLeg)->RenderFinalMatrix(_program);
 	}
@@ -119,10 +119,10 @@ void AttackEnemy::RenderChild(GLuint _program)
 		glm::mat4 t2 = glm::mat4(1.f);
 		glm::mat4 r = glm::mat4(1.f);
 
-		t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
+		t1 = glm::translate(t1, glm::vec3(_trans[3][0], _trans[3][1], _trans[3][2]));
 		t2 = glm::translate(t2, glm::vec3(0.4f, 0.0f, 0.f));
 		r = glm::rotate(r, glm::radians((float)_ringRot), glm::vec3(0.f, 1.f, 0.f));
-		childMat = t1 * r * t2 * static_cast<Cube*>(_ring)->scale;
+		childMat = t1 * r * t2 * static_cast<Cube*>(_ring)->_scale;
 		_bulletPos = t1 * t2;
 		static_cast<Cube*>(_ring)->SetFinalMat(childMat);
 		static_cast<Cube*>(_ring)->RenderFinalMatrix(_program);
@@ -131,7 +131,7 @@ void AttackEnemy::RenderChild(GLuint _program)
 
 void AttackEnemy::Attack()
 {
-	if (static_cast<Player*>(ObjectManager::Get_Instance()->Get_Player())->GetZ() < trans[3][2]) return;
+	if (static_cast<Player*>(ObjectManager::Get_Instance()->Get_Player())->GetZ() < _trans[3][2]) return;
 
 	Object* obj = nullptr;
 	obj = new Bullet;

@@ -21,8 +21,8 @@ void ObjectManager::Update()
 		{
 			if (!(*iter))
 				continue;
-			int iEvent = (*iter)->Update();
-			if (iEvent == OBJ_DEAD)
+			int event = (*iter)->Update();
+			if (event == OBJ_DEAD)
 			{
 				SAFE_DELETE(*iter);
 				iter = _listObj[i].erase(iter);

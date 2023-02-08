@@ -23,10 +23,10 @@ private:
 	void CreateEnemy();
 	void CreateItem();
 
-	vector<glm::vec3> BlockPos;
-	vector<glm::vec3> MovingEnemyPos;
-	vector<glm::vec3> AttackEnemyPos;
-	vector<glm::vec3> ItemPos;
+	vector<glm::vec3> _blockPos;
+	vector<glm::vec3> _movingEnemyPos;
+	vector<glm::vec3> _attackEnemyPos;
+	vector<glm::vec3> _itemPos;
 };
 
 #endif // !__STAGE_H__

@@ -56,10 +56,10 @@ void MovingEnemy::Late_Update()
 
 void MovingEnemy::Render(GLuint _program, GLuint _texProgram)
 {
-	glm::mat4 finalMat = trans * rotation * scale;
+	glm::mat4 finalMat = _trans * _rotation * _scale;
 	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(finalMat));
-	glBindVertexArray(vaoHandle);
+	glBindVertexArray(_vaoHandle);
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
 
 	// child
@@ -78,10 +78,10 @@ void MovingEnemy::RenderChild(GLuint _program)
 	glm::mat4 t2 = glm::mat4(1.f);
 
 	r1 = glm::rotate(r1, glm::radians((float)_childRot), glm::vec3(0.f, 1.f, 0.f));
-	t1 = glm::translate(t1, glm::vec3(trans[3][0], trans[3][1], trans[3][2]));
+	t1 = glm::translate(t1, glm::vec3(_trans[3][0], _trans[3][1], _trans[3][2]));
 	t2 = glm::translate(t2, glm::vec3(0.f, 0.5f, 0.f));
 
-	childMat = t1 * r1 * t2 * static_cast<Cube*>(_child)->scale;
+	childMat = t1 * r1 * t2 * static_cast<Cube*>(_child)->_scale;
 	static_cast<Cube*>(_child)->SetFinalMat(childMat);
 	static_cast<Cube*>(_child)->RenderFinalMatrix(_program);
 }

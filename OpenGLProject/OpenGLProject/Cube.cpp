@@ -31,16 +31,6 @@ GLfloat cube_vertices[] = {
 	-0.2f,	0.2f,	-0.2f,		// 7.
 };
 
-//GLfloat colors[] = {
-//	1.0f, 0.0f, 0.0f,
-//	0.0f, 1.0f, 0.0f,
-//	0.0f, 0.0f, 1.0f,
-//	1.0f, 1.0f, 0.0f,
-//	1.0f, 0.0f, 1.0f,
-//	0.0f, 1.0f, 1.0f,
-//	0.5f, 0.0f, 0.0f,
-//	0.0f, 0.5f, 0.0f
-//};
 
 Cube::Cube()
 {
@@ -69,10 +59,10 @@ void Cube::Late_Update()
 
 void Cube::Render(GLuint _program, GLuint _texProgram)
 {
-	glm::mat4 finalMat = scale * trans * rotation;
+	glm::mat4 finalMat = _scale * _trans * _rotation;
 	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(finalMat));
-	glBindVertexArray(vaoHandle);
+	glBindVertexArray(_vaoHandle);
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
 }
 
@@ -83,8 +73,8 @@ void Cube::Release()
 
 void Cube::UpdateBuffer()
 {
-	glGenVertexArrays(1, &vaoHandle);
-	glBindVertexArray(vaoHandle);
+	glGenVertexArrays(1, &_vaoHandle);
+	glBindVertexArray(_vaoHandle);
 
 	GLuint vboHandles[2];
 	glGenBuffers(2, vboHandles);
@@ -98,7 +88,7 @@ void Cube::UpdateBuffer()
 	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vboHandles[1]);
-	glBufferData(GL_ARRAY_BUFFER, 24 * sizeof(float), colors, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 24 * sizeof(float), _colors, GL_STATIC_DRAW);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (GLubyte*)NULL);
 	glEnableVertexAttribArray(1);
 
@@ -112,8 +102,8 @@ void Cube::UpdateBuffer()
 void Cube::RenderFinalMatrix(GLuint _program)
 {
 	unsigned int modelLocation = glGetUniformLocation(_program, "modelTransform");
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(finalMat));
-	glBindVertexArray(vaoHandle);
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(_finalMat));
+	glBindVertexArray(_vaoHandle);
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
 }
 
@@ -122,29 +112,29 @@ void Cube::Move()
 	double time = Timer::Get_Instance()->Get_DeltaTime();
 	glm::mat4	playerTrans = static_cast<Cube*>(ObjectManager::Get_Instance()->Get_Player())->Get_Translation();
 	glm::vec3	playerPos = glm::vec3(playerTrans[3][0], playerTrans[3][1], playerTrans[3][2]);
-	glm::vec3	pos = glm::vec3(trans[3][0], trans[3][1], trans[3][2]);
+	glm::vec3	pos = glm::vec3(_trans[3][0], _trans[3][1], _trans[3][2]);
 	glm::vec3	dir = glm::normalize(playerPos - pos);
 
 	switch (_eCurMoveDir)
 	{
 	case MOVE_FORWARD:
-		trans = glm::translate(trans, glm::vec3(0.f, 0.0f, _movingSpeed * -time));
+		_trans = glm::translate(_trans, glm::vec3(0.f, 0.0f, _movingSpeed * -time));
 		break;
 
 	case MOVE_BACK:
-		trans = glm::translate(trans, glm::vec3(0.f, 0.0f, _movingSpeed * time));
+		_trans = glm::translate(_trans, glm::vec3(0.f, 0.0f, _movingSpeed * time));
 		break;
 
 	case MOVE_LEFT:
-		trans = glm::translate(trans, glm::vec3(_movingSpeed * -time, 0.0f, 0.f));
+		_trans = glm::translate(_trans, glm::vec3(_movingSpeed * -time, 0.0f, 0.f));
 		break;
 
 	case MOVE_RIGHT:
-		trans = glm::translate(trans, glm::vec3(_movingSpeed * time, 0.0f, 0.f));
+		_trans = glm::translate(_trans, glm::vec3(_movingSpeed * time, 0.0f, 0.f));
 		break;
 
 	case MOVE_TO_PLAYER:
-		trans = glm::translate(trans, glm::vec3(_movingSpeed * dir.x * time, 0.0f, _movingSpeed * dir.z * time));
+		_trans = glm::translate(_trans, glm::vec3(_movingSpeed * dir.x * time, 0.0f, _movingSpeed * dir.z * time));
 		break;
 
 	case MOVE_END:
@@ -160,13 +150,13 @@ void Cube::Jump()
 	_jumpHeight = (float)((_jumpTime * _jumpTime - _jumpPower * _jumpTime) / 5.f);
 	_jumpTime += (float)Timer::Get_Instance()->Get_DeltaTime();
 
-	trans[3][1] = 0.f;
+	_trans[3][1] = 0.f;
 	float y = _jumpHeight * -1.f;
-	trans = glm::translate(trans, glm::vec3(0.0f, y, 0.0f));
+	_trans = glm::translate(_trans, glm::vec3(0.0f, y, 0.0f));
 
+	// 점프 끝
 	if (_jumpTime > _jumpPower)
 	{
-		//cout << "점프 끝" << endl;
 		_jumpTime = 0.f;
 		_jumpHeight = 0.f;
 		_isJump = false;
@@ -177,8 +167,8 @@ void Cube::SetColor(float x, float y, float z)
 {
 	for (int i = 0; i < 24; i += 3)
 	{
-		colors[i] = x;
-		colors[i + 1] = y;
-		colors[i + 2] = z;
+		_colors[i] = x;
+		_colors[i + 1] = y;
+		_colors[i + 2] = z;
 	}
 }

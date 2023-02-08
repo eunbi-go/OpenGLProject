@@ -28,36 +28,38 @@ public:
 
 	void Jump();
 
-	glm::mat4 Get_Translation() { return trans; }
-	float GetX() { return trans[3][0]; }
-	float GetY() { return trans[3][1]; }
-	float GetZ() { return trans[3][2]; }
+
+public:
+	glm::mat4 Get_Translation() { return _trans; }
+	float GetX() { return _trans[3][0]; }
+	float GetY() { return _trans[3][1]; }
+	float GetZ() { return _trans[3][2]; }
 	float GetBoundingSize() { return _boundingSize; }
 	MOVE GetMoveDir() { return _eCurMoveDir; }
 
 public:
-	void SetPos(glm::vec3 pos) { trans = glm::mat4(1.0f); trans = glm::translate(trans, glm::vec3(pos.x, pos.y, pos.z)); }
-	void SetScale(glm::vec3 s) { scale = glm::scale(scale, glm::vec3(s.x, s.y, s.z)); }
-	void SetRotateX(float radian) { rotateRadian = radian;  rotation = glm::rotate(rotation, glm::radians(rotateRadian), glm::vec3(1.0, 0.0, 0.0)); }
-	void SetRotateY(float radian) { rotateRadian = radian;  rotation = glm::rotate(rotation, glm::radians(rotateRadian), glm::vec3(0.0, 1.0, 0.0)); }
-	void SetRotateZ(float radian) { rotateRadian = radian;  rotation = glm::rotate(rotation, glm::radians(rotateRadian), glm::vec3(0.0, 0.0, 1.0)); }
-	void SetFinalMat(glm::mat4 finalM) { finalMat = finalM; }
+	void SetPos(glm::vec3 pos) { _trans = glm::mat4(1.0f); _trans = glm::translate(_trans, glm::vec3(pos.x, pos.y, pos.z)); }
+	void SetScale(glm::vec3 s) { _scale = glm::scale(_scale, glm::vec3(s.x, s.y, s.z)); }
+	void SetRotateX(float radian) { _rotateRadian = radian;  _rotation = glm::rotate(_rotation, glm::radians(_rotateRadian), glm::vec3(1.0, 0.0, 0.0)); }
+	void SetRotateY(float radian) { _rotateRadian = radian;  _rotation = glm::rotate(_rotation, glm::radians(_rotateRadian), glm::vec3(0.0, 1.0, 0.0)); }
+	void SetRotateZ(float radian) { _rotateRadian = radian;  _rotation = glm::rotate(_rotation, glm::radians(_rotateRadian), glm::vec3(0.0, 0.0, 1.0)); }
+	void SetFinalMat(glm::mat4 finalM) { _finalMat = finalM; }
 	void SetBoundingSize(float size) { _boundingSize = size; }
 	void SetColor(float x, float y, float z);
 
 public:
-	GLuint vaoHandle;
-	GLuint vboHandles[2];
-	GLuint indexBufferObject;
+	GLuint _vaoHandle;
+	GLuint _vboHandles[2];
+	GLuint _indexBufferObject;
 
-	GLfloat	colors[24];
+	GLfloat	_colors[24];
 
-	glm::mat4 trans = glm::mat4(1.0f);
-	glm::mat4 rotation = glm::mat4(1.0f);
-	glm::mat4 scale = glm::mat4(1.0f);
-	glm::mat4 finalMat = glm::mat4(1.0f);
+	glm::mat4 _trans = glm::mat4(1.0f);
+	glm::mat4 _rotation = glm::mat4(1.0f);
+	glm::mat4 _scale = glm::mat4(1.0f);
+	glm::mat4 _finalMat = glm::mat4(1.0f);
 
-	GLfloat rotateRadian;
+	GLfloat _rotateRadian;
 	GLfloat _movingSpeed = 5.f;
 
 	MOVE	_ePreMoveDir = MOVE::MOVE_END;

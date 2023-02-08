@@ -93,20 +93,19 @@ void Stage::CreateBlock()
 	float y = 0.0f;
 
 	// block pos
-	BlockPos.push_back(glm::vec3(-2.0f, y, -40.f));
-	BlockPos.push_back(glm::vec3(2.0f, y, -40.f));
-	BlockPos.push_back(glm::vec3(-2.0f, y, -45.f));
-	BlockPos.push_back(glm::vec3(2.0f, y, -45.f));
-	BlockPos.push_back(glm::vec3(-2.0f, y, -50.f));
-	BlockPos.push_back(glm::vec3(2.0f, y, -50.f));
-
-	BlockPos.push_back(glm::vec3(0.f, y, -60.f));
+	_blockPos.push_back(glm::vec3(-2.0f, y, -40.f));
+	_blockPos.push_back(glm::vec3(2.0f, y, -40.f));
+	_blockPos.push_back(glm::vec3(-2.0f, y, -45.f));
+	_blockPos.push_back(glm::vec3(2.0f, y, -45.f));
+	_blockPos.push_back(glm::vec3(-2.0f, y, -50.f));
+	_blockPos.push_back(glm::vec3(2.0f, y, -50.f));
+	_blockPos.push_back(glm::vec3(0.f, y, -60.f));
 
 	// create block
-	for (int i = 0; i < (int)BlockPos.size(); ++i) {
+	for (int i = 0; i < (int)_blockPos.size(); ++i) {
 		Object* obj = nullptr;
 		obj = new Block;
-		static_cast<Cube*>(obj)->SetPos(BlockPos[i]);
+		static_cast<Cube*>(obj)->SetPos(_blockPos[i]);
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(5.f, 20.f, 5.f));
 		static_cast<Cube*>(obj)->SetColor((float)randomC(genColor), (float)randomC(genColor), (float)randomC(genColor));
 		obj->Initialize();
@@ -120,31 +119,29 @@ void Stage::CreateEnemy()
 	float y = 0.0f;
 
 	// Movnig Enemy Pos
-	MovingEnemyPos.push_back(glm::vec3(-1.0f, y, -1.0f));
-	MovingEnemyPos.push_back(glm::vec3(1.0f, y, -1.0f));
-
-	MovingEnemyPos.push_back(glm::vec3(-1.8f, y, -20.0f));
-	MovingEnemyPos.push_back(glm::vec3(0.0f, y, -20.0f));
-	MovingEnemyPos.push_back(glm::vec3(1.8f, y, -20.0f));
-	
-	MovingEnemyPos.push_back(glm::vec3(0.f, y, -43.0f));
-	MovingEnemyPos.push_back(glm::vec3(0.f, y, -48.0f));
+	_movingEnemyPos.push_back(glm::vec3(-1.0f, y, -1.0f));
+	_movingEnemyPos.push_back(glm::vec3(1.0f, y, -1.0f));
+	_movingEnemyPos.push_back(glm::vec3(-1.8f, y, -20.0f));
+	_movingEnemyPos.push_back(glm::vec3(0.0f, y, -20.0f));
+	_movingEnemyPos.push_back(glm::vec3(1.8f, y, -20.0f));
+	_movingEnemyPos.push_back(glm::vec3(0.f, y, -43.0f));
+	_movingEnemyPos.push_back(glm::vec3(0.f, y, -48.0f));
 
 
 	// Attack Enemy Pos
-	AttackEnemyPos.push_back(glm::vec3(0.0f, y, -10.0f));
-	AttackEnemyPos.push_back(glm::vec3(-1.3f, y, -30.0f));
-	AttackEnemyPos.push_back(glm::vec3(1.3f, y, -30.0f));
-	AttackEnemyPos.push_back(glm::vec3(-2.0f, y, -60.0f));
-	AttackEnemyPos.push_back(glm::vec3(2.0f, y, -60.0f));
+	_attackEnemyPos.push_back(glm::vec3(0.0f, y, -10.0f));
+	_attackEnemyPos.push_back(glm::vec3(-1.3f, y, -30.0f));
+	_attackEnemyPos.push_back(glm::vec3(1.3f, y, -30.0f));
+	_attackEnemyPos.push_back(glm::vec3(-2.0f, y, -60.0f));
+	_attackEnemyPos.push_back(glm::vec3(2.0f, y, -60.0f));
 
 
 	// Create Moving Enemy
-	for (int i = 0; i < (int)MovingEnemyPos.size(); ++i) {
+	for (int i = 0; i < (int)_movingEnemyPos.size(); ++i) {
 		Object* obj = nullptr;
 		obj = new MovingEnemy;
 		
-		static_cast<Cube*>(obj)->SetPos(MovingEnemyPos[i]);
+		static_cast<Cube*>(obj)->SetPos(_movingEnemyPos[i]);
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
 		static_cast<Cube*>(obj)->SetColor(0.0f, 1.f, 1.f);	// ÇÏ´Ã»ö
 		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
@@ -154,11 +151,11 @@ void Stage::CreateEnemy()
 	}
 
 	// Create Attack Enemy
-	for (int i = 0; i < (int)AttackEnemyPos.size(); ++i) {
+	for (int i = 0; i < (int)_attackEnemyPos.size(); ++i) {
 		Object* obj = nullptr;
 		obj = new AttackEnemy;
 
-		static_cast<Cube*>(obj)->SetPos(AttackEnemyPos[i]);
+		static_cast<Cube*>(obj)->SetPos(_attackEnemyPos[i]);
 		static_cast<Cube*>(obj)->SetScale(glm::vec3(1.f, 1.f, 1.f));
 		static_cast<Cube*>(obj)->SetColor(1.f, 0.4f, 0.7f);	// ºÐÈ«
 		static_cast<Cube*>(obj)->SetBoundingSize(0.3f);
@@ -172,8 +169,8 @@ void Stage::CreateItem()
 {
 	float y = 0.0f;
 
-	ItemPos.push_back(glm::vec3(-1.8f, y, -60.0f));
-	ItemPos.push_back(glm::vec3(1.8f, y, -60.0f));
+	_itemPos.push_back(glm::vec3(-1.8f, y, -60.0f));
+	_itemPos.push_back(glm::vec3(1.8f, y, -60.0f));
 
 	{
 		Object* obj = nullptr;
