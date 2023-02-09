@@ -6,7 +6,7 @@
 #include <glm/glm/glm.hpp>
 #include <glm/glm/ext.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
-
+//#include <gl/freeglut.h>
 //#include <stdlib.h>
 #include <stdio.h>
 

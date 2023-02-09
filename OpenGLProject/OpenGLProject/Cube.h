@@ -24,6 +24,7 @@ public:
 
 public:
 	void Move();
+	void Move2();
 	void SetMoveDir(MOVE move) { _eCurMoveDir = move; }
 
 	void Jump();
@@ -71,6 +72,8 @@ public:
 	GLfloat	_jumpPower = 4.f;
 
 	float	_boundingSize = 0.2f;
+
+	glm::vec3 _speed = glm::vec3(1.f);
 };
 
 #endif // !__CUBE_H__

@@ -20,6 +20,14 @@ struct Camera
 	glm::mat4 view = glm::mat4(1.0f);
 };
 
+struct SHAKEINFO
+{
+	GLfloat timeFlow = 0.f;
+	GLfloat settingTime = 0.f;
+	GLfloat magnitude = 0.f;
+	GLfloat frequency = 0.f;
+};
+
 MainGame game;
 Camera camera;
 bool isUp = false;
@@ -152,11 +160,17 @@ void InitShader()
 	glUseProgram(s_program);
 }
 
+bool isShake = false;
+SHAKEINFO sInfo = {};
+
 //--- 그리기 콜백 함수
 GLvoid drawScene()
 {
 	glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+
 
 	{
 		glUseProgram(s_TexProgram);
@@ -182,19 +196,34 @@ GLvoid drawScene()
 		glUniformMatrix4fv(projectLoc, 1, GL_FALSE, &projection[0][0]);
 	}
 	
+
+	if (sInfo.settingTime < sInfo.timeFlow || sInfo.magnitude < 0)
+	{
+		sInfo.settingTime = 0.f;
+		sInfo.timeFlow = 0.f;
+		isShake = false;
+	}
+	else
+	{
+		sInfo.timeFlow += game.Get_DeltaTime();
+
+		sInfo.magnitude -= game.Get_DeltaTime();
+		camera.cameraPos += camera.cameraUp * sinf(sInfo.timeFlow * sInfo.frequency) * sInfo.magnitude;
+	}
+
+
 	glUseProgram(s_program);
 
 	// camera
-	camera.view = glm::mat4(1.0f);
-	
-	
-	glm::vec3 camDir = glm::vec3(0.f);
-	if (isUp)
-	{
-		camDir = camera.cameraPos + camera.cameraFront + camera.cameraOn;
-	}
-	else camDir = camera.cameraPos + camera.cameraFront;
+		camera.view = glm::mat4(1.0f);
 
+
+		glm::vec3 camDir = glm::vec3(0.f);
+		if (isUp)
+		{
+			camDir = camera.cameraPos + camera.cameraFront + camera.cameraOn;
+		}
+		else camDir = camera.cameraPos + camera.cameraFront;
 
 	camera.view = glm::lookAt(camera.cameraPos, camDir, camera.cameraUp);
 	unsigned int viewLoc = glGetUniformLocation(s_program, "viewTransform");
@@ -237,7 +266,7 @@ DWORD dwTime = GetTickCount();
 float camSpeed = 0.5f;
 void IdleScene()
 {
-	if (dwTime + 40 < GetTickCount())
+	if (dwTime + 60 < GetTickCount())
 	{
 		game.Update();
 		game.Late_Update();
@@ -262,6 +291,7 @@ void IdleScene()
 	}
 
 }
+
 
 GLvoid Keyboard(unsigned char key, int x, int y)
 {
@@ -349,6 +379,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case 'e':
 	case 'E':
 		isUp = !isUp;
+
 		isCamAni = true;
 		break;
 
@@ -361,6 +392,13 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		static_cast<Player*>(game.Get_Player())->SetItemOn(ITEMTYPE::SPEEDUP);
 		break;
 	case '3':
+		break;
+
+	case '4':
+		isShake = !isShake;
+		sInfo.magnitude = 0.7f;
+		sInfo.frequency = 70.f;
+		sInfo.settingTime = 1.5f;
 		break;
 
 	default:

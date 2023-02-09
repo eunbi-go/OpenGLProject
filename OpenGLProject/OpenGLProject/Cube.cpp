@@ -145,6 +145,12 @@ void Cube::Move()
 	}
 }
 
+void Cube::Move2()
+{
+	glm::vec3 acc = glm::vec3(0.f, 0.f, 2.f);
+	_speed += acc;
+}
+
 void Cube::Jump()
 {
 	_jumpHeight = (float)((_jumpTime * _jumpTime - _jumpPower * _jumpTime) / 5.f);
