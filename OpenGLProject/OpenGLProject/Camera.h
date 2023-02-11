@@ -15,17 +15,18 @@ private:
 	~Camera();
 
 public:
-	void Late_Update();
-	void Render(GLuint _program, GLuint _texProgram);
-public:
 	void Initialize();
 
-private:
-	void UpdateTexMode();
-	void UpdateNormalMode();
+public:
+	void Update(float deltaTime);
+	void UpdateTexMode(GLuint texProgram);
+	void UpdateNormalMode(GLuint program);
+
+	void MoveForward(float speed);
+	void MoveHorizontal(float speed);
 
 public:
-	void SetMode(CAMERA_MODE mode) { _mode = mode; }
+	void ChangeMode();
 	void SetSpeed(float speed) { _speed = speed; }
 
 private:
@@ -40,6 +41,9 @@ private:
 	float		_speed = 0.f;
 	bool		_isUp = false;
 	bool		_isCamAni = false;
+
+	GLuint		_program;
+	GLuint		_texProgram;
 
 public:
 	static Camera* Get_Instance()

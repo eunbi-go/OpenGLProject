@@ -2,7 +2,7 @@
 
 
 #include "stdafx.h"
-
+#include "Camera.h"
 #include "Cube.h"
 #include "MainGame.h"
 #include "Player.h"
@@ -10,15 +10,15 @@
 
 
 
-struct Camera
-{
-	glm::vec3 cameraPos = glm::vec3(0.0f, 1.0f, 2.0f);
-	glm::vec3 cameraDir = glm::vec3(0.0f, 0.0f, 0.0f);
-	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.f);
-	glm::vec3 cameraOn = glm::vec3(0.0f, -1.0f, 0.f);
-	glm::mat4 view = glm::mat4(1.0f);
-};
+//struct Camera
+//{
+//	glm::vec3 cameraPos = glm::vec3(0.0f, 1.0f, 2.0f);
+//	glm::vec3 cameraDir = glm::vec3(0.0f, 0.0f, 0.0f);
+//	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+//	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.f);
+//	glm::vec3 cameraOn = glm::vec3(0.0f, -1.0f, 0.f);
+//	glm::mat4 view = glm::mat4(1.0f);
+//};
 
 struct SHAKEINFO
 {
@@ -29,7 +29,6 @@ struct SHAKEINFO
 };
 
 MainGame game;
-Camera camera;
 bool isUp = false;
 bool isCamAni = false;
 void IdleScene();
@@ -170,34 +169,7 @@ GLvoid drawScene()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-
-
-	{
-		glUseProgram(s_TexProgram);
-
-		glm::mat4 view = glm::mat4(1.0f);
-		glm::vec3 camDir = glm::vec3(0.f);
-		if (isUp)
-		{
-			camDir = camera.cameraPos + camera.cameraFront + camera.cameraOn;
-		}
-		else camDir = camera.cameraPos + camera.cameraFront;
-
-
-		view = glm::lookAt(camera.cameraPos, camDir, camera.cameraUp);
-		unsigned int viewLoc = glGetUniformLocation(s_TexProgram, "viewTransform");
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
-
-		// project
-		glm::mat4 projection = glm::mat4(1.0f);
-		projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 200.0f);
-		projection = glm::translate(projection, glm::vec3(0.0, 0.0, -2.0));
-		unsigned int projectLoc = glGetUniformLocation(s_TexProgram, "projectionTransform");
-		glUniformMatrix4fv(projectLoc, 1, GL_FALSE, &projection[0][0]);
-	}
-	
-
-	if (sInfo.settingTime < sInfo.timeFlow || sInfo.magnitude < 0)
+	/*if (sInfo.settingTime < sInfo.timeFlow || sInfo.magnitude < 0)
 	{
 		sInfo.settingTime = 0.f;
 		sInfo.timeFlow = 0.f;
@@ -209,51 +181,50 @@ GLvoid drawScene()
 
 		sInfo.magnitude -= game.Get_DeltaTime();
 		camera.cameraPos += camera.cameraUp * sinf(sInfo.timeFlow * sInfo.frequency) * sInfo.magnitude;
-	}
+	}*/
 
-
-	glUseProgram(s_program);
-
-	// camera
-		camera.view = glm::mat4(1.0f);
-
-
-		glm::vec3 camDir = glm::vec3(0.f);
-		if (isUp)
-		{
-			camDir = camera.cameraPos + camera.cameraFront + camera.cameraOn;
-		}
-		else camDir = camera.cameraPos + camera.cameraFront;
-
-	camera.view = glm::lookAt(camera.cameraPos, camDir, camera.cameraUp);
-	unsigned int viewLoc = glGetUniformLocation(s_program, "viewTransform");
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &camera.view[0][0]);
-	
-	// project
-	glm::mat4 projection = glm::mat4(1.0f);
-	projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 200.0f);
-	projection = glm::translate(projection, glm::vec3(0.0, 0.0, -2.0));
 	{
-		unsigned int projectLoc = glGetUniformLocation(s_program, "projectionTransform");
+		glUseProgram(s_TexProgram);
+
+
+		Camera::Get_Instance()->UpdateTexMode(s_TexProgram);
+
+
+		// project
+		glm::mat4 projection = glm::mat4(1.0f);
+		projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 200.0f);
+		projection = glm::translate(projection, glm::vec3(0.0, 0.0, -2.0));
+		unsigned int projectLoc = glGetUniformLocation(s_TexProgram, "projectionTransform");
 		glUniformMatrix4fv(projectLoc, 1, GL_FALSE, &projection[0][0]);
 	}
 
-	// 플레이어 원점 돌아갔을때 카메라 위치 초기화
-	if (game.Get_Player() != nullptr && static_cast<Player*>(game.Get_Player())->GetIsRespawn()) {
-		camera.cameraPos = glm::vec3(0.0f, 1.0f, 2.0f);
-		camera.cameraDir = glm::vec3(0.0f, 0.0f, 0.0f);
-		camera.cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-		camera.cameraFront = glm::vec3(0.0f, 0.0f, -1.f);
-		camera.cameraOn = glm::vec3(0.0f, -1.0f, 0.f);
-		camera.view = glm::mat4(1.0f);
+	{
+		glUseProgram(s_program);
 
-		isUp = false;
-		isCamAni = false;
+		Camera::Get_Instance()->UpdateNormalMode(s_program);
+		
+		// project
+		glm::mat4 projection = glm::mat4(1.0f);
+		projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 200.0f);
+		projection = glm::translate(projection, glm::vec3(0.0, 0.0, -2.0));
+		{
+			unsigned int projectLoc = glGetUniformLocation(s_program, "projectionTransform");
+			glUniformMatrix4fv(projectLoc, 1, GL_FALSE, &projection[0][0]);
+		}
 
-		static_cast<Player*>(game.Get_Player())->SetIsRespawn(false);
+		// 플레이어 원점 돌아갔을때 카메라 위치 초기화
+		if (game.Get_Player() != nullptr && static_cast<Player*>(game.Get_Player())->GetIsRespawn()) {
+
+			Camera::Get_Instance()->Initialize();
+
+
+			static_cast<Player*>(game.Get_Player())->SetIsRespawn(false);
+		}
 	}
 
+
 	game.Render(s_program, s_TexProgram);
+	
 	glutSwapBuffers(); //--- 화면에 출력하기
 }
 
@@ -271,18 +242,7 @@ void IdleScene()
 		game.Update();
 		game.Late_Update();
 
-		if (isCamAni)
-		{
-			if (isUp && camera.cameraPos.y <= 2.f)
-			{
-				camera.cameraPos.y += (GLfloat)(game.Get_DeltaTime() * camSpeed);
-			}
-			else if (!isUp && camera.cameraPos.y >= 1.f)
-			{
-				camera.cameraPos.y -= (GLfloat)(game.Get_DeltaTime() * camSpeed);
-			}
-			else isCamAni = false;
-		}
+		Camera::Get_Instance()->Update((float)game.Get_DeltaTime());
 
 		dwTime = GetTickCount();
 
@@ -318,7 +278,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
 			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_FORWARD);
 			static_cast<Cube*>(game.Get_Player())->Move();
-			camera.cameraPos += camera.cameraFront * speed;
+			Camera::Get_Instance()->MoveForward(speed);
 		}
 		break;
 
@@ -334,7 +294,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
 			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_BACK);
 			static_cast<Cube*>(game.Get_Player())->Move();
-			camera.cameraPos -= camera.cameraFront * speed;
+			Camera::Get_Instance()->MoveForward(-speed);
 		}
 		break;
 
@@ -350,7 +310,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
 			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_LEFT);
 			static_cast<Cube*>(game.Get_Player())->Move();
-			camera.cameraPos -= glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
+			Camera::Get_Instance()->MoveHorizontal(-speed);
 		}
 		break;
 
@@ -366,7 +326,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
 			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_RIGHT);
 			static_cast<Cube*>(game.Get_Player())->Move();
-			camera.cameraPos += glm::normalize(glm::cross(camera.cameraFront, up)) * speed;
+			Camera::Get_Instance()->MoveHorizontal(speed);
 		}
 		break;
 
@@ -378,9 +338,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 
 	case 'e':
 	case 'E':
-		isUp = !isUp;
-
-		isCamAni = true;
+		Camera::Get_Instance()->ChangeMode();
 		break;
 
 	// 아이템 적용 테스트
@@ -428,8 +386,6 @@ void MouseInput(int button, int state, int x, int y)
 
 void main(int argc, char** argv)
 {
-
-
 	// 윈도우 생성하기
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
@@ -455,6 +411,7 @@ void main(int argc, char** argv)
 void Init()
 {
 	game.Initialize();
+	Camera::Get_Instance()->Initialize();
 
 	glEnable(GL_DEPTH_TEST);
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <gl/glew.h>
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
@@ -9,6 +10,7 @@
 //#include <gl/freeglut.h>
 //#include <stdlib.h>
 #include <stdio.h>
+
 
 // Windows 헤더 파일:
 #include <windows.h>

@@ -4,7 +4,6 @@
 #include "ObjectManager.h"
 #include "SoundManager.h"
 #include "Timer.h"
-#include "Camera.h"
 
 MainGame::MainGame()
 {
@@ -20,7 +19,7 @@ void MainGame::Initialize()
 	//SoundManager::Get_Instance()->Initialize();
 	SceneManager::Get_Instance()->Scene_Change(SCENEID::LOGO);
 	Timer::Get_Instance()->Ready_CTimeManager();
-	Camera::Get_Instance()->Initialize();
+	
 }
 
 void MainGame::Update()
@@ -31,13 +30,11 @@ void MainGame::Update()
 void MainGame::Late_Update()
 {
 	SceneManager::Get_Instance()->Late_Update();
-	Camera::Get_Instance()->Late_Update();
 	Timer::Get_Instance()->Update_CTimeManager();
 }
 
 void MainGame::Render(GLuint _program, GLuint _texProgram)
 {
-	Camera::Get_Instance()->Render(_program, _texProgram);
 	SceneManager::Get_Instance()->Render(_program, _texProgram);
 }
 
