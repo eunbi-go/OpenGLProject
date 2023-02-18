@@ -9,6 +9,7 @@ Bullet::Bullet()
 
 Bullet::~Bullet()
 {
+	Release();
 }
 
 void Bullet::Initialize()
@@ -16,20 +17,20 @@ void Bullet::Initialize()
 	UpdateBuffer();
 }
 
-int Bullet::Update()
+int Bullet::Update(float deltaTime)
 {
 	if (_isDead)
-		return OBJ_DEAD;
+		return DEATH;
 
 	_lifeTime += Timer::Get_Instance()->Get_DeltaTime();
 	if (_lifeTime >= 3.f)
-		return OBJ_DEAD;
+		return DEATH;
 
 	Move();
-	return OBJ_NOEVENET;
+	return ALIVE;
 }
 
-void Bullet::Late_Update()
+void Bullet::Late_Update(float deltaTime)
 {
 }
 

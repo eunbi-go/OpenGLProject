@@ -41,7 +41,7 @@ void AttackEnemy::Initialize()
 	_ring->Initialize();
 }
 
-int AttackEnemy::Update()
+int AttackEnemy::Update(float deltaTime)
 {
 	glm::mat4 playerMat = static_cast<Cube*>(ObjectManager::Get_Instance()->Get_Player())->Get_Translation();
 	glm::vec3 playerPos = glm::vec3(playerMat[3][0], playerMat[3][1], playerMat[3][2]);
@@ -64,10 +64,10 @@ int AttackEnemy::Update()
 		Attack();
 	}
 
-	return OBJ_NOEVENET;
+	return ALIVE;
 }
 
-void AttackEnemy::Late_Update()
+void AttackEnemy::Late_Update(float deltaTime)
 {
 }
 
@@ -84,9 +84,9 @@ void AttackEnemy::Render(GLuint _program, GLuint _texProgram)
 
 void AttackEnemy::Release()
 {
-	if (_leftLeg) delete _leftLeg;
-	if (_rightLeg) delete _rightLeg;
-	if (_ring) delete _ring;
+	SAFE_DELETE(_leftLeg);
+	SAFE_DELETE(_rightLeg);
+	SAFE_DELETE(_ring);
 }
 
 void AttackEnemy::RenderChild(GLuint _program)

@@ -51,8 +51,8 @@ enum SCENEID { LOGO, STAGE, SCENE_END };
 
 #define SAFE_DELETE(p) if (p) { delete p; p = nullptr; }
 
-#define OBJ_DEAD 1
-#define OBJ_NOEVENET 0
+#define DEATH 1
+#define ALIVE 0
 
 template <typename T>
 void Safe_Delete(T& _Dst)

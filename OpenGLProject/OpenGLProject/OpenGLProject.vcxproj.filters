@@ -57,6 +57,7 @@
       <Filter>01. Object\- Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="KeyManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -118,6 +119,7 @@
       <Filter>01. Object\- Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="KeyManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragments.glsl">

@@ -56,14 +56,14 @@ void Stage::Initialize()
 	CreateItem();
 }
 
-void Stage::Update()
+void Stage::Update(float deltaTime)
 {
-	ObjectManager::Get_Instance()->Update();
+	ObjectManager::Get_Instance()->Update(deltaTime);
 }
 
-void Stage::Late_update()
+void Stage::Late_update(float deltaTime)
 {
-	ObjectManager::Get_Instance()->Late_Update();
+	ObjectManager::Get_Instance()->Late_Update(deltaTime);
 
 	CollisionManager::Get_Instance()->Collision_PlayerToBlock(
 		ObjectManager::Get_Instance()->Get_Player(), ObjectManager::Get_Instance()->Get_List(OBJID::BLOCK));

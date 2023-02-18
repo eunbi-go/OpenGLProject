@@ -12,8 +12,8 @@ public:
 
 public:
 	virtual void Initialize() override;
-	virtual void Update() override;
-	virtual void Late_update() override;
+	virtual void Update(float deltaTime) override;
+	virtual void Late_update(float deltaTime) override;
 	virtual void Render(GLuint _program, GLuint _texProgram) override;
 	virtual void Release() override;
 };

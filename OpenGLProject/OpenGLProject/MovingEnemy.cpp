@@ -29,7 +29,7 @@ void MovingEnemy::Initialize()
 	UpdateBuffer();
 }
 
-int MovingEnemy::Update()
+int MovingEnemy::Update(float deltaTime)
 {
 	_dirTime += Timer::Get_Instance()->Get_DeltaTime();
 	if (_dirTime >= 0.5)
@@ -48,10 +48,10 @@ int MovingEnemy::Update()
 	if (_childRot > 360.f)
 		_childRot = 1.f;
 
-	return OBJ_NOEVENET;
+	return ALIVE;
 }
 
-void MovingEnemy::Late_Update()
+void MovingEnemy::Late_Update(float deltaTime)
 {
 }
 
@@ -69,7 +69,7 @@ void MovingEnemy::Render(GLuint _program, GLuint _texProgram)
 
 void MovingEnemy::Release()
 {
-	if (_child) delete _child;
+	SAFE_DELETE(_child);
 }
 
 void MovingEnemy::RenderChild(GLuint _program)

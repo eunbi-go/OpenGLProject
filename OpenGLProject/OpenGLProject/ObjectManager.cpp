@@ -13,7 +13,7 @@ ObjectManager::~ObjectManager()
 	Release();
 }
 
-void ObjectManager::Update()
+void ObjectManager::Update(float deltaTime)
 {
 	for (int i = 0; i < OBJID::OBJID_END; ++i)
 	{
@@ -21,25 +21,25 @@ void ObjectManager::Update()
 		{
 			if (!(*iter))
 				continue;
-			int event = (*iter)->Update();
-			if (event == OBJ_DEAD)
+			int isDeath = (*iter)->Update(deltaTime);
+			if (isDeath == DEATH)
 			{
 				SAFE_DELETE(*iter);
 				iter = _listObj[i].erase(iter);
 			}
-			else
+			else if (isDeath == ALIVE)
 				++iter;
 		}
 	}
 
 }
 
-void ObjectManager::Late_Update()
+void ObjectManager::Late_Update(float deltaTime)
 {
 	for (int i = 0; i < OBJID::OBJID_END; ++i)
 	{
 		for (auto& pObj : _listObj[i])
-			pObj->Late_Update();
+			pObj->Late_Update(deltaTime);
 	}
 }
 

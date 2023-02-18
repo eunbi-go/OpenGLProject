@@ -30,6 +30,7 @@ TexturedRect::TexturedRect()
 
 TexturedRect::~TexturedRect()
 {
+	Release();
 }
 
 void TexturedRect::Initialize()
@@ -40,12 +41,12 @@ void TexturedRect::Initialize()
 		UpdateBuffer();
 }
 
-int TexturedRect::Update()
+int TexturedRect::Update(float deltaTime)
 {
-	return OBJ_NOEVENET;
+	return ALIVE;
 }
 
-void TexturedRect::Late_Update()
+void TexturedRect::Late_Update(float deltaTime)
 {
 }
 

@@ -23,6 +23,7 @@ public:
 public:
 	class Object* Get_Player();
 	double Get_DeltaTime();
+	void Start_CameraShake();
 };
 
 #endif

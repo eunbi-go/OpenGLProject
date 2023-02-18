@@ -25,14 +25,14 @@ void Logo::Initialize()
 	}
 }
 
-void Logo::Update()
+void Logo::Update(float deltaTime)
 {
-	ObjectManager::Get_Instance()->Update();
+	ObjectManager::Get_Instance()->Update(deltaTime);
 }
 
-void Logo::Late_update()
+void Logo::Late_update(float deltaTime)
 {
-	ObjectManager::Get_Instance()->Late_Update();
+	ObjectManager::Get_Instance()->Late_Update(deltaTime);
 }
 
 void Logo::Render(GLuint _program, GLuint _texProgram)

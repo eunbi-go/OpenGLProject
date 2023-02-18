@@ -13,8 +13,8 @@ public:
 
 public:
 	virtual void Initialize() override;
-	virtual int Update() override;
-	virtual void Late_Update() override;
+	virtual int Update(float deltaTime) override;
+	virtual void Late_Update(float deltaTime) override;
 	virtual void Render(GLuint _program, GLuint _texProgram) override;
 	virtual void Release() override;
 
@@ -37,6 +37,7 @@ public:
 	float GetZ() { return _trans[3][2]; }
 	float GetBoundingSize() { return _boundingSize; }
 	MOVE GetMoveDir() { return _eCurMoveDir; }
+	Cube* GetParent() { return _parent; }
 
 public:
 	void SetPos(glm::vec3 pos) { _trans = glm::mat4(1.0f); _trans = glm::translate(_trans, glm::vec3(pos.x, pos.y, pos.z)); }
@@ -47,6 +48,7 @@ public:
 	void SetFinalMat(glm::mat4 finalM) { _finalMat = finalM; }
 	void SetBoundingSize(float size) { _boundingSize = size; }
 	void SetColor(float x, float y, float z);
+	void SetParent(Cube* parent) { _parent = parent; }
 
 public:
 	GLuint _vaoHandle = 0;
@@ -74,6 +76,8 @@ public:
 	float	_boundingSize = 0.2f;
 
 	glm::vec3 _speed = glm::vec3(1.f);
+
+	Cube* _parent = nullptr;
 };
 
 #endif // !__CUBE_H__

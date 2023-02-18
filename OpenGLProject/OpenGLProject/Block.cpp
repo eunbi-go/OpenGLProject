@@ -7,6 +7,7 @@ Block::Block()
 
 Block::~Block()
 {
+	Release();
 }
 
 void Block::Initialize()
@@ -14,12 +15,12 @@ void Block::Initialize()
 	Cube::Initialize();
 }
 
-int Block::Update()
+int Block::Update(float deltaTime)
 {
-	return Cube::Update();
+	return Cube::Update(deltaTime);
 }
 
-void Block::Late_Update()
+void Block::Late_Update(float deltaTime)
 {
 }
 

@@ -38,6 +38,7 @@ Cube::Cube()
 
 Cube::~Cube()
 {
+	Release();
 }
 
 void Cube::Initialize()
@@ -45,14 +46,14 @@ void Cube::Initialize()
 	UpdateBuffer();
 }
 
-int Cube::Update()
+int Cube::Update(float deltaTime)
 {
-	if (_isDead) return OBJ_DEAD;
+	if (_isDead) return DEATH;
 
-	return OBJ_NOEVENET;
+	return ALIVE;
 }
 
-void Cube::Late_Update()
+void Cube::Late_Update(float deltaTime)
 {
 
 }
@@ -68,6 +69,7 @@ void Cube::Render(GLuint _program, GLuint _texProgram)
 
 void Cube::Release()
 {
+	SAFE_DELETE(_parent);
 }
 
 

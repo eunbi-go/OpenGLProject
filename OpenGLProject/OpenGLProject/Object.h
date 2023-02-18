@@ -12,8 +12,8 @@ public:
 
 public:
 	virtual void Initialize() = 0;
-	virtual int Update() = 0;
-	virtual void Late_Update() = 0;
+	virtual int Update(float deltaTime) = 0;
+	virtual void Late_Update(float deltaTime) = 0;
 	virtual void Render(GLuint _program, GLuint _texProgram) = 0;
 	virtual void Release() = 0;
 

@@ -16,8 +16,8 @@ public:
 
 public:
 	void Scene_Change(SCENEID _eScene);
-	void Update();
-	void Late_Update();
+	void Update(float deltaTime);
+	void Late_Update(float deltaTime);
 	void Render(GLuint _program, GLuint _texProgram);
 	void Release();
 

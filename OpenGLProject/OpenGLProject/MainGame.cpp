@@ -4,6 +4,8 @@
 #include "ObjectManager.h"
 #include "SoundManager.h"
 #include "Timer.h"
+#include "KeyManager.h"
+#include "Camera.h"
 
 MainGame::MainGame()
 {
@@ -19,18 +21,22 @@ void MainGame::Initialize()
 	//SoundManager::Get_Instance()->Initialize();
 	SceneManager::Get_Instance()->Scene_Change(SCENEID::LOGO);
 	Timer::Get_Instance()->Ready_CTimeManager();
-	
 }
 
 void MainGame::Update()
 {
-	SceneManager::Get_Instance()->Update();
+	Timer::Get_Instance()->Update_CTimeManager();
+	KeyManager::Get_Instance()->Key_Update();
+
+	float deltaTime = (float)Timer::Get_Instance()->Get_DeltaTime();
+	SceneManager::Get_Instance()->Update(deltaTime);
+	Camera::Get_Instance()->Update(deltaTime);
 }
 
 void MainGame::Late_Update()
 {
-	SceneManager::Get_Instance()->Late_Update();
-	Timer::Get_Instance()->Update_CTimeManager();
+	float deltaTime = (float)Timer::Get_Instance()->Get_DeltaTime();
+	SceneManager::Get_Instance()->Late_Update(deltaTime);
 }
 
 void MainGame::Render(GLuint _program, GLuint _texProgram)
@@ -40,8 +46,11 @@ void MainGame::Render(GLuint _program, GLuint _texProgram)
 
 void MainGame::Release()
 {
-	Timer::Destroy_Instance();
 	SoundManager::Destroy_Instance();
+	SceneManager::Get_Instance()->Destroy_Instance();
+	ObjectManager::Get_Instance()->Destroy_Instance();
+	KeyManager::Get_Instance()->Destroy_Instance();
+	Timer::Destroy_Instance();
 }
 
 SCENEID MainGame::GetCurrentSceneType()
@@ -62,4 +71,9 @@ Object* MainGame::Get_Player()
 double MainGame::Get_DeltaTime()
 {
 	return Timer::Get_Instance()->Get_DeltaTime();
+}
+
+void MainGame::Start_CameraShake()
+{
+	Camera::Get_Instance()->SetIsShake(true);
 }

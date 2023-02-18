@@ -7,28 +7,11 @@
 #include "MainGame.h"
 #include "Player.h"
 
+#include "Timer.h"
 
 
 
-//struct Camera
-//{
-//	glm::vec3 cameraPos = glm::vec3(0.0f, 1.0f, 2.0f);
-//	glm::vec3 cameraDir = glm::vec3(0.0f, 0.0f, 0.0f);
-//	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-//	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.f);
-//	glm::vec3 cameraOn = glm::vec3(0.0f, -1.0f, 0.f);
-//	glm::mat4 view = glm::mat4(1.0f);
-//};
-
-struct SHAKEINFO
-{
-	GLfloat timeFlow = 0.f;
-	GLfloat settingTime = 0.f;
-	GLfloat magnitude = 0.f;
-	GLfloat frequency = 0.f;
-};
-
-MainGame game;
+MainGame mainGame;
 bool isUp = false;
 bool isCamAni = false;
 void IdleScene();
@@ -46,16 +29,15 @@ char* filetobuf(const char* file)
 		return NULL;
 	fseek(fptr, 0, SEEK_END);
 	length = ftell(fptr);
-	buf = (char*)malloc(length + 1); 
+	buf = (char*)malloc(length + 1);
 	fseek(fptr, 0, SEEK_SET);
-	fread(buf, length, 1, fptr); 
-	fclose(fptr); 
+	fread(buf, length, 1, fptr);
+	fclose(fptr);
 	buf[length] = 0;
 	return buf;
 }
-
 GLchar* vertexsource, * fragmentsource;
-GLuint vertexshader, fragmentshader; 
+GLuint vertexshader, fragmentshader;
 
 GLchar* vertexTexSource, * fragmentTexSource;
 GLuint vertexTexShader, fragmentTexShader;
@@ -141,7 +123,7 @@ GLuint s_TexProgram;
 
 void InitShader()
 {
-	make_vertexShader(); 
+	make_vertexShader();
 	make_fragmentShader();
 
 	s_program = glCreateProgram();
@@ -160,7 +142,11 @@ void InitShader()
 }
 
 bool isShake = false;
-SHAKEINFO sInfo = {};
+//ShakeInfo shakeInfo = {};
+//
+//glm::vec3 _position;
+//glm::vec3 _up;
+
 
 //--- 그리기 콜백 함수
 GLvoid drawScene()
@@ -168,20 +154,6 @@ GLvoid drawScene()
 	glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-	/*if (sInfo.settingTime < sInfo.timeFlow || sInfo.magnitude < 0)
-	{
-		sInfo.settingTime = 0.f;
-		sInfo.timeFlow = 0.f;
-		isShake = false;
-	}
-	else
-	{
-		sInfo.timeFlow += game.Get_DeltaTime();
-
-		sInfo.magnitude -= game.Get_DeltaTime();
-		camera.cameraPos += camera.cameraUp * sinf(sInfo.timeFlow * sInfo.frequency) * sInfo.magnitude;
-	}*/
 
 	{
 		glUseProgram(s_TexProgram);
@@ -202,7 +174,7 @@ GLvoid drawScene()
 		glUseProgram(s_program);
 
 		Camera::Get_Instance()->UpdateNormalMode(s_program);
-		
+
 		// project
 		glm::mat4 projection = glm::mat4(1.0f);
 		projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 200.0f);
@@ -213,18 +185,18 @@ GLvoid drawScene()
 		}
 
 		// 플레이어 원점 돌아갔을때 카메라 위치 초기화
-		if (game.Get_Player() != nullptr && static_cast<Player*>(game.Get_Player())->GetIsRespawn()) {
+		if (mainGame.Get_Player() != nullptr && static_cast<Player*>(mainGame.Get_Player())->GetIsRespawn()) {
 
 			Camera::Get_Instance()->Initialize();
 
 
-			static_cast<Player*>(game.Get_Player())->SetIsRespawn(false);
+			static_cast<Player*>(mainGame.Get_Player())->SetIsRespawn(false);
 		}
 	}
 
 
-	game.Render(s_program, s_TexProgram);
-	
+	mainGame.Render(s_program, s_TexProgram);
+
 	glutSwapBuffers(); //--- 화면에 출력하기
 }
 
@@ -234,19 +206,17 @@ GLvoid Reshape(int w, int h) //--- 콜백 함수: 다시 그리기 콜백 함수
 }
 
 DWORD dwTime = GetTickCount();
-float camSpeed = 0.5f;
+
 void IdleScene()
 {
 	if (dwTime + 60 < GetTickCount())
 	{
-		game.Update();
-		game.Late_Update();
-
-		Camera::Get_Instance()->Update((float)game.Get_DeltaTime());
+		mainGame.Update();
+		mainGame.Late_Update();
 
 		dwTime = GetTickCount();
-
-		glutPostRedisplay();
+		
+		glutPostRedisplay();	// mainGame.Render();
 
 	}
 
@@ -258,82 +228,18 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	float speed = 20.f;
 	glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
 
-	if (static_cast<Player*>(game.Get_Player())->GetIsSpeedUp()) speed = 30.f;
+	if (static_cast<Player*>(mainGame.Get_Player())->GetIsSpeedUp()) speed = 30.f;
 	else speed = 20.f;
-	speed *= (float)game.Get_DeltaTime();
+	speed *= (float)mainGame.Get_DeltaTime();
 
 
 
 	switch (key)
 	{
-	case 'W': 
-	case 'w':
-		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
-		
-		if (static_cast<Player*>(game.Get_Player())->GetIsBack()) {
-			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-			static_cast<Player*>(game.Get_Player())->SetIsBack(false);
-		}
-
-		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
-			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_FORWARD);
-			static_cast<Cube*>(game.Get_Player())->Move();
-			Camera::Get_Instance()->MoveForward(speed);
-		}
-		break;
-
-	case 'S':
-	case 's':
-		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
-
-		if (static_cast<Player*>(game.Get_Player())->GetIsForward()) {
-			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-			static_cast<Player*>(game.Get_Player())->SetIsForward(false);
-		}
-
-		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
-			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_BACK);
-			static_cast<Cube*>(game.Get_Player())->Move();
-			Camera::Get_Instance()->MoveForward(-speed);
-		}
-		break;
-
-	case 'A':
-	case 'a':
-		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
-
-		if (static_cast<Player*>(game.Get_Player())->GetIsRight()) {
-			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-			static_cast<Player*>(game.Get_Player())->SetIsRight(false);
-		}
-
-		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
-			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_LEFT);
-			static_cast<Cube*>(game.Get_Player())->Move();
-			Camera::Get_Instance()->MoveHorizontal(-speed);
-		}
-		break;
-
-	case 'D':
-	case 'd':
-		static_cast<Player*>(game.Get_Player())->_isMoveStop = false;
-
-		if (static_cast<Player*>(game.Get_Player())->GetIsLeft()) {
-			static_cast<Player*>(game.Get_Player())->SetIsMove(true);
-			static_cast<Player*>(game.Get_Player())->SetIsLeft(false);
-		}
-
-		if (static_cast<Player*>(game.Get_Player())->GetIsMove()) {
-			static_cast<Cube*>(game.Get_Player())->SetMoveDir(MOVE::MOVE_RIGHT);
-			static_cast<Cube*>(game.Get_Player())->Move();
-			Camera::Get_Instance()->MoveHorizontal(speed);
-		}
-		break;
-
 	case 'q':
 	case 'Q':
-		if (static_cast<Player*>(game.Get_Player())->GetIsMove())
-			static_cast<Cube*>(game.Get_Player())->_isJump = true;
+		mainGame.Release();
+		exit(1);
 		break;
 
 	case 'e':
@@ -341,22 +247,19 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		Camera::Get_Instance()->ChangeMode();
 		break;
 
-	// 아이템 적용 테스트
+		// 아이템 적용 테스트
 	case '1':	// 투명화
-		static_cast<Player*>(game.Get_Player())->SetItemOn(ITEMTYPE::ALPHA);
+		static_cast<Player*>(mainGame.Get_Player())->SetItemOn(ITEMTYPE::ALPHA);
 		break;
 
 	case '2':	// 스피드업
-		static_cast<Player*>(game.Get_Player())->SetItemOn(ITEMTYPE::SPEEDUP);
+		static_cast<Player*>(mainGame.Get_Player())->SetItemOn(ITEMTYPE::SPEEDUP);
 		break;
 	case '3':
 		break;
 
 	case '4':
-		isShake = !isShake;
-		sInfo.magnitude = 0.7f;
-		sInfo.frequency = 70.f;
-		sInfo.settingTime = 1.5f;
+		mainGame.Start_CameraShake();
 		break;
 
 	default:
@@ -374,11 +277,11 @@ void MouseInput(int button, int state, int x, int y)
 		float posX = (float)(x - (float)800 / 2.0) * (float)(1.0 / (float)(800 / 2.0));
 		float posY = -(float)(y - (float)600 / 2.0) * (float)(1.0 / (float)(600 / 2.0));
 
-		if (game.GetCurrentSceneType() == SCENEID::LOGO)
+		if (mainGame.GetCurrentSceneType() == SCENEID::LOGO)
 		{
 			if (posX >= -0.3f && posX <= 0.3f && posY >= -0.8f && posY <= -0.5f)
 			{
-				game.ChangeToStage();
+				mainGame.ChangeToStage();
 			}
 		}
 	}
@@ -410,7 +313,7 @@ void main(int argc, char** argv)
 
 void Init()
 {
-	game.Initialize();
+	mainGame.Initialize();
 	Camera::Get_Instance()->Initialize();
 
 	glEnable(GL_DEPTH_TEST);

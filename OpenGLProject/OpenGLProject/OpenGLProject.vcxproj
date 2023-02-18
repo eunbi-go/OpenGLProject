@@ -148,6 +148,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Logo.cpp" />
     <ClCompile Include="MovingEnemy.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="KeyManager.h" />
     <ClInclude Include="Logo.h" />
     <ClInclude Include="MovingEnemy.h" />
     <ClInclude Include="Item.h" />

@@ -39,14 +39,14 @@ void SceneManager::Scene_Change(SCENEID _eScene)
 	}
 }
 
-void SceneManager::Update()
+void SceneManager::Update(float deltaTime)
 {
-	_pScene->Update();
+	_pScene->Update(deltaTime);
 }
 
-void SceneManager::Late_Update()
+void SceneManager::Late_Update(float deltaTime)
 {
-	_pScene->Late_update();
+	_pScene->Late_update(deltaTime);
 }
 
 void SceneManager::Render(GLuint _program, GLuint _texProgram)

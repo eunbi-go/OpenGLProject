@@ -11,8 +11,8 @@ public:
 	~ObjectManager();
 
 public:
-	void Update();
-	void Late_Update();
+	void Update(float deltaTime);
+	void Late_Update(float deltaTime);
 	void Render(GLuint _program, GLuint _texProgram);
 	void Release();
 
@@ -41,6 +41,7 @@ public:
 
 private:
 	list<Object*>				_listObj[OBJID::OBJID_END];
+
 	static ObjectManager* _pInstance;
 	GLuint _texProgram;
 };
