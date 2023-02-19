@@ -14,7 +14,7 @@ public:
 	void Update_CTimeManager();
 
 public:
-	double Get_DeltaTime() { return _dDeltaTime; }
+	float Get_DeltaTime() { return (float)_dDeltaTime; }
 
 
 public:

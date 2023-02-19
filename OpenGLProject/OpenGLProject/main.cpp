@@ -258,9 +258,10 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case '3':
 		break;
 
-	case '4':
-		mainGame.Start_CameraShake();
-		break;
+	//// test
+	//case '4':
+	//	mainGame.Start_CameraShake();
+	//	break;
 
 	default:
 		break;

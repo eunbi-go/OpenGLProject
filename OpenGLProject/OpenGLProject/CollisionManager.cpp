@@ -5,6 +5,7 @@
 #include "Cube.h"
 #include "Player.h"
 #include "Item.h"
+#include "Camera.h"
 
 CollisionManager* CollisionManager::_pInstance = nullptr;
 
@@ -93,10 +94,15 @@ void CollisionManager::Collision_PlayerToBullet(Object* player, list<Object*> sr
 		c2.maxZ = static_cast<Cube*>(Src)->GetZ() + static_cast<Cube*>(Src)->GetBoundingSize();
 		c2.minZ = static_cast<Cube*>(Src)->GetZ() - static_cast<Cube*>(Src)->GetBoundingSize();
 
-		if (static_cast<Player*>(player)->GetIsCollision() && IsCollision(&c1, &c2)) {
+		if (static_cast<Player*>(player)->GetIsCollision() && IsCollision(&c1, &c2)) 
+		{
 			static_cast<Cube*>(Src)->SetDead();
-			static_cast<Cube*>(player)->SetPos(glm::vec3(0.0, 0.0, 0));
-			static_cast<Player*>(player)->SetIsRespawn(true);
+
+			if (static_cast<Player*>(player)->GetIsAlpha())
+				break;
+			//static_cast<Cube*>(player)->SetPos(glm::vec3(0.0, 0.0, 0));
+			//static_cast<Player*>(player)->SetIsRespawn(true);
+			Camera::Get_Instance()->SetIsShake(true);
 		}
 	}
 }
@@ -116,7 +122,8 @@ void CollisionManager::Collision_PlayerToEnemy(Object* player, list<Object*> src
 		c2.maxZ = static_cast<Cube*>(Src)->GetZ() + static_cast<Cube*>(Src)->GetBoundingSize();
 		c2.minZ = static_cast<Cube*>(Src)->GetZ() - static_cast<Cube*>(Src)->GetBoundingSize();
 
-		if (static_cast<Player*>(player)->GetIsCollision() && IsCollision(&c1, &c2)) {
+		if (static_cast<Player*>(player)->GetIsCollision() && IsCollision(&c1, &c2)
+			&& !static_cast<Player*>(player)->GetIsAlpha()) {
 			//static_cast<Cube*>(Src)->SetDead();
 			static_cast<Cube*>(player)->SetPos(glm::vec3(0.0, 0.0, 0));
 			static_cast<Player*>(player)->SetIsRespawn(true);

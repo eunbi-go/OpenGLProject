@@ -184,10 +184,10 @@ void Player::ApplyItemEffect()
 	if (_playerItem[ITEMTYPE::SPEEDUP]) {
 		_speedupTime += Timer::Get_Instance()->Get_DeltaTime();
 	
-		_movingSpeed = 30.f;
+		_movingSpeed = 6.f;
 	
 		if (_speedupTime >= 5.f) {
-			_movingSpeed = 20.f;
+			_movingSpeed = 3.f;
 			_speedupTime = 0.f;
 			_isSpeedUp = false;
 			_playerItem[ITEMTYPE::SPEEDUP] = false;
@@ -226,13 +226,13 @@ void Player::UpdateChild()
 			_isLegMius = false;
 		if (_isLegMius)
 		{
-			_rightLegRot -= Timer::Get_Instance()->Get_DeltaTime() * 100.f;
-			_leftLegRot += Timer::Get_Instance()->Get_DeltaTime() * 100.f;
+			_rightLegRot -= Timer::Get_Instance()->Get_DeltaTime() * _rotSpeed;
+			_leftLegRot += Timer::Get_Instance()->Get_DeltaTime() * _rotSpeed;
 		}
 		else
 		{
-			_rightLegRot += Timer::Get_Instance()->Get_DeltaTime() * 100.f;
-			_leftLegRot -= Timer::Get_Instance()->Get_DeltaTime() * 100.f;
+			_rightLegRot += Timer::Get_Instance()->Get_DeltaTime() * _rotSpeed;
+			_leftLegRot -= Timer::Get_Instance()->Get_DeltaTime() * _rotSpeed;
 		}
 
 		// arm
@@ -244,13 +244,13 @@ void Player::UpdateChild()
 			_isArmMius = false;
 		if (_isArmMius)
 		{
-			_leftArmRot -= Timer::Get_Instance()->Get_DeltaTime() * 100.f;
-			_rightArmRot += Timer::Get_Instance()->Get_DeltaTime() * 100.f;
+			_leftArmRot -= Timer::Get_Instance()->Get_DeltaTime() * _rotSpeed;
+			_rightArmRot += Timer::Get_Instance()->Get_DeltaTime() * _rotSpeed;
 		}
 		else
 		{
-			_leftArmRot += Timer::Get_Instance()->Get_DeltaTime() * 100.f;
-			_rightArmRot -= Timer::Get_Instance()->Get_DeltaTime() * 100.f;
+			_leftArmRot += Timer::Get_Instance()->Get_DeltaTime() * _rotSpeed;
+			_rightArmRot -= Timer::Get_Instance()->Get_DeltaTime() * _rotSpeed;
 		}
 	}
 }

@@ -18,7 +18,7 @@ MainGame::~MainGame()
 
 void MainGame::Initialize()
 {
-	//SoundManager::Get_Instance()->Initialize();
+	SoundManager::Get_Instance()->Initialize();
 	SceneManager::Get_Instance()->Scene_Change(SCENEID::LOGO);
 	Timer::Get_Instance()->Ready_CTimeManager();
 }

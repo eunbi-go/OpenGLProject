@@ -32,6 +32,7 @@ public:
 	bool GetIsBack() { return _isBackCollision; }
 	bool GetIsRespawn() { return _isRespawn; }
 	bool GetIsSpeedUp() { return _isSpeedUp; }
+	bool GetIsAlpha() { return _playerItem[ITEMTYPE::ALPHA]; }
 
 public:
 	void SetItemOn(ITEMTYPE i) { _playerItem[i] = true; }
@@ -51,9 +52,9 @@ private:
 	bool		_isRespawn = false;
 	bool		_isSpeedUp = false;
 
-	double		_alphaTime = 0.f;
-	double		_speedupTime = 0.f;
-	double		_lightTime = 0.f;
+	float		_alphaTime = 0.f;
+	float		_speedupTime = 0.f;
+	float		_lightTime = 0.f;
 
 	bool		_isLeftCollision = false;
 	bool		_isRightCollision = false;
@@ -66,15 +67,16 @@ private:
 	class Object* _leftArm = nullptr;
 	class Object* _rightArm = nullptr;
 
-	double	_rightLegRot = -35.f;
-	double	_leftLegRot = 35.f;
+	float	_rightLegRot = -35.f;
+	float	_leftLegRot = 35.f;
 	bool	_isLegMius = false;
 
-	double	_rightArmRot = -35.f;
-	double	_leftArmRot = 35.f;
+	float	_rightArmRot = -35.f;
+	float	_leftArmRot = 35.f;
 	bool	_isArmMius = false;
 
-	double	_movingSec = 0.f;
+	float	_movingSec = 0.f;
+	float	_rotSpeed = 100.f;
 public:
 	bool	_isMoveStop = true;
 };
